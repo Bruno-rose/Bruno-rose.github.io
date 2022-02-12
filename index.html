@@ -1,17 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>BGRS</title>
+        <title>Bruno-ROSE</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
-            h1{
-                color:blue;
+            * {
+              box-sizing: border-box;
             }
+            :any-link {
+            color: grey
+         }
+            /* Style the body */
+            body {
+              font-family: Arial, Helvetica, sans-serif;
+              margin: 0;
+            }
+            
+            /* Header/logo Title */
+            .header {
+              padding: 80px;
+              text-align: center;
+              background: #1abc9c;
+              color: rgb(255, 255, 255);
+            }
+            
+            /* Increase the font size of the heading */
+            .header h1 {
+              font-size: 40px;
+            }
+            h2 {
+                color: #357B6B;
+            }
+            
+            /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
+            .navbar {
+              overflow: hidden;
+              background-color: #333;
+              position: sticky;
+              position: -webkit-sticky;
+              top: 0;
+            }
+            
+            /* Style the navigation bar links */
+            .navbar a {
+              float: left;
+              display: block;
+              color: white;
+              text-align: center;
+              padding: 14px 20px;
+              text-decoration: none;
+            }
+
+            
+            
+            /* Right-aligned link */
+            .navbar a.right {
+              float: right;
+            }
+            
+            /* Change color on hover */
+            .navbar a:hover {
+              background-color: #ddd;
+              color: black;
+            }
+            
+            /* Active/current link */
+            .navbar a.active {
+              background-color: #666;
+              color: white;
+            }
+            
+            /* Column container */
+            .row {  
+              display: -ms-flexbox; /* IE10 */
+              display: flex;
+              -ms-flex-wrap: wrap; /* IE10 */
+              flex-wrap: wrap;
+            }
+            
+            /* Create two unequal columns that sits next to each other */
+            /* Sidebar/left column */
+            .side {
+              -ms-flex: 20%; /* IE10 */
+              flex: 20%;
+              background-color: #f1f1f1;
+              padding: 20px;
+            }
+            
+            /* Main column */
+            .main {   
+              -ms-flex: 80%; /* IE10 */
+              flex: 80%;
+              background-color: white;
+              padding: 20px;
+            }
+            
+            /* Fake image, just for this example */
+            .fakeimg {
+              background-color: #aaa;
+              width: 100%;
+              padding: 20px;
+            }
+            
+            /* Footer */
+            .footer {
+              padding: 20px;
+              text-align: center;
+              background: #ddd;
+            }
+            
+            /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+            @media screen and (max-width: 700px) {
+              .row {   
+                flex-direction: column;
+              }
+            }
+            
+            /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+            @media screen and (max-width: 400px) {
+              .navbar a {
+                float: none;
+                width: 100%;
+              }
+            }
+            #contact {
+                color: gray;
+            }
+            
         </style>
     </head>
     <body>
-        <h1>Welcome to the website of Bruno German Rodriguez Sepulveda !</h1>
-        <h2> What are you doing here?</h2>
-        Maybe you want to see my <a href="https://bruno-rose.github.io/CV.html">CV</a>?
+ 
+    <div class="header">
+        <h1>Bruno Rodríguez Sepúlveda</h1>
+        <p>Engineering student at <a href="https://www.uchile.cl/english" style="text-decoration: none">University of Chile</a> and <a href="https://www.centralesupelec.fr/" style="text-decoration: none" color="green" >Centrale Supélec</a> </p>
+      </div>
+      
+      <div class="navbar">
+        <a href="#" >Home</a>
+        <a href="CV.html">Curriculum Vitae</a>
+        <a href="https://dzaritmik.cs-campus.fr/">Musical Group - DzaritmiK</a>
+      </div>
+      
+      <div class="row">
+        <div class="side">
+          <h2>About Me</h2>
+          <div class="fakeimg" style="width:100%;"><img src="bruno_profile.jpg" alt="profile_photo" width=100%; > </div>
+          <p></p>
+          <h3>Interests</h3>
+          <p>Education, Cryptography, Deep Learning, Alto Saxophone, Volley, Running</p>
+          <h3>Languages</h3>
+          <p>Native Spanish, French <b>C1</b>, English <b>C1</b> </p>
+          
+          
+        </div>
+        <div class="main">
+            
+          <h2>Education</h2>
+          <ul>
+              <li>École CentraleSupélec - Paris Saclay University </li>
+              <li>University of Chile</li>
+              <li>Ambrosio O'Higgins High School</li>
+          </ul>
+          
+          <h2>Experience</h2>
+          <ul>
+              <li>Data Scientist - <a href="https://premialab.com/">Premialab</a></li>
+              <li>International relations - <a href="https://dzaritmik.cs-campus.fr/">DzaritmiK</a></li>
+              <li>Research Assistantship - MICS Laboratory</li>
+              <li>Sustainable cities: Fight against desertification - <a href="https://helice.ing.uchile.cl/igea/">IGEA</a></li>
+          </ul>
+          <h2>Teaching</h2>
+          <ul>
+              <li>Music Workshops - Elementary School Henri Wallon</li>
+              <li>Teaching Assistant - University of Chile</li>
+              <li>Teaching Assistant - University of Chile Summer School for High School students</li>
+              <li>Teacher - University of Santiago Summer School for Elementary School students</li>
+          </ul>
+
+          <h2>Challenges</h2>
+          <ul>
+              <li>Facebook Hackathon {2017, 2018}
+                  <ul>
+                      <li>Facebook bot to match board game players</li>
+                      <li>Social network based on geo-proximity</li>
+                  </ul>
+              </li>
+              <li>Academic Olympiads</li>
+              <ul>
+                  <li>National Maths Championship by teams {gold 2015, gold 2016}</li>
+                  <li>Math Olympiads {silver 2015, bronze 2016}</li>
+                  <li>Physics Olympiads {silver 2015}</li>
+              </ul>
+            </ul>
+            <h2>Skills</h2>
+            <ul>
+                <li>Programming languages & others</li>
+                <ul>
+                    <li>C++, Java, Python, HTML, CSS, JavaScript</li>
+                    <li>SQL, JSON, Docker, Solidity</li>
+                </ul>
+                <li>Machine learning</li>
+                <ul>
+                    <li>Tensorflow, Pytorch, Scikit-Learn</li>
+                    <li>Classification models, supervised learning</li>
+                    <li>High dimessional regressions</li>
+                </ul>
+            </ul>
+            <h2>Courses</h2>
+            <ul>
+                <li>International summer school - Beihang University</li>
+                <ul>
+                    <li>Theory and applications of machine learning</li>
+                    <li>Digital visual information processing</li>
+                </ul>
+                <li>Blockchain Workshops -  ConsenSys</li>
+                <ul>
+                    <li>Cryptography for blockchain</li>
+                    <li>Smart contracts with Solidity</li>
+                </ul>
+                <li>Summer Camp in Competitive Programming - ProgcompCL</li>
+                <ul>
+                    <li>Advanced algorithms and data structures</li>
+                </ul>
+                <li>Science and leadership Camp -  <a href="https://cienciajoven.la/en/programas/aldea-bayer-kimlu/">Bayer Kimlu</a></li>
+
+            </ul>
+
+
+        </div>
+      </div>
+      
+      <div class="footer">
+        <h2>Contact</h2>
+        <p id = contact> Email: bruno.rodriguez@student-cs.fr - <a href="https://www.linkedin.com/in/bruno-german-rodriguez-sepulveda/">Linkedin</a> </p>
+      </div>
+      
+        
+    
+    
     </body>
 <html>
+
