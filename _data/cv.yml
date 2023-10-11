@@ -2,11 +2,11 @@
   type: map
   contents:
     - name: Full Name
-      value: Albert Einstein
+      value: Bruno Germán Rodríguez Sepúlveda
     - name: Date of Birth
-      value: 14th March 1879
+      value: 4th December 1998
     - name: Languages
-      value: English, German
+      value: Spanish, English, French, Portuguese
 
 - title: Education
   type: time_table
