@@ -4,7 +4,9 @@ title: project 6
 description: a project with no image
 img:
 importance: 4
+redirect: https://unsplash.com
 category: fun
+giscus_comments: true
 ---
 
 Every project has a beautiful feature showcase page.

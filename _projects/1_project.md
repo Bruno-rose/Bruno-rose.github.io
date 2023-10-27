@@ -1,11 +1,11 @@
 ---
 layout: page
-title: project 1
-description: a project with a background image
-img: assets/img/12.jpg
+title: Maipu vehicle fleet
+description: Software Engineering Capstone Course
+img: assets/img/logo_maipu.png
 importance: 1
-category: work
-related_publications: einstein1956investigations, einstein1950meaning
+category: university
+related_publications:
 ---
 
 Every project has a beautiful feature showcase page.
