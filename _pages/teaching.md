@@ -3,7 +3,7 @@ layout: page
 permalink: /teaching/
 title: teaching
 description: My teaching experiences have been sincere and diverse. From school workshops to university teaching assistant roles and international projects.
-nav: true
+nav: false
 nav_order: 5
 ---
 

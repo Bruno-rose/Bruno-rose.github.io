@@ -4,7 +4,7 @@
     "label": "Computer Scientist and Software Engineer",
     "image": "",
     "email": "bruno.rodriguez.sep@gmail.com",
-    "phone": "+1 (650) 613-8527",
+    "phone": "+1 (650) 613-8527 or +56 9 3302 7489",
     "url": "https://bruno-rose.github.io/",
     "summary": "Proficient in AI, software development, and big data, with a proven ability to deliver high-impact solutions. Committed to leveraging my expertise for impactful initiatives in the realms of health, education, and environmental sustainability.",
     "location": {
@@ -38,12 +38,12 @@
       "position": "Master Student Researcher",
       "url": "https://imfd.cl/",
       "startDate": "2022-12-01",
-      "endDate": "2023-12-01",
-      "summary": "Developing a framework for private data release for big data applications.",
+      "endDate": "2024-01-01",
+      "summary": "Developed a framework for differentially private clustering via the generation of private data synopses in Scala and Apache Spark focused on privacy tradeoff and distributed environments, achieving SOTA performance.",
       "highlights": [
         "Big Data",
         "Differential Privacy",
-        "Machine Learning",
+        "Unsupervised Learning",
         "Data Mining"
       ]
     },
