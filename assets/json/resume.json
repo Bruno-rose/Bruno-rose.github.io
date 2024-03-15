@@ -48,6 +48,18 @@
       ]
     },
     {
+      "name": "Cardda (YC W22)",
+      "position": "Software Engineer",
+      "url": "https://www.cardda.com/",
+      "startDate": "2024-01-01",
+      "endDate": "2023-04-01",
+      "summary": "Designed and implemented a double-entry accounting application for credit card and bank transactions, with Svelte, Ruby on Rails.",
+      "highlights": [
+        "Full Stack Development",
+        "Accounting"
+      ]
+    },
+    {
       "name": "PSINet",
       "position": "Software Engineer",
       "url": "https://www.psinet.cl/",
