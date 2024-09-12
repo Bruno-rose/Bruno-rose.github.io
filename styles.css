@@ -1,0 +1,53 @@
+:root {
+    --base: #1e1e2e;
+    --text: #cdd6f4;
+    --surface0: #313244;
+    --blue: #89b4fa;
+    --sapphire: #74c7ec;
+    --green: #a6e3a1;
+}
+
+body {
+    font-family: 'Cascadia Code', monospace;
+    background-color: var(--base);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    color: var(--blue);
+}
+
+p {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.reveal {
+    color: var(--sapphire);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.hidden {
+    display: none;
+    color: var(--green);
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--surface0);
+    border-radius: 5px;
+    text-align: left;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 2rem auto;
+    display: block;
+}
