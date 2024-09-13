@@ -51,3 +51,12 @@ img {
     margin: 2rem auto;
     display: block;
 }
+
+#hiddenContent a {
+    color: var(--sapphire);
+    text-decoration: none;
+}
+
+#hiddenContent a:hover {
+    text-decoration: underline;
+}
