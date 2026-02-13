@@ -17,6 +17,8 @@
           -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
           Cantarell, sans-serif;
         overflow-x: hidden;
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
       }
 
       canvas {
@@ -31,9 +33,9 @@
       .content {
         position: relative;
         z-index: 2;
-        max-width: 700px;
+        max-width: min(700px, 92vw);
         margin: 0 auto;
-        padding: 100px 40px;
+        padding: clamp(60px, 12vh, 100px) clamp(20px, 5vw, 40px);
         min-height: 100vh;
         display: flex;
         flex-direction: column;
@@ -41,7 +43,7 @@
       }
 
       h1 {
-        font-size: 2.5em;
+        font-size: clamp(1.6rem, 4vw + 1rem, 2.5em);
         font-weight: 300;
         color: #2a2a2a;
         margin-bottom: 0.3em;
@@ -49,14 +51,14 @@
       }
 
       .intro {
-        font-size: 1.3em;
+        font-size: clamp(1.05rem, 2vw + 0.8rem, 1.3em);
         color: #4a4a4a;
         margin-bottom: 1.5em;
         font-weight: 300;
       }
 
       p {
-        font-size: 1.1em;
+        font-size: clamp(0.95rem, 1.5vw + 0.8rem, 1.1em);
         line-height: 1.7;
         color: #5a5a5a;
         margin-bottom: 1.2em;
@@ -82,8 +84,9 @@
 
       .experience li {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
-        gap: 1em;
+        gap: 0.2em 1em;
         margin-bottom: 0.4em;
         color: #5a5a5a;
       }
@@ -153,27 +156,36 @@
       }
 
       @media (max-width: 768px) {
-        .content {
-          padding: 60px 30px;
+        .controls {
+          top: auto;
+          bottom: max(60px, calc(env(safe-area-inset-bottom) + 52px));
+          left: max(12px, env(safe-area-inset-left));
+          right: max(12px, env(safe-area-inset-right));
+          min-width: auto;
+          max-height: 60vh;
+          overflow-y: auto;
         }
 
-        h1 {
-          font-size: 2em;
+        .config-toggle {
+          bottom: 12px;
+          right: 12px;
         }
+      }
 
-        .intro {
-          font-size: 1.1em;
+      @media (max-width: 480px) {
+        .experience li {
+          flex-direction: column;
+          gap: 0;
         }
-
-        p {
-          font-size: 1em;
+        .experience .when {
+          font-size: 0.9em;
         }
       }
 
       .config-toggle {
         position: fixed;
-        bottom: 20px;
-        right: 20px;
+        bottom: max(20px, env(safe-area-inset-bottom));
+        right: max(20px, env(safe-area-inset-right));
         background: rgba(20, 20, 20, 0.95);
         border: 1px solid #333;
         color: #888;
@@ -193,8 +205,8 @@
 
       .controls {
         position: fixed;
-        top: 20px;
-        right: 20px;
+        top: max(20px, env(safe-area-inset-top));
+        right: max(20px, env(safe-area-inset-right));
         background: rgba(20, 20, 20, 0.95);
         padding: 16px;
         border: 1px solid #333;
