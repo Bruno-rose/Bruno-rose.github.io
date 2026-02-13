@@ -57,6 +57,31 @@
         font-weight: 300;
       }
 
+      .location {
+        font-size: 0.9em;
+        color: #888;
+        font-weight: 400;
+        margin-bottom: 1.5em;
+        display: flex;
+        align-items: center;
+        gap: 0.45em;
+      }
+
+      .location-icon {
+        flex-shrink: 0;
+        width: 1em;
+        height: 1em;
+        color: inherit;
+      }
+
+      .location-icon path {
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.5;
+      }
+
       p {
         font-size: clamp(0.95rem, 1.5vw + 0.8rem, 1.1em);
         line-height: 1.7;
@@ -366,6 +391,12 @@
     <div class="content">
       <div class="intro">Hello.</div>
       <h1>My name is Bruno Rodríguez.</h1>
+      <p class="location">
+        <svg class="location-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 22L8 8a4 4 0 0 1 8 0l-4 14z"/>
+        </svg>
+        San Francisco, Bay Area
+      </p>
 
       <p>
         I'm a software engineer with a proven track record building and scaling
