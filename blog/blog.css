@@ -15,6 +15,8 @@ body {
 }
 
 .content {
+  position: relative;
+  z-index: 2;
   max-width: min(760px, 92vw);
   margin: 0 auto;
   padding: clamp(50px, 10vh, 90px) clamp(20px, 5vw, 40px) 100px;
