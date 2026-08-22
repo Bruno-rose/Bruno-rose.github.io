@@ -4,9 +4,74 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Writing - Bruno Rodríguez</title>
+    <link rel="stylesheet" href="../background.css" />
     <link rel="stylesheet" href="blog.css" />
   </head>
   <body>
+    <canvas id="canvas"></canvas>
+
+    <button class="config-toggle" id="configToggle">config</button>
+
+    <div class="controls" id="controls">
+      <h3>// Config</h3>
+
+      <div class="control-group">
+        <label>bg_color</label>
+        <input type="color" id="bgColor" value="#f5f5f5" />
+      </div>
+
+      <div class="control-group">
+        <label>particle_color</label>
+        <input type="color" id="particleColor" value="#505050" />
+      </div>
+
+      <div class="control-group">
+        <label>
+          gravity = <span class="value" id="gravityValue">400</span>
+        </label>
+        <input
+          type="range"
+          id="gravity"
+          min="0"
+          max="1000"
+          value="400"
+          step="50"
+        />
+      </div>
+
+      <div class="control-group">
+        <label> count = <span class="value" id="countValue">200</span> </label>
+        <input
+          type="range"
+          id="particleCount"
+          min="50"
+          max="500"
+          value="200"
+          step="50"
+        />
+      </div>
+
+      <div class="control-group">
+        <label>
+          <input type="checkbox" id="particleAttraction" /> p2p_attraction
+        </label>
+      </div>
+
+      <div class="control-group">
+        <label>
+          connect_dist = <span class="value" id="connectValue">100</span>
+        </label>
+        <input
+          type="range"
+          id="connectDistance"
+          min="0"
+          max="300"
+          value="100"
+          step="10"
+        />
+      </div>
+    </div>
+
     <div class="content">
       <a class="back" href="../index.html">&larr; Back</a>
       <h1>Writing</h1>
@@ -20,13 +85,15 @@
           </a>
           <div class="post-meta">2026 · Guía · Inmigración & carrera</div>
           <div class="post-excerpt">
-            Guía general para PhDs y posgrados en STEM en OPT o STEM OPT que
+            Notas para PhDs y posgrados en STEM en OPT o STEM OPT que
             empiezan su búsqueda en industria: reloj de desempleo, H-1B y
-            alternativas, dónde buscar, networking, materiales, entrevistas y
-            un checklist de arranque.
+            alternativas, dónde buscar, networking, materiales y
+            entrevistas.
           </div>
         </li>
       </ul>
     </div>
+
+    <script src="../background.js"></script>
   </body>
 </html>
