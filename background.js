@@ -10,8 +10,8 @@ resizeCanvas();
 
 // Physics constants
 let G = 400;
-let backgroundColor = "#f5f5f5";
-let particleColor = { r: 80, g: 80, b: 80 };
+let backgroundColor = "#05070d";
+let particleColor = { r: 232, g: 236, b: 245 };
 let particleAttractionEnabled = false;
 let connectionDistance = 100;
 
@@ -700,7 +700,7 @@ function clearHoles() {
 // ---------------------------------------------------------------------------
 // Drawing
 // ---------------------------------------------------------------------------
-let bgIsDark = false;
+let bgIsDark = true;
 // Batched drawing: lines and plain dust share a few alpha levels
 const LINE_ALPHA_LEVELS = 8;
 const DOT_ALPHA_STEP = 0.05;
