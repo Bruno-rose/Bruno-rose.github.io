@@ -40,6 +40,36 @@
       </div>
 
       <div class="control-group">
+        <label>
+          <input type="checkbox" id="blackHolesEnabled" checked /> black_holes
+        </label>
+        <div class="button-row">
+          <button type="button" id="bigBang">big_bang</button>
+          <button type="button" id="pauseSim">pause</button>
+          <button type="button" id="clearHoles">clear</button>
+        </div>
+        <p class="hint">click empty space to spawn · drag a hole to throw it</p>
+      </div>
+
+      <div
+        class="control-group"
+        title="How many particles must bunch together (within 15px) to collapse into a black hole"
+      >
+        <label>
+          merge_at = <span class="value" id="mergeValue">6</span>
+        </label>
+        <input
+          type="range"
+          id="mergeCount"
+          min="3"
+          max="10"
+          value="6"
+          step="1"
+        />
+        <p class="hint">particles that collapse into a black hole</p>
+      </div>
+
+      <div class="control-group">
         <label> count = <span class="value" id="countValue">200</span> </label>
         <input
           type="range"

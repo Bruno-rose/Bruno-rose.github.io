@@ -122,6 +122,37 @@ canvas {
   cursor: pointer;
 }
 
+.control-group .button-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.control-group button {
+  flex: 1;
+  background: #111;
+  border: 1px solid #333;
+  color: #aaa;
+  font-family: inherit;
+  font-size: 10px;
+  padding: 5px 0;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.control-group button:hover {
+  color: #ddd;
+  border-color: #555;
+}
+
+.control-group .hint {
+  margin: 6px 0 0;
+  font-size: 9px;
+  color: #555;
+  line-height: 1.4;
+}
+
 @media (max-width: 768px) {
   .controls {
     top: auto;
