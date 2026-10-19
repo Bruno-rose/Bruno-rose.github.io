@@ -30,44 +30,6 @@
         font-size: 15px;
         line-height: 1.4;
       }
-
-      #dino {
-        left: max(16px, calc(50% - 230px));
-        top: 130px;
-      }
-
-      #pinball {
-        left: max(16px, calc(50% - 200px));
-        top: 160px;
-      }
-
-      /* The port draws its own 606x480 Win98 frame; size the window to it */
-      #pinball {
-        width: min(614px, calc(100vw - 32px));
-      }
-
-      #pinball iframe {
-        aspect-ratio: auto;
-        height: 480px;
-      }
-
-      .game {
-        width: min(680px, calc(100vw - 32px));
-      }
-
-      .game iframe {
-        display: block;
-        width: 100%;
-        aspect-ratio: 4 / 3;
-        flex: 1 1 auto;
-        min-height: 0;
-        border: 0;
-        background: #000;
-      }
-
-      .window.max iframe {
-        aspect-ratio: auto;
-      }
     </style>
   </head>
   <body>
@@ -171,54 +133,7 @@ contact@brunorodriguez.dev
         </div>
       </section>
 
-      <section class="window game" id="dino" hidden>
-        <div class="title-bar">
-          <div class="title-bar-text">Cadillacs and Dinosaurs - Arcade</div>
-          <div class="title-bar-controls">
-            <button aria-label="Minimize"></button>
-            <button aria-label="Maximize"></button>
-            <button aria-label="Close"></button>
-          </div>
-        </div>
-        <div class="window-body">
-          <iframe
-            data-src="https://archive.org/embed/arcade_dino"
-            title="Cadillacs and Dinosaurs, via the Internet Archive"
-            allow="fullscreen; autoplay; gamepad"
-          ></iframe>
-        </div>
-        <div class="status-bar">
-          <p class="status-bar-field">Capcom, 1993</p>
-          <p class="status-bar-field">
-            via <a href="https://archive.org/details/arcade_dino" target="_blank">Internet Archive</a>
-          </p>
-        </div>
-      </section>
 
-      <section class="window game" id="pinball" hidden>
-        <div class="title-bar">
-          <div class="title-bar-text">3D Pinball for Windows - Space Cadet</div>
-          <div class="title-bar-controls">
-            <button aria-label="Minimize"></button>
-            <button aria-label="Maximize"></button>
-            <button aria-label="Close"></button>
-          </div>
-        </div>
-        <div class="window-body">
-          <iframe
-            data-src="https://pinball.alula.me/"
-            title="3D Pinball Space Cadet, web port"
-            allow="fullscreen; autoplay; gamepad"
-          ></iframe>
-        </div>
-        <div class="status-bar">
-          <p class="status-bar-field">Microsoft, 1995</p>
-          <p class="status-bar-field">
-            web port by
-            <a href="https://github.com/alula/SpaceCadetPinball" target="_blank">alula</a>
-          </p>
-        </div>
-      </section>
 
 
     </main>

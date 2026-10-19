@@ -5,8 +5,6 @@
   const APPS = [
     { label: "bruno.txt", icon: "note", open: "notepad" },
     { label: "cv.txt", icon: "note", open: "cv" },
-    { label: "Cadillacs & Dinosaurs", icon: "arcade", open: "dino" },
-    { label: "Pinball", icon: "pinball", open: "pinball" },
     { label: "Blog", icon: "folder", href: ROOT + "blog/index.html" },
     {
       label: "Request resume",
@@ -34,17 +32,6 @@
     <symbol id="ico-mail" viewBox="0 0 32 32">
       <rect x="3" y="8" width="26" height="17" fill="#fff" stroke="#000" />
       <path d="M3 8l13 10 13-10" fill="none" stroke="#000" />
-    </symbol>
-    <symbol id="ico-arcade" viewBox="0 0 32 32">
-      <rect x="5" y="20" width="22" height="9" fill="#444" stroke="#000" />
-      <path d="M16 20V9" stroke="#000" stroke-width="3" />
-      <circle cx="16" cy="8" r="5" fill="#e22" stroke="#000" />
-      <circle cx="23" cy="24" r="2" fill="#fd0" />
-    </symbol>
-    <symbol id="ico-pinball" viewBox="0 0 32 32">
-      <rect x="6" y="2" width="20" height="28" rx="2" fill="#1b2a6b" stroke="#000" />
-      <circle cx="19" cy="11" r="4" fill="#ccc" stroke="#000" />
-      <path d="M9 24l6 2M23 24l-6 2" stroke="#fd0" stroke-width="2.5" />
     </symbol>
     <symbol id="ico-win" viewBox="0 0 16 16">
       <rect x="1" y="1" width="6" height="6" fill="#f03a17" />
@@ -94,10 +81,6 @@
   function open(id) {
     const { el, task } = wins[id];
     if (!task.isConnected) tasks.append(task);
-    // Embedded games load on first open, not with the page
-    for (const f of el.querySelectorAll("iframe[data-src]")) {
-      if (!f.src || f.src === "about:blank") f.src = f.dataset.src;
-    }
     el.hidden = false;
     el.style.zIndex = ++z;
     setFocus(el);
@@ -114,10 +97,6 @@
     if (el.dataset.closeHref) return (location.href = el.dataset.closeHref);
     el.hidden = true;
     task.remove();
-    // Unload embeds so a closed game stops (minimize keeps it running)
-    el.querySelectorAll("iframe[data-src]").forEach(
-      (f) => (f.src = "about:blank"),
-    );
     setFocus(null);
   }
 
