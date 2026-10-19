@@ -21,17 +21,14 @@
         display: block;
         width: 100%;
         height: min(60dvh, 480px);
+        flex: 1 1 auto; /* starting size; then follows the window's resize */
+        min-height: 0;
         box-sizing: border-box;
         resize: none;
         padding: 6px 8px;
         font-family: "Fixedsys", "Lucida Console", "Courier New", monospace;
         font-size: 15px;
         line-height: 1.4;
-      }
-
-      #doom {
-        left: max(16px, calc(50% - 260px));
-        top: 100px;
       }
 
       #dino {
@@ -62,18 +59,14 @@
         display: block;
         width: 100%;
         aspect-ratio: 4 / 3;
+        flex: 1 1 auto;
+        min-height: 0;
         border: 0;
         background: #000;
       }
 
       .window.max iframe {
-        flex: 1;
         aspect-ratio: auto;
-      }
-
-      .window.max textarea {
-        flex: 1;
-        height: auto;
       }
     </style>
   </head>
@@ -178,28 +171,6 @@ contact@brunorodriguez.dev
         </div>
       </section>
 
-      <section class="window game" id="doom" hidden>
-        <div class="title-bar">
-          <div class="title-bar-text">DOOM</div>
-          <div class="title-bar-controls">
-            <button aria-label="Minimize"></button>
-            <button aria-label="Maximize"></button>
-            <button aria-label="Close"></button>
-          </div>
-        </div>
-        <div class="window-body">
-          <iframe
-            data-src="games/doom.html"
-            title="DOOM shareware"
-            allow="fullscreen; autoplay; gamepad"
-          ></iframe>
-        </div>
-        <div class="status-bar">
-          <p class="status-bar-field">id Software, 1993</p>
-          <p class="status-bar-field">Shareware episode 1</p>
-        </div>
-      </section>
-
       <section class="window game" id="dino" hidden>
         <div class="title-bar">
           <div class="title-bar-text">Cadillacs and Dinosaurs - Arcade</div>
@@ -248,6 +219,8 @@ contact@brunorodriguez.dev
           </p>
         </div>
       </section>
+
+
     </main>
 
     <script src="win98.js"></script>

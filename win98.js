@@ -5,7 +5,6 @@
   const APPS = [
     { label: "bruno.txt", icon: "note", open: "notepad" },
     { label: "cv.txt", icon: "note", open: "cv" },
-    { label: "DOOM.EXE", icon: "doom", open: "doom" },
     { label: "Cadillacs & Dinosaurs", icon: "arcade", open: "dino" },
     { label: "Pinball", icon: "pinball", open: "pinball" },
     { label: "Blog", icon: "folder", href: ROOT + "blog/index.html" },
@@ -35,11 +34,6 @@
     <symbol id="ico-mail" viewBox="0 0 32 32">
       <rect x="3" y="8" width="26" height="17" fill="#fff" stroke="#000" />
       <path d="M3 8l13 10 13-10" fill="none" stroke="#000" />
-    </symbol>
-    <symbol id="ico-doom" viewBox="0 0 32 32">
-      <rect x="2" y="6" width="28" height="20" fill="#2b1d12" stroke="#000" />
-      <text x="16" y="20" text-anchor="middle" font-family="Arial Black, Arial"
-        font-weight="900" font-size="9" fill="#d22">DOOM</text>
     </symbol>
     <symbol id="ico-arcade" viewBox="0 0 32 32">
       <rect x="5" y="20" width="22" height="9" fill="#444" stroke="#000" />
