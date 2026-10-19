@@ -6,11 +6,7 @@
     { label: "bruno.txt", icon: "note", open: "notepad" },
     { label: "cv.txt", icon: "note", open: "cv" },
     { label: "Blog", icon: "folder", href: ROOT + "blog/index.html" },
-    {
-      label: "Request resume",
-      icon: "mail",
-      href: "mailto:contact@brunorodriguez.dev?subject=Resume%20request",
-    },
+    { label: "Request resume", icon: "mail", open: "resume" },
   ];
   const appAttrs = (a) =>
     a.open ? `data-open="${a.open}"` : `data-href="${a.href}"`;

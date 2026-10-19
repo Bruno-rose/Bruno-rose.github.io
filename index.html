@@ -30,6 +30,73 @@
         font-size: 15px;
         line-height: 1.4;
       }
+
+      #resume {
+        left: max(16px, calc(50% - 170px));
+        top: 140px;
+        width: min(340px, calc(100vw - 32px));
+        resize: none;
+      }
+
+      #resume form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+      }
+
+      #resume input[type="email"] {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      #resume .buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 6px;
+      }
+
+      #resume .progress,
+      #resume form.loading .ask {
+        display: none;
+      }
+
+      #resume form.loading .progress {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      /* Classic segmented blue bar; the fill is fake, 2.5s end to end */
+      #resume .bar {
+        height: 18px;
+        padding: 2px;
+        box-sizing: border-box;
+        box-shadow:
+          inset -1px -1px #fff,
+          inset 1px 1px grey;
+      }
+
+      #resume .bar span {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: repeating-linear-gradient(
+          to right,
+          #000080 0 8px,
+          transparent 8px 10px
+        );
+      }
+
+      #resume form.loading .bar span {
+        animation: fill 2.5s steps(20) forwards;
+      }
+
+      @keyframes fill {
+        to {
+          width: 100%;
+        }
+      }
     </style>
   </head>
   <body>
@@ -49,10 +116,7 @@
             <ul class="dropdown">
               <li><button data-open="cv">cv.txt</button></li>
               <li>
-                <a
-                  href="mailto:contact@brunorodriguez.dev?subject=Resume%20request"
-                  >Request resume</a
-                >
+                <button data-open="resume">Request resume</button>
               </li>
               <li><hr /></li>
               <li><button data-close>Exit</button></li>
@@ -96,10 +160,7 @@ Want to talk? contact@brunorodriguez.dev
             <ul class="dropdown">
               <li><button data-open="notepad">bruno.txt</button></li>
               <li>
-                <a
-                  href="mailto:contact@brunorodriguez.dev?subject=Resume%20request"
-                  >Request resume</a
-                >
+                <button data-open="resume">Request resume</button>
               </li>
               <li><hr /></li>
               <li><button data-close>Exit</button></li>
@@ -128,11 +189,55 @@ contact@brunorodriguez.dev
         </div>
       </section>
 
-
-
-
+      <section class="window" id="resume" hidden>
+        <div class="title-bar">
+          <div class="title-bar-text">Request resume</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <form>
+            <div class="ask">
+              <div class="field-row-stacked">
+                <label for="resume-email">Your email</label>
+                <input
+                  id="resume-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+            </div>
+            <div class="buttons ask">
+              <button type="submit">Download</button>
+              <button type="button" data-close>Cancel</button>
+            </div>
+            <div class="progress" role="status">
+              <span>Downloading resume.pdf…</span>
+              <div class="bar"><span></span></div>
+            </div>
+          </form>
+        </div>
+      </section>
     </main>
 
     <script src="win98.js"></script>
+    <script>
+      // Request resume: the email rides along as a query string, so requests
+      // show up in Cloudflare's traffic analytics. The download bar is for show.
+      const form = document.querySelector("#resume form");
+      form.onsubmit = (e) => {
+        e.preventDefault();
+        form.classList.add("loading");
+        const email = encodeURIComponent(form.email.value.trim());
+        setTimeout(() => (location.href = "resume.pdf?email=" + email), 2500);
+      };
+      // Coming back from the PDF (back button) shows the form again
+      addEventListener("pageshow", () => form.classList.remove("loading"));
+    </script>
   </body>
 </html>
