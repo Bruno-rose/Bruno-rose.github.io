@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOOM</title>
+    <!-- js-dos (DOSBox in WebAssembly) runs the untouched shareware files in
+         doom.jsdos. Own page so its CSS and globals stay out of the desktop. -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/js-dos@8.4.1/dist/js-dos.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/js-dos@8.4.1/dist/js-dos.js"></script>
+    <style>
+      html,
+      body,
+      #dos {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="dos"></div>
+    <script>
+      Dos(document.getElementById("dos"), {
+        url: "doom.jsdos",
+        pathPrefix: "https://cdn.jsdelivr.net/npm/js-dos@8.4.1/dist/emulators/",
+        autoStart: true,
+        kiosk: true,
+        noCloud: true,
+      });
+    </script>
+  </body>
+</html>

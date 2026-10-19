@@ -3,363 +3,253 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bruno Rodríguez - Full-Stack Software Engineer</title>
-    <link rel="stylesheet" href="background.css" />
+    <title>Bruno Rodríguez</title>
+    <link rel="stylesheet" href="https://unpkg.com/98.css@0.1.20/dist/98.css" />
+    <link rel="stylesheet" href="win98.css" />
     <style>
-      * {
-        margin: 0;
-        padding: 0;
+      #notepad {
+        left: max(16px, calc(50% - 320px));
+        top: 40px;
+      }
+
+      #cv {
+        left: max(16px, calc(50% - 290px));
+        top: 70px;
+      }
+
+      .window textarea {
+        display: block;
+        width: 100%;
+        height: min(60dvh, 480px);
         box-sizing: border-box;
+        resize: none;
+        padding: 6px 8px;
+        font-family: "Fixedsys", "Lucida Console", "Courier New", monospace;
+        font-size: 15px;
+        line-height: 1.4;
       }
 
-      body {
-        background: #05070d;
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-          Cantarell, sans-serif;
-        overflow-x: hidden;
-        padding-left: env(safe-area-inset-left);
-        padding-right: env(safe-area-inset-right);
+      #doom {
+        left: max(16px, calc(50% - 260px));
+        top: 100px;
       }
 
-      .content {
-        position: relative;
-        z-index: 2;
-        max-width: min(700px, 92vw);
-        margin: 0 auto;
-        padding: clamp(60px, 12vh, 100px) clamp(20px, 5vw, 40px);
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+      #dino {
+        left: max(16px, calc(50% - 230px));
+        top: 130px;
       }
 
-      h1 {
-        font-size: clamp(1.6rem, 4vw + 1rem, 2.5em);
-        font-weight: 300;
-        color: #f0f2f5;
-        margin-bottom: 0.3em;
-        line-height: 1.2;
+      #pinball {
+        left: max(16px, calc(50% - 200px));
+        top: 160px;
       }
 
-      .intro {
-        font-size: clamp(1.05rem, 2vw + 0.8rem, 1.3em);
-        color: #cbd1da;
-        margin-bottom: 1.5em;
-        font-weight: 300;
+      /* The port draws its own 606x480 Win98 frame; size the window to it */
+      #pinball {
+        width: min(614px, calc(100vw - 32px));
       }
 
-      .location {
-        font-size: 0.9em;
-        color: #838b99;
-        font-weight: 400;
-        margin-bottom: 1.5em;
-        display: flex;
-        align-items: center;
-        gap: 0.45em;
+      #pinball iframe {
+        aspect-ratio: auto;
+        height: 480px;
       }
 
-      .location-icon {
-        flex-shrink: 0;
-        width: 1em;
-        height: 1em;
-        color: inherit;
+      .game {
+        width: min(680px, calc(100vw - 32px));
       }
 
-      .location-icon path {
-        fill: none;
-        stroke: currentColor;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke-width: 1.5;
+      .game iframe {
+        display: block;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        border: 0;
+        background: #000;
       }
 
-      p {
-        font-size: clamp(0.95rem, 1.5vw + 0.8rem, 1.1em);
-        line-height: 1.7;
-        color: #b3bac6;
-        margin-bottom: 1.2em;
+      .window.max iframe {
+        flex: 1;
+        aspect-ratio: auto;
       }
 
-      .experience {
-        margin: 2em 0;
-        font-size: 0.95em;
+      .window.max textarea {
+        flex: 1;
+        height: auto;
       }
-
-      .experience h2 {
-        font-size: 0.75em;
-        font-weight: 500;
-        color: #838b99;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: 0.8em;
-      }
-
-      .experience ul {
-        list-style: none;
-      }
-
-      .experience li {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 0.2em 1em;
-        margin-bottom: 0.4em;
-        color: #b3bac6;
-      }
-
-      .experience .role {
-        font-weight: 500;
-        color: #dfe3ea;
-      }
-      .experience .when {
-        color: #838b99;
-        white-space: nowrap;
-      }
-
-      .tech {
-        margin: 2em 0;
-        font-size: 0.9em;
-      }
-      .tech h2 {
-        font-size: 0.75em;
-        font-weight: 500;
-        color: #838b99;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: 0.6em;
-      }
-      .tech .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.35em 0.6em;
-      }
-      .tech .tags span {
-        color: #b3bac6;
-        background: rgba(255, 255, 255, 0.07);
-        padding: 0.2em 0.5em;
-      }
-
-      .links {
-        margin-top: 2em;
-        font-size: 1.1em;
-      }
-
-      a {
-        color: #dfe3ea;
-        text-decoration: none;
-        position: relative;
-        font-weight: 400;
-      }
-
-      a::after {
-        content: "";
-        position: absolute;
-        z-index: -1;
-        top: 66%;
-        left: -0.1em;
-        right: -0.1em;
-        bottom: 0;
-        transition: top 200ms cubic-bezier(0, 0.8, 0.13, 1);
-        background-color: rgba(110, 128, 170, 0.32);
-      }
-
-      a:hover {
-        color: #dfe3ea;
-      }
-
-      a:hover::after {
-        top: 0;
-      }
-
-      @media (max-width: 480px) {
-        .experience li {
-          flex-direction: column;
-          gap: 0;
-        }
-        .experience .when {
-          font-size: 0.9em;
-        }
-      }
-
     </style>
   </head>
   <body>
-    <canvas id="canvas"></canvas>
-
-    <button class="config-toggle" id="configToggle">config</button>
-
-    <div class="controls" id="controls">
-      <h3>// Config</h3>
-
-      <div class="control-group">
-        <label>bg_color</label>
-        <input type="color" id="bgColor" value="#05070d" />
-      </div>
-
-      <div class="control-group">
-        <label>particle_color</label>
-        <input type="color" id="particleColor" value="#e8ecf5" />
-      </div>
-
-      <div class="control-group">
-        <label>
-          gravity = <span class="value" id="gravityValue">400</span>
-        </label>
-        <input
-          type="range"
-          id="gravity"
-          min="0"
-          max="1000"
-          value="400"
-          step="50"
-        />
-      </div>
-
-      <div class="control-group">
-        <label>
-          <input type="checkbox" id="blackHolesEnabled" checked /> black_holes
-        </label>
-        <div class="button-row">
-          <button type="button" id="bigBang">big_bang</button>
-          <button type="button" id="pauseSim">pause</button>
-          <button type="button" id="clearHoles">clear</button>
+    <main class="desktop">
+      <section class="window" id="notepad">
+        <div class="title-bar">
+          <div class="title-bar-text">bruno.txt - Notepad</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
         </div>
-        <p class="hint">click empty space to spawn · drag a hole to throw it</p>
-      </div>
+        <nav class="menubar">
+          <details class="menu">
+            <summary>File</summary>
+            <ul class="dropdown">
+              <li><button data-open="cv">cv.txt</button></li>
+              <li>
+                <a
+                  href="mailto:contact@brunorodriguez.dev?subject=Resume%20request"
+                  >Request resume</a
+                >
+              </li>
+              <li><hr /></li>
+              <li><button data-close>Exit</button></li>
+            </ul>
+          </details>
+          <a href="blog/index.html">Blog</a>
+        </nav>
+        <div class="window-body">
+          <textarea spellcheck="false" aria-label="bruno.txt">
+Bruno
 
-      <div
-        class="control-group"
-        title="How many particles must bunch together (within 15px) to collapse into a black hole"
-      >
-        <label>
-          merge_at = <span class="value" id="mergeValue">6</span>
-        </label>
-        <input
-          type="range"
-          id="mergeCount"
-          min="3"
-          max="10"
-          value="6"
-          step="1"
-        />
-        <p class="hint">particles that collapse into a black hole</p>
-      </div>
+Extremely curious. The world is fascinating
+Chronically online. Love to see new tech
+Love challenges. Just for accomplishments
 
-      <div class="control-group">
-        <label> count = <span class="value" id="countValue">200</span> </label>
-        <input
-          type="range"
-          id="particleCount"
-          min="50"
-          max="500"
-          value="200"
-          step="50"
-        />
-      </div>
+Worked in early stage [Breezy] and late [Fintual] stage startups.
 
-      <div class="control-group">
-        <label>
-          <input type="checkbox" id="particleAttraction" /> p2p_attraction
-        </label>
-      </div>
+From Vallenar, Atacama, Chile, but lived on:
+- Santiago (Chile)
+- Paris (France)
+- San Francisco (USA)
 
-      <div class="control-group">
-        <label>
-          connect_dist = <span class="value" id="connectValue">100</span>
-        </label>
-        <input
-          type="range"
-          id="connectDistance"
-          min="0"
-          max="300"
-          value="100"
-          step="10"
-        />
-      </div>
-    </div>
-
-    <div class="content">
-      <div class="intro">Hello.</div>
-      <h1>My name is Bruno Rodríguez.</h1>
-      <p class="location">
-        <svg class="location-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 22L8 8a4 4 0 0 1 8 0l-4 14z" />
-        </svg>
-        San Francisco, Bay Area
-      </p>
-
-      <p>
-        I'm a software engineer with a proven track record building and scaling
-        products at high-growth startups serving over 150,000 users. Since 2022,
-        I have specialized in delivering robust, end-to-end systems.
-      </p>
-
-      <p>
-        My experience spans the real estate, healthcare, and finance industries,
-        where I've tackled complex engineering challenges. I bring a strong
-        foundation in distributed systems and machine learning, and approach
-        every problem pragmatically, balancing reliability and product outcomes.
-      </p>
-
-      <p>
-        Outside of engineering, I enjoy beach volleyball, cheese, playing
-        saxophone.
-      </p>
-
-      <section class="experience">
-        <h2>Experience</h2>
-        <ul>
-          <li>
-            <span class="role">Founding Software Engineer</span>
-            <span class="when">Breezy · 2025 –</span>
-          </li>
-          <li>
-            <span class="role">Software Engineer</span>
-            <span class="when">Fintual (YC, Sequoia) · 2024–25</span>
-          </li>
-          <li>
-            <span class="role">Infra & Data Research</span>
-            <span class="when"
-              >Institute for Foundational Research on Data · 2023–24</span
-            >
-          </li>
-          <li>
-            <span class="role">Full-Stack Engineer & Team Lead</span>
-            <span class="when">Isatec R&D · 2022–23</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="tech">
-        <h2>Tech</h2>
-        <div class="tags">
-          <span>TypeScript</span><span>Python</span><span>Scala</span
-          ><span>React Native</span><span>NestJS</span><span>Django</span
-          ><span>Rails</span><span>GraphQL</span><span>PostgreSQL</span
-          ><span>Docker</span><span>Kubernetes</span><span>AWS</span
-          ><span>PyTorch</span><span>Spark</span>
+Want to talk? reach out at contact@brunorodriguez.dev
+</textarea
+          >
         </div>
       </section>
 
-      <div class="links">
-        <p>
-          Find me on
-          <a href="https://github.com/bruno-rose" target="_blank">GitHub</a>
-          and
-          <a
-            href="https://linkedin.com/in/bruno-rodriguez-sepulveda"
-            target="_blank"
-            >LinkedIn</a
-          >. Reach out any time at
-          <a href="mailto:contact@brunorodriguez.dev"
-            >contact@brunorodriguez.dev</a
-          >. I also write occasionally on my
-          <a href="blog/index.html">blog</a>.
-        </p>
-      </div>
-    </div>
+      <section class="window" id="cv" hidden>
+        <div class="title-bar">
+          <div class="title-bar-text">cv.txt - Notepad</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <nav class="menubar">
+          <details class="menu">
+            <summary>File</summary>
+            <ul class="dropdown">
+              <li><button data-open="notepad">bruno.txt</button></li>
+              <li>
+                <a
+                  href="mailto:contact@brunorodriguez.dev?subject=Resume%20request"
+                  >Request resume</a
+                >
+              </li>
+              <li><hr /></li>
+              <li><button data-close>Exit</button></li>
+            </ul>
+          </details>
+          <a href="blog/index.html">Blog</a>
+        </nav>
+        <div class="window-body">
+          <textarea spellcheck="false" aria-label="cv.txt">
+BRUNO RODRÍGUEZ
+Software Engineer · San Francisco
 
-    <script src="background.js"></script>
+EXPERIENCE
+2025-     Founding Software Engineer · Breezy
+2024-25   Software Engineer · Fintual (YC, Sequoia)
+2023-24   Infra & Data Research · Institute for
+          Foundational Research on Data
+2022-23   Full-Stack Engineer & Team Lead · Isatec R&D
+
+TECH
+TypeScript, Python, Scala, React Native, NestJS,
+Django, Rails, GraphQL, PostgreSQL, Docker,
+Kubernetes, AWS, PyTorch, Spark
+
+ELSEWHERE
+github.com/bruno-rose
+linkedin.com/in/bruno-rodriguez-sepulveda
+contact@brunorodriguez.dev
+</textarea
+          >
+        </div>
+      </section>
+
+      <section class="window game" id="doom" hidden>
+        <div class="title-bar">
+          <div class="title-bar-text">DOOM</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <iframe
+            data-src="games/doom.html"
+            title="DOOM shareware"
+            allow="fullscreen; autoplay; gamepad"
+          ></iframe>
+        </div>
+        <div class="status-bar">
+          <p class="status-bar-field">id Software, 1993</p>
+          <p class="status-bar-field">Shareware episode 1</p>
+        </div>
+      </section>
+
+      <section class="window game" id="dino" hidden>
+        <div class="title-bar">
+          <div class="title-bar-text">Cadillacs and Dinosaurs - Arcade</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <iframe
+            data-src="https://archive.org/embed/arcade_dino"
+            title="Cadillacs and Dinosaurs, via the Internet Archive"
+            allow="fullscreen; autoplay; gamepad"
+          ></iframe>
+        </div>
+        <div class="status-bar">
+          <p class="status-bar-field">Capcom, 1993</p>
+          <p class="status-bar-field">
+            via <a href="https://archive.org/details/arcade_dino" target="_blank">Internet Archive</a>
+          </p>
+        </div>
+      </section>
+
+      <section class="window game" id="pinball" hidden>
+        <div class="title-bar">
+          <div class="title-bar-text">3D Pinball for Windows - Space Cadet</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <iframe
+            data-src="https://pinball.alula.me/"
+            title="3D Pinball Space Cadet, web port"
+            allow="fullscreen; autoplay; gamepad"
+          ></iframe>
+        </div>
+        <div class="status-bar">
+          <p class="status-bar-field">Microsoft, 1995</p>
+          <p class="status-bar-field">
+            web port by
+            <a href="https://github.com/alula/SpaceCadetPinball" target="_blank">alula</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script src="win98.js"></script>
   </body>
 </html>

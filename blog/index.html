@@ -4,124 +4,66 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Writing - Bruno Rodríguez</title>
-    <link rel="stylesheet" href="../background.css" />
+    <link rel="stylesheet" href="https://unpkg.com/98.css@0.1.20/dist/98.css" />
+    <link rel="stylesheet" href="../win98.css" />
     <link rel="stylesheet" href="blog.css" />
   </head>
   <body>
-    <canvas id="canvas"></canvas>
-
-    <button class="config-toggle" id="configToggle">config</button>
-
-    <div class="controls" id="controls">
-      <h3>// Config</h3>
-
-      <div class="control-group">
-        <label>bg_color</label>
-        <input type="color" id="bgColor" value="#05070d" />
-      </div>
-
-      <div class="control-group">
-        <label>particle_color</label>
-        <input type="color" id="particleColor" value="#e8ecf5" />
-      </div>
-
-      <div class="control-group">
-        <label>
-          gravity = <span class="value" id="gravityValue">400</span>
-        </label>
-        <input
-          type="range"
-          id="gravity"
-          min="0"
-          max="1000"
-          value="400"
-          step="50"
-        />
-      </div>
-
-      <div class="control-group">
-        <label>
-          <input type="checkbox" id="blackHolesEnabled" checked /> black_holes
-        </label>
-        <div class="button-row">
-          <button type="button" id="bigBang">big_bang</button>
-          <button type="button" id="pauseSim">pause</button>
-          <button type="button" id="clearHoles">clear</button>
-        </div>
-        <p class="hint">click empty space to spawn · drag a hole to throw it</p>
-      </div>
-
-      <div
-        class="control-group"
-        title="How many particles must bunch together (within 15px) to collapse into a black hole"
-      >
-        <label>
-          merge_at = <span class="value" id="mergeValue">6</span>
-        </label>
-        <input
-          type="range"
-          id="mergeCount"
-          min="3"
-          max="10"
-          value="6"
-          step="1"
-        />
-        <p class="hint">particles that collapse into a black hole</p>
-      </div>
-
-      <div class="control-group">
-        <label> count = <span class="value" id="countValue">200</span> </label>
-        <input
-          type="range"
-          id="particleCount"
-          min="50"
-          max="500"
-          value="200"
-          step="50"
-        />
-      </div>
-
-      <div class="control-group">
-        <label>
-          <input type="checkbox" id="particleAttraction" /> p2p_attraction
-        </label>
-      </div>
-
-      <div class="control-group">
-        <label>
-          connect_dist = <span class="value" id="connectValue">100</span>
-        </label>
-        <input
-          type="range"
-          id="connectDistance"
-          min="0"
-          max="300"
-          value="100"
-          step="10"
-        />
-      </div>
-    </div>
-
-    <div class="content">
-      <a class="back" href="../index.html">&larr; Back</a>
-      <h1>Writing</h1>
-      <ul class="posts">
-        <li>
-          <a href="trabajo-eeuu-latam.html">
-            <span class="post-title"
-              >Cómo buscar trabajo en Estados Unidos desde Latinoamérica</span
-            >
-          </a>
-          <div class="post-meta">2026 · Guía · Carrera</div>
-          <div class="post-excerpt">
-            Guía para profesionales latinoamericanos que buscan trabajo en
-            EE.UU.: resume al estilo gringo, dónde buscar, networking,
-            entrevistas en inglés y negociación.
+    <main class="desktop">
+      <section class="window doc" id="blog" data-close-href="../index.html">
+        <div class="title-bar">
+          <div class="title-bar-text">Blog - Internet Explorer</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
           </div>
-        </li>
-      </ul>
-    </div>
+        </div>
+        <nav class="menubar">
+          <details class="menu">
+            <summary>File</summary>
+            <ul class="dropdown">
+              <li><button data-open="notepad">bruno.txt</button></li>
+              <li><button data-open="cv">cv.txt</button></li>
+              <li>
+                <a
+                  href="mailto:contact@brunorodriguez.dev?subject=Resume%20request"
+                  >Request resume</a
+                >
+              </li>
+              <li><hr /></li>
+              <li><button data-close>Close</button></li>
+            </ul>
+          </details>
+          <a href="../index.html">Home</a>
+        </nav>
+        <div class="address">
+          <label for="address">Address</label>
+          <input id="address" readonly />
+        </div>
+        <div class="window-body">
+          <div class="page">
+            <h1>Writing</h1>
+            <ul class="posts">
+              <li>
+                <a href="trabajo-eeuu-latam.html">
+                  <span class="post-title"
+                    >Cómo buscar trabajo en Estados Unidos desde Latinoamérica</span
+                  >
+                </a>
+                <div class="post-meta">2026 · Guía · Carrera</div>
+                <div class="post-excerpt">
+                  Guía para profesionales latinoamericanos que buscan trabajo en
+                  EE.UU.: resume al estilo gringo, dónde buscar, networking,
+                  entrevistas en inglés y negociación.
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
 
-    <script src="../background.js"></script>
+    <script src="../win98.js"></script>
   </body>
 </html>
