@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cómo buscar trabajo en Estados Unidos desde Latinoamérica - Bruno Rodríguez</title>
+    <link rel="stylesheet" href="../background.css" />
+    <link rel="stylesheet" href="blog.css" />
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+
+    <button class="config-toggle" id="configToggle">config</button>
+
+    <div class="controls" id="controls">
+      <h3>// Config</h3>
+
+      <div class="control-group">
+        <label>bg_color</label>
+        <input type="color" id="bgColor" value="#05070d" />
+      </div>
+
+      <div class="control-group">
+        <label>particle_color</label>
+        <input type="color" id="particleColor" value="#e8ecf5" />
+      </div>
+
+      <div class="control-group">
+        <label>
+          gravity = <span class="value" id="gravityValue">400</span>
+        </label>
+        <input
+          type="range"
+          id="gravity"
+          min="0"
+          max="1000"
+          value="400"
+          step="50"
+        />
+      </div>
+
+      <div class="control-group">
+        <label>
+          <input type="checkbox" id="blackHolesEnabled" checked /> black_holes
+        </label>
+        <div class="button-row">
+          <button type="button" id="bigBang">big_bang</button>
+          <button type="button" id="pauseSim">pause</button>
+          <button type="button" id="clearHoles">clear</button>
+        </div>
+        <p class="hint">click empty space to spawn · drag a hole to throw it</p>
+      </div>
+
+      <div
+        class="control-group"
+        title="How many particles must bunch together (within 15px) to collapse into a black hole"
+      >
+        <label>
+          merge_at = <span class="value" id="mergeValue">6</span>
+        </label>
+        <input
+          type="range"
+          id="mergeCount"
+          min="3"
+          max="10"
+          value="6"
+          step="1"
+        />
+        <p class="hint">particles that collapse into a black hole</p>
+      </div>
+
+      <div class="control-group">
+        <label> count = <span class="value" id="countValue">200</span> </label>
+        <input
+          type="range"
+          id="particleCount"
+          min="50"
+          max="500"
+          value="200"
+          step="50"
+        />
+      </div>
+
+      <div class="control-group">
+        <label>
+          <input type="checkbox" id="particleAttraction" /> p2p_attraction
+        </label>
+      </div>
+
+      <div class="control-group">
+        <label>
+          connect_dist = <span class="value" id="connectValue">100</span>
+        </label>
+        <input
+          type="range"
+          id="connectDistance"
+          min="0"
+          max="300"
+          value="100"
+          step="10"
+        />
+      </div>
+    </div>
+
+    <div class="content">
+      <a class="back" href="index.html">&larr; Writing</a>
+      <h1>Cómo buscar trabajo en Estados Unidos desde Latinoamérica</h1>
+      <div class="meta">Guía · Carrera</div>
+
+      <p class="subtitle">
+        Guía para profesionales latinoamericanos que buscan trabajo en
+        empresas de Estados Unidos, sobre todo en tech, datos y finanzas
+        cuantitativas. Las secciones se pueden leer en cualquier orden.
+      </p>
+
+      <article>
+        <h2>1. Definir el target antes de aplicar en masa</h2>
+        <p>
+          Aplicar a todo lo que aparece es el error más común y consume mucho
+          tiempo. Antes de tocar el CV, elige 2–3 tipos de rol, no más, e
+          investiga qué piden y cómo es su proceso: software engineering pide
+          coding y system design; data science pide SQL, estadística, sentido
+          de producto y comunicación; ML pide portfolio y dominio de
+          frameworks; quant pide probabilidad y coding rápido en C++/Python.
+        </p>
+
+        <h3>Traducir tu experiencia a keywords</h3>
+        <p>
+          Los reclutadores y los ATS buscan skills, no el nombre de tu cargo
+          ni de tu carrera. Muchos títulos latinoamericanos no tienen
+          equivalente directo en EE.UU. ("Ingeniero Civil Industrial",
+          "Licenciado en Sistemas"), así que tradúcelos a lo más cercano
+          (Industrial Engineering, Computer Science) y deja que las skills
+          hagan el resto.
+        </p>
+
+        <blockquote>
+          Ejemplo: en vez de "Analista de Control de Gestión", algo como
+          Data Analyst con SQL, Python, forecasting, dashboards (Tableau /
+          Looker) y A/B testing. Esos términos son los que aparecen en las
+          ofertas.
+        </blockquote>
+
+        <p>
+          La receta general: lee 10–15 ofertas reales del rol target y
+          subraya los términos que se repiten. Ese es tu diccionario de
+          keywords.
+        </p>
+
+        <hr />
+
+        <h2>2. Resume al estilo EE.UU.</h2>
+        <p>
+          El formato de CV que se usa en Latinoamérica no sirve tal cual. Las
+          diferencias más importantes:
+        </p>
+        <ul>
+          <li>
+            Sin foto, edad, estado civil, nacionalidad, RUT/DNI/cédula ni
+            dirección completa. En EE.UU. eso no se pone, y puede jugar en
+            contra.
+          </li>
+          <li>
+            <strong>1 página</strong> si tienes &lt;10 años de experiencia;
+            2 como máximo.
+          </li>
+          <li>
+            Cuantifica los logros ("reduje el tiempo de procesamiento 40%",
+            "pipeline que procesa 2M de eventos al día") en vez de listar
+            responsabilidades.
+          </li>
+          <li>
+            Si tus empresas no son conocidas afuera, agrega una línea de
+            contexto: "mayor fintech de Colombia, 5M de usuarios".
+          </li>
+          <li>
+            Todo en inglés, formato simple para ATS, sin columnas raras ni
+            gráficos.
+          </li>
+        </ul>
+
+        <h3>LinkedIn</h3>
+        <p>
+          Perfil completo en inglés, con un headline que lleve las keywords
+          del rol target ("Data Engineer | Python, Spark, AWS") y no solo tu
+          cargo actual. Vale la pena activar "open to work" para los roles y
+          ubicaciones que te interesan.
+        </p>
+
+        <h3>Portfolio / GitHub</h3>
+        <p>
+          Importante si vienes de empresas poco conocidas afuera: repos
+          limpios, un par de proyectos con README claro en inglés, quizá un
+          blog técnico. Es la forma más directa de demostrar nivel sin que el
+          reclutador tenga que conocer tu mercado.
+        </p>
+
+        <hr />
+
+        <h2>3. Dónde buscar</h2>
+        <ul>
+          <li>LinkedIn</li>
+          <li>Portales de carreras de las propias empresas</li>
+          <li>
+            Wellfound (startups) y el hilo mensual "Who is hiring?" de Hacker
+            News
+          </li>
+          <li>
+            Boards de trabajo remoto (We Work Remotely, Remote OK) si te
+            sirve empezar remoto
+          </li>
+          <li>Quant / finanzas: eFinancialCareers, QuantNet</li>
+        </ul>
+
+        <hr />
+
+        <h2>4. Conexiones</h2>
+        <p>
+          El networking rinde mucho más que aplicar en masa, y es justo donde
+          más se nota la desventaja de no haber estudiado o trabajado en
+          EE.UU. Para compensarla: busca a excompañeros de trabajo o de
+          universidad que ya estén allá (la diáspora latinoamericana en tech
+          es grande y suele estar dispuesta a ayudar), filtra alumni de tu
+          universidad por empresa en LinkedIn, y súmate a comunidades como
+          Techqueria, Latinas in Tech o LatinX in AI.
+        </p>
+        <p>
+          Para que rinda: pide conversaciones de 20 minutos enmarcadas como
+          "quiero aprender de tu rol", no como pedir trabajo. Si escribes en
+          frío, que sea corto y específico. Un referral mueve tu CV al frente
+          de la fila, así que si vas a pedir algo pide eso, apuntado a una
+          vacante concreta. Eso sí, un referral no reemplaza el fit ni la
+          experiencia: sirve para entrar a la sala, no para ganar la
+          conversación.
+        </p>
+
+        <hr />
+
+        <h2>5. Postular: estrategia</h2>
+        <p>
+          Haz tailoring por aplicación con las keywords del posting. Prioriza
+          vacantes donde tienes algún contacto o referral y donde tus
+          keywords calzan de verdad. Antes de aplicar en frío revisa si
+          conoces a alguien en esa empresa (§4), y registra todo para no
+          duplicar esfuerzos ni perder seguimientos.
+        </p>
+
+        <hr />
+
+        <h2>6. Entrevistas</h2>
+
+        <h3>Inglés</h3>
+        <p>
+          El acento no es el problema; la claridad sí. Practica en voz alta
+          explicar tu trabajo, resolver problemas pensando en inglés y
+          contestar preguntas de seguimiento sin traducir mentalmente. Si te
+          pierdes, pedir que repitan o reformulen es normal y está bien
+          visto.
+        </p>
+
+        <h3>Behavioral</h3>
+        <p>
+          Practica historias tipo STAR (Situation, Task, Action, Result) y ten
+          5–6 listas (liderazgo, conflicto, fracaso, iniciativa,
+          colaboración). Una diferencia cultural que pesa: en EE.UU. se
+          espera que hables de lo que <em>tú</em> hiciste, en primera
+          persona y con resultados concretos. Decir siempre "nosotros" o
+          minimizar tu aporte se lee como falta de impacto, no como modestia.
+        </p>
+
+        <h3>Técnica (según el rol)</h3>
+        <p>
+          Para coding, LeetCode y similares, apostando a patrones más que a
+          memorizar problemas; para roles senior, system design. Para quant,
+          brain teasers de probabilidad y cálculo mental. Los take-homes son
+          cada vez más comunes; ahí cuida la limpieza del código tanto como
+          la comunicación de resultados.
+        </p>
+
+        <h3>Mock interviews</h3>
+        <p>
+          Haz simulacros técnicos y conductuales en inglés, idealmente con
+          alguien que ya trabaje en EE.UU., y grábate para pulir cómo
+          comunicas.
+        </p>
+
+        <hr />
+
+        <h2>7. Oferta y negociación</h2>
+        <p>
+          No ancles tus expectativas a los sueldos de tu país: los rangos en
+          EE.UU. son otros, y pedir de menos es un error difícil de corregir
+          después. Infórmate con levels.fyi, Glassdoor y los rangos que
+          publican las ofertas. Entiende el total comp, no solo el salario
+          base — bonos, equity o RSUs, sign-on. Y casi siempre hay margen
+          para negociar, sobre todo con una oferta competidora en mano.
+        </p>
+
+        <hr />
+
+        <h2>8. Tracker de postulaciones</h2>
+        <p>Notion o Excel, con al menos estas columnas:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Empresa</th>
+                <th>Rol</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Contacto</th>
+                <th>Próximo paso</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="6"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr />
+
+        <h2>9. Contactar reclutadores</h2>
+        <p>
+          Los reclutadores internos de la empresa son los mejores contactos
+          posibles porque conocen las vacantes reales. En el primer mensaje
+          deja claro dónde estás, tu zona horaria y desde cuándo puedes
+          empezar: ahorra tiempo a ambos. La cercanía horaria con EE.UU. es
+          una ventaja real frente a candidatos de otras regiones, úsala.
+        </p>
+
+        <hr />
+
+        <h2>10. Ritmo y salud mental</h2>
+        <p>
+          La búsqueda es un juego de números y desgasta — el rechazo es la
+          norma estadística, no una señal sobre tu valía. Empieza temprano y
+          ponle cadencia: bloques fijos para aplicar, para networking y para
+          prep, en vez de dejar que "buscar trabajo" sea una nube difusa que
+          se come el día entero. Y apóyate en comunidades de latinos en tech,
+          donde mucha gente está pasando, o ya pasó, por lo mismo.
+        </p>
+      </article>
+    </div>
+
+    <script src="../background.js"></script>
+  </body>
+</html>
