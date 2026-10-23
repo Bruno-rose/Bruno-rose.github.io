@@ -5,13 +5,12 @@
   const APPS = [
     { label: "bruno.txt", icon: "note", open: "notepad" },
     { label: "cv.txt", icon: "note", open: "cv" },
-    { label: "My Projects", icon: "folder", open: "projects" },
     { label: "Blog", icon: "web", href: ROOT + "blog/index.html" },
     { label: "Request resume", icon: "disk", open: "resume" },
     { label: "Contact", icon: "mail", open: "contact" },
     { label: "Recycle Bin", icon: "bin", open: "recycle" },
   ];
-  const QUICK = ["Blog", "My Projects", "Contact"];
+  const QUICK = ["Blog", "Contact"];
   const LINKS = {
     linkedin: "https://www.linkedin.com/in/bruno-rodriguez-sepulveda",
     github: "https://github.com/bruno-rose",
@@ -53,10 +52,6 @@
       <path d="M6 2h15l5 5v23H6z" fill="#fff" stroke="#000" />
       <path d="M21 2v5h5" fill="silver" stroke="#000" />
       <path d="M9 12h14M9 16h14M9 20h14M9 24h9" stroke="#000080" />
-    </symbol>
-    <symbol id="ico-folder" viewBox="0 0 32 32">
-      <path d="M2 7h10l3 3h15v18H2z" fill="#ffd862" stroke="#000" />
-      <path d="M2.5 13h27" stroke="#b8901e" />
     </symbol>
     <symbol id="ico-mail" viewBox="0 0 32 32">
       <rect x="3" y="8" width="26" height="17" fill="#fff" stroke="#000" />
@@ -121,7 +116,7 @@
         <div class="field-row">
           <label for="run-cmd">Open:</label>
           <input id="run-cmd" name="cmd" list="run-list" autocomplete="off" autocapitalize="off" spellcheck="false" />
-          <datalist id="run-list">${["cv", "projects", "contact", "resume", "blog", "linkedin", "github", "mail"]
+          <datalist id="run-list">${["cv", "contact", "resume", "blog", "linkedin", "github", "mail"]
             .map((c) => `<option value="${c}"></option>`)
             .join("")}</datalist>
         </div>
