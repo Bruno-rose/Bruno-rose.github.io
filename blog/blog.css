@@ -6,6 +6,12 @@
   height: calc(100% - 32px);
 }
 
+.toolbar {
+  display: flex;
+  gap: 4px;
+  padding: 2px 4px;
+}
+
 .address {
   display: flex;
   align-items: center;
@@ -126,4 +132,12 @@ hr {
 .post-title {
   font-size: 1.15em;
   font-weight: bold;
+}
+
+/* iOS zooms into inputs under 16px; keep phone text readable too */
+@media (max-width: 600px) {
+  .page,
+  .address input {
+    font-size: 16px;
+  }
 }

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>404 - Bruno Rodríguez</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: #0000aa;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100%;
+        padding: 16px;
+        box-sizing: border-box;
+        font: 18px/1.5 "Lucida Console", "Courier New", monospace;
+      }
+
+      main > div {
+        max-width: 64ch;
+      }
+
+      h1 {
+        width: max-content;
+        margin: 0 auto 1.5em;
+        padding: 0 0.4em;
+        background: #aaa;
+        color: #0000aa;
+        font: inherit;
+      }
+
+      p {
+        margin: 0 0 1.5em;
+        overflow-wrap: anywhere;
+      }
+
+      .press {
+        text-align: center;
+      }
+
+      .cursor {
+        animation: blink 1s steps(1) infinite;
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .cursor {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div>
+        <h1>Windows</h1>
+        <p>
+          A fatal exception 404 has occurred at brunorodriguez.dev<span id="path"></span>.
+          The page you requested could not be found.
+        </p>
+        <p class="press">
+          * Press any key to return to the desktop <span class="cursor">_</span>
+        </p>
+      </div>
+    </main>
+    <script>
+      document.getElementById("path").textContent = location.pathname;
+      const home = () => location.assign("/");
+      addEventListener("keydown", (e) => e.metaKey || e.ctrlKey || e.altKey || e.key.length > 1 && e.key !== "Enter" || home());
+      addEventListener("pointerdown", home);
+    </script>
+  </body>
+</html>

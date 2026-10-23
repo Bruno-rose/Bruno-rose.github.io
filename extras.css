@@ -1,0 +1,258 @@
+/* Desktop extras. Pairs with extras.js */
+
+/* Full-screen layers: boot, shut down, screensaver */
+.x-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+}
+
+.x-bios {
+  background: #000;
+}
+
+.x-bios pre {
+  margin: 0;
+  padding: 16px;
+  background: none; /* 98.css gives pre a white sunken box */
+  box-shadow: none;
+  color: #c0c0c0;
+  font: 16px/1.5 "Courier New", monospace;
+  white-space: pre-wrap;
+}
+
+.x-splash {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(#1c4fbf, #86b6ee);
+  color: #fff;
+}
+
+.x-logo {
+  text-align: center;
+}
+
+.x-logo svg {
+  width: 120px;
+  height: 120px;
+}
+
+.x-logo p {
+  margin: 0;
+  font: bold 44px Arial, sans-serif;
+  text-shadow: 2px 2px #0005;
+}
+
+.x-logo sup {
+  color: #ffb900;
+  font-size: 0.55em;
+}
+
+/* Scrolling band along the bottom; shift = one tile, so it loops seamlessly */
+.x-splash::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 10px;
+  background: linear-gradient(90deg, #0000, #8cf, #fff, #8cf, #0000) 0 0 / 50%
+    100% repeat-x;
+  animation: x-scroll 0.8s linear infinite;
+}
+
+@keyframes x-scroll {
+  to {
+    background-position: 100% 0;
+  }
+}
+
+/* Classic 50% checkerboard dim */
+.x-dither {
+  background: repeating-conic-gradient(#000 0 25%, #0000 0 50%) 0 0 / 2px 2px;
+}
+
+.x-safe {
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: #000;
+  color: #ff8c00;
+  font: 28px/1.4 Arial, sans-serif;
+  text-align: center;
+}
+
+.x-saver {
+  background: #000;
+  cursor: none;
+}
+
+.x-saver canvas {
+  display: block;
+}
+
+/* Volume button in the tray */
+.x-vol,
+.x-vol:active {
+  min-width: 0;
+  min-height: 0;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin-right: 6px;
+  background: none;
+  box-shadow: none;
+}
+
+.x-vol[aria-pressed="true"] .w,
+.x-vol[aria-pressed="false"] .x {
+  display: none;
+}
+
+/* Dialogs */
+#display,
+#about {
+  top: 60px;
+}
+
+#display {
+  width: min(320px, calc(100vw - 32px));
+  left: max(16px, calc(50% - 160px));
+}
+
+#about {
+  width: min(360px, calc(100vw - 32px));
+  left: max(16px, calc(50% - 180px));
+  top: 100px;
+}
+
+#display form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+/* Little CRT: silver bezel, screen, stand */
+.x-monitor {
+  position: relative;
+  width: 160px;
+  height: 116px;
+  margin: 0 auto 18px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: silver;
+  box-shadow:
+    inset -1px -1px #0a0a0a,
+    inset 1px 1px #fff,
+    inset -2px -2px grey,
+    inset 2px 2px #dfdfdf;
+}
+
+.x-monitor::after {
+  content: "";
+  position: absolute;
+  left: 50px;
+  bottom: -14px;
+  width: 60px;
+  height: 12px;
+  background: silver;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff;
+}
+
+.x-screen {
+  height: 100%;
+  background: #008080;
+  box-shadow: inset 1px 1px grey, inset -1px -1px #fff;
+}
+
+.x-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 0 10px 10px;
+}
+
+#display .x-buttons {
+  padding: 0;
+}
+
+.x-about {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+}
+
+.x-about svg {
+  flex: none;
+  width: 48px;
+  height: 48px;
+}
+
+.x-about p {
+  margin: 0 0 6px;
+}
+
+.x-about a {
+  word-break: break-all;
+}
+
+/* Assistant: sits above windows, below the taskbar and overlays */
+.x-clippy {
+  position: fixed;
+  right: 16px;
+  bottom: 40px;
+  z-index: 1500;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.x-bubble {
+  position: relative;
+  width: 220px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #ffffe1;
+  border: 1px solid #000;
+  border-radius: 8px;
+}
+
+.x-bubble p {
+  margin: 0 0 4px;
+}
+
+/* Tail pointing down at the paperclip */
+.x-bubble::after {
+  content: "";
+  position: absolute;
+  right: 22px;
+  bottom: -9px;
+  width: 14px;
+  height: 14px;
+  background: #ffffe1;
+  border: solid #000;
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .x-clippy {
+    animation: x-pop 0.3s ease-out;
+  }
+
+  @keyframes x-pop {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  #display,
+  #about {
+    font-size: 16px;
+  }
+}

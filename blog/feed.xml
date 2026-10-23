@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bruno Rodríguez - Blog</title>
+    <link>https://brunorodriguez.dev/blog/</link>
+    <atom:link href="https://brunorodriguez.dev/blog/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Writing by Bruno Rodríguez.</description>
+    <lastBuildDate>Mon, 19 Oct 2026 11:11:53 -0700</lastBuildDate>
+    <item>
+      <title>Cómo buscar trabajo en Estados Unidos desde Latinoamérica</title>
+      <link>https://brunorodriguez.dev/blog/trabajo-eeuu-latam.html</link>
+      <guid isPermaLink="true">https://brunorodriguez.dev/blog/trabajo-eeuu-latam.html</guid>
+      <pubDate>Mon, 19 Oct 2026 11:11:53 -0700</pubDate>
+      <description>Guía para profesionales latinoamericanos que buscan trabajo en EE.UU.: definir el target, resume al estilo gringo, dónde buscar, networking, entrevistas en inglés, oferta y negociación.</description>
+    </item>
+  </channel>
+</rss>

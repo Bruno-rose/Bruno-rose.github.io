@@ -3,10 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bruno Rodríguez</title>
-    <link rel="stylesheet" href="https://unpkg.com/98.css@0.1.20/dist/98.css" />
+    <title>Bruno Rodríguez · Founding Engineer</title>
+    <meta
+      name="description"
+      content="Bruno Rodríguez, Founding Engineer at Breezy in San Francisco. Previously Fintual. From Vallenar, Chile."
+    />
+    <link rel="canonical" href="https://brunorodriguez.dev/" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://brunorodriguez.dev/" />
+    <meta property="og:title" content="Bruno Rodríguez · Founding Engineer" />
+    <meta
+      property="og:description"
+      content="Founding Engineer at Breezy in San Francisco. Previously Fintual. From Vallenar, Chile."
+    />
+    <meta property="og:image" content="https://brunorodriguez.dev/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A Windows 98 desktop with bruno.txt open in Notepad"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Bruno Rodríguez",
+        "jobTitle": "Founding Engineer",
+        "worksFor": { "@type": "Organization", "name": "Breezy" },
+        "url": "https://brunorodriguez.dev/",
+        "email": "mailto:contact@brunorodriguez.dev",
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Universidad de Chile"
+        },
+        "sameAs": [
+          "https://github.com/bruno-rose",
+          "https://www.linkedin.com/in/bruno-rodriguez-sepulveda"
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="vendor/98.css" />
     <link rel="stylesheet" href="win98.css" />
     <style>
+      /* Windows cascade down and to the right, like Win98 opening them */
       #notepad {
         left: max(16px, calc(50% - 320px));
         top: 40px;
@@ -17,25 +58,147 @@
         top: 70px;
       }
 
-      .window textarea {
-        display: block;
-        width: 100%;
-        height: min(60dvh, 480px);
-        flex: 1 1 auto; /* starting size; then follows the window's resize */
+      #projects {
+        left: max(16px, calc(50% - 260px));
+        top: 100px;
+      }
+
+      #contact {
+        left: max(16px, calc(50% - 230px));
+        top: 130px;
+        width: min(520px, calc(100vw - 32px));
+      }
+
+      #recycle {
+        left: max(16px, calc(50% - 200px));
+        top: 160px;
+      }
+
+      /* Notepad: real HTML (links, a real h1) dressed as a textarea */
+      .notepad {
+        flex: 1 1 auto;
+        height: min(60dvh, 480px); /* starting size; then follows the window's resize */
         min-height: 0;
-        box-sizing: border-box;
-        resize: none;
+        overflow: auto;
         padding: 6px 8px;
+        background: #fff;
+        color: #000;
+        white-space: pre-wrap;
         font-family: "Fixedsys", "Lucida Console", "Courier New", monospace;
         font-size: 15px;
         line-height: 1.4;
+        box-shadow:
+          inset -1px -1px #fff,
+          inset 1px 1px grey,
+          inset -2px -2px #dfdfdf,
+          inset 2px 2px #0a0a0a;
+      }
+
+      .notepad:focus {
+        outline: none;
+      }
+
+      .notepad h1 {
+        display: inline;
+        margin: 0;
+        font: inherit;
+      }
+
+      .notepad a {
+        color: #000080;
+      }
+
+      /* Explorer windows: address bar, white file list, status bar */
+      .addressbar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 2px 4px 4px;
+      }
+
+      .addressbar input {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .files {
+        flex: 1 1 auto;
+        height: min(50dvh, 360px);
+        min-height: 0;
+      }
+
+      .files table {
+        width: 100%;
+      }
+
+      .files td {
+        padding: 3px 6px;
+        vertical-align: top;
+      }
+
+      .files td:last-child {
+        white-space: normal;
+      }
+
+      .files svg {
+        width: 16px;
+        height: 16px;
+        vertical-align: -3px;
+        margin-right: 4px;
+      }
+
+      .window .status-bar {
+        margin-top: 2px;
+      }
+
+      #recycle .addressbar button {
+        min-width: 0;
+      }
+
+      /* Outlook Express "New Message" */
+      #contact .toolbar {
+        display: flex;
+        gap: 4px;
+        padding: 2px 4px 6px;
+      }
+
+      #contact .field-row label {
+        width: 56px;
+      }
+
+      #contact .field-row input {
+        flex: 1;
+        min-width: 0;
+      }
+
+      #contact textarea {
+        flex: 1 1 auto;
+        height: 200px;
+        min-height: 0;
+        margin: 6px 0;
+        resize: none;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+      }
+
+      #contact form {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 0;
+        padding: 0 4px;
+      }
+
+      #contact .links {
+        display: flex;
+        gap: 12px;
+        padding: 4px;
       }
 
       #resume {
         left: max(16px, calc(50% - 170px));
         top: 140px;
         width: min(340px, calc(100vw - 32px));
-        resize: none;
       }
 
       #resume form {
@@ -67,6 +230,12 @@
         gap: 6px;
       }
 
+      /* Hourglass everywhere while the fake download runs */
+      .busy,
+      .busy * {
+        cursor: wait !important;
+      }
+
       /* Classic segmented blue bar; the fill is fake, 2.5s end to end */
       #resume .bar {
         height: 18px;
@@ -92,9 +261,26 @@
         animation: fill 2.5s steps(20) forwards;
       }
 
+      @media (prefers-reduced-motion: reduce) {
+        #resume form.loading .bar span {
+          animation: none;
+          width: 100%;
+        }
+      }
+
       @keyframes fill {
         to {
           width: 100%;
+        }
+      }
+
+      /* iOS zooms into inputs under 16px; keep phone text readable too */
+      @media (max-width: 600px) {
+        .notepad,
+        .files table,
+        .window input,
+        #contact textarea {
+          font-size: 16px;
         }
       }
     </style>
@@ -123,10 +309,16 @@
             </ul>
           </details>
           <a href="blog/index.html">Blog</a>
+          <details class="menu">
+            <summary>Help</summary>
+            <ul class="dropdown">
+              <li><button data-action="about">About Notepad</button></li>
+            </ul>
+          </details>
         </nav>
         <div class="window-body">
-          <textarea spellcheck="false" aria-label="bruno.txt">
-Bruno
+          <div class="notepad" tabindex="0" aria-label="bruno.txt"><h1>Bruno Rodríguez</h1>
+Founding Engineer at Breezy · San Francisco
 
 Extremely curious. The world is fascinating.
 Chronically online. Love seeing new tech.
@@ -139,9 +331,7 @@ From Vallenar, Atacama, Chile. Lived in:
 - Paris, France
 - San Francisco, USA
 
-Want to talk? contact@brunorodriguez.dev
-</textarea
-          >
+Want to talk? <a href="mailto:contact@brunorodriguez.dev">contact@brunorodriguez.dev</a></div>
         </div>
       </section>
 
@@ -167,29 +357,174 @@ Want to talk? contact@brunorodriguez.dev
             </ul>
           </details>
           <a href="blog/index.html">Blog</a>
+          <details class="menu">
+            <summary>Help</summary>
+            <ul class="dropdown">
+              <li><button data-action="about">About Notepad</button></li>
+            </ul>
+          </details>
         </nav>
         <div class="window-body">
-          <textarea spellcheck="false" aria-label="cv.txt">
-BRUNO RODRÍGUEZ
-Software Engineer · San Francisco
+          <div class="notepad" tabindex="0" aria-label="cv.txt">BRUNO RODRÍGUEZ
+Founding Engineer · San Francisco
 
 EXPERIENCE
 2025-present  Founding Engineer · Breezy
 2024          Software Engineer · Fintual (YC, Sequoia)
-2023          Infra & Data Research · Institute for
+2023          Infra &amp; Data Research · Institute for
               Foundational Research on Data
-2022          Software Engineer · Isatec R&D
+2022          Software Engineer · Isatec R&amp;D
+
+EDUCATION
+2024          Ingeniería Civil en Computación
+              (Computer Engineering) · Universidad
+              de Chile, ranked 10th of 116
 
 ELSEWHERE
-github.com/bruno-rose
-linkedin.com/in/bruno-rodriguez-sepulveda
-contact@brunorodriguez.dev
-</textarea
-          >
+<a href="https://github.com/bruno-rose">github.com/bruno-rose</a>
+<a href="https://www.linkedin.com/in/bruno-rodriguez-sepulveda">linkedin.com/in/bruno-rodriguez-sepulveda</a>
+<a href="mailto:contact@brunorodriguez.dev">contact@brunorodriguez.dev</a></div>
         </div>
       </section>
 
-      <section class="window" id="resume" hidden>
+      <!-- DRAFT: Bruno to review this project list -->
+      <section class="window" id="projects" hidden>
+        <div class="title-bar">
+          <div class="title-bar-text">My Projects</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <div class="addressbar">
+            <label for="projects-addr">Address</label>
+            <input id="projects-addr" type="text" value="C:\My Projects" readonly />
+          </div>
+          <div class="sunken-panel files">
+            <table>
+              <thead>
+                <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><svg><use href="#ico-folder" /></svg><a href="https://github.com/Bruno-rose/treasure-roach">treasure-roach</a></td>
+                  <td>Python</td>
+                  <td>Autonomous research agent that rents its own GPUs on Akash and pays its own way, behind a Pomerium approval gate.</td>
+                </tr>
+                <tr>
+                  <td><svg><use href="#ico-folder" /></svg><a href="https://github.com/Bruno-rose/fufx">Congress Signal</a></td>
+                  <td>Python</td>
+                  <td>Crawls GovInfo.gov daily, extracts company and sector impacts with AI, and emails personalized digests.</td>
+                </tr>
+                <tr>
+                  <td><svg><use href="#ico-folder" /></svg><a href="https://github.com/Bruno-rose/brose-changelog-cli">brose-changelog-cli</a></td>
+                  <td>Python</td>
+                  <td>AI changelog generator that turns git history into structured changelogs. On PyPI.</td>
+                </tr>
+                <tr>
+                  <td><svg><use href="#ico-folder" /></svg><a href="https://github.com/Bruno-rose/gramatico-back">gramatico-back</a></td>
+                  <td>Python</td>
+                  <td>Script that fixes the grammar of whatever is on your clipboard with OpenAI and copies it back.</td>
+                </tr>
+                <tr>
+                  <td><svg><use href="#ico-folder" /></svg><a href="https://github.com/Bruno-rose/kanban">kanban</a></td>
+                  <td>TypeScript</td>
+                  <td>Real-time collaborative Kanban board with drag and drop and live presence (Next.js, Socket.IO).</td>
+                </tr>
+                <tr>
+                  <td><svg><use href="#ico-folder" /></svg><a href="https://github.com/Bruno-rose/gtl-api-onboarding">gtl-api-onboarding</a></td>
+                  <td>TypeScript</td>
+                  <td>Frontend demo for Greptile: index a repo, then ask questions about the code in natural language.</td>
+                </tr>
+                <tr>
+                  <td><svg><use href="#ico-folder" /></svg><a href="https://github.com/Bruno-rose/DPMultiQ">DPMultiQ</a></td>
+                  <td>Scala</td>
+                  <td>Scala port of Google Research's differentially private quantiles (JointExp).</td>
+                </tr>
+                <tr>
+                  <td><svg><use href="#ico-folder" /></svg><a href="https://github.com/Bruno-rose/valle-labs">valle-labs</a></td>
+                  <td>HTML</td>
+                  <td>Website for Valle Labs, a data and AI software factory.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="status-bar">
+            <p class="status-bar-field">8 object(s)</p>
+            <p class="status-bar-field"><a href="https://github.com/bruno-rose">github.com/bruno-rose</a></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="window" id="contact" data-dialog hidden>
+        <div class="title-bar">
+          <div class="title-bar-text">New Message</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <form>
+            <div class="toolbar">
+              <button type="submit">Send</button>
+              <button type="button" data-close>Cancel</button>
+            </div>
+            <div class="field-row">
+              <label for="contact-to">To:</label>
+              <input id="contact-to" type="text" value="contact@brunorodriguez.dev" readonly />
+            </div>
+            <div class="field-row">
+              <label for="contact-subject">Subject:</label>
+              <input id="contact-subject" name="subject" type="text" />
+            </div>
+            <textarea name="body" aria-label="Message"></textarea>
+          </form>
+          <div class="links">
+            <a href="mailto:contact@brunorodriguez.dev">Email</a>
+            <a href="https://www.linkedin.com/in/bruno-rodriguez-sepulveda">LinkedIn</a>
+            <a href="https://github.com/bruno-rose">GitHub</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="window" id="recycle" hidden>
+        <div class="title-bar">
+          <div class="title-bar-text">Recycle Bin</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <div class="addressbar">
+            <button id="empty-bin" aria-disabled="true" style="color: grey">Empty Recycle Bin</button>
+          </div>
+          <div class="sunken-panel files">
+            <table>
+              <thead>
+                <tr><th>Name</th><th>Original Location</th><th>Date Deleted</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>DOOM.exe</td><td>C:\games</td><td>10/19/2026</td></tr>
+                <tr><td>Games</td><td>C:\Desktop</td><td>10/19/2026</td></tr>
+                <tr><td>background.js (particles, black holes)</td><td>C:\</td><td>10/19/2026</td></tr>
+                <tr><td>opt-f1-job-search.html</td><td>C:\blog</td><td>10/19/2026</td></tr>
+                <tr><td>styles.css</td><td>C:\</td><td>02/12/2026</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="status-bar">
+            <p class="status-bar-field" id="bin-status">5 object(s)</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="window" id="resume" data-dialog hidden>
         <div class="title-bar">
           <div class="title-bar-text">Request resume</div>
           <div class="title-bar-controls">
@@ -202,13 +537,12 @@ contact@brunorodriguez.dev
           <form>
             <div class="ask">
               <div class="field-row-stacked">
-                <label for="resume-email">Your email</label>
+                <label for="resume-email">Your email (optional)</label>
                 <input
                   id="resume-email"
                   name="email"
                   type="email"
                   autocomplete="email"
-                  required
                 />
               </div>
             </div>
@@ -216,6 +550,7 @@ contact@brunorodriguez.dev
               <button type="submit">Download</button>
               <button type="button" data-close>Cancel</button>
             </div>
+            <a class="ask" href="resume.pdf">or open resume.pdf directly</a>
             <div class="progress" role="status">
               <span>Downloading resume.pdf…</span>
               <div class="bar"><span></span></div>
@@ -227,17 +562,44 @@ contact@brunorodriguez.dev
 
     <script src="win98.js"></script>
     <script>
-      // Request resume: the email rides along as a query string, so requests
+      // Request resume: an email rides along as a query string, so requests
       // show up in Cloudflare's traffic analytics. The download bar is for show.
       const form = document.querySelector("#resume form");
       form.onsubmit = (e) => {
         e.preventDefault();
         form.classList.add("loading");
-        const email = encodeURIComponent(form.email.value.trim());
-        setTimeout(() => (location.href = "resume.pdf?email=" + email), 2500);
+        document.documentElement.classList.add("busy");
+        const email = form.email.value.trim();
+        const url = email
+          ? "resume.pdf?email=" + encodeURIComponent(email)
+          : "resume.pdf";
+        setTimeout(() => {
+          location.href = url;
+          // Browsers that download the PDF instead of opening it stay here
+          setTimeout(reset, 1000);
+        }, 2500);
+      };
+      const reset = () => {
+        form.classList.remove("loading");
+        document.documentElement.classList.remove("busy");
       };
       // Coming back from the PDF (back button) shows the form again
-      addEventListener("pageshow", () => form.classList.remove("loading"));
+      addEventListener("pageshow", reset);
+
+      // New Message: hand off to the visitor's own mail client
+      const mail = document.querySelector("#contact form");
+      mail.onsubmit = (e) => {
+        e.preventDefault();
+        location.href =
+          "mailto:contact@brunorodriguez.dev?subject=" +
+          encodeURIComponent(mail.subject.value) +
+          "&body=" +
+          encodeURIComponent(mail.body.value);
+      };
+
+      document.getElementById("empty-bin").onclick = () =>
+        (document.getElementById("bin-status").textContent =
+          "Can't empty: keeping these for sentimental reasons.");
     </script>
   </body>
 </html>

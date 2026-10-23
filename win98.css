@@ -3,7 +3,7 @@ body {
   margin: 0;
   height: 100dvh;
   overflow: hidden;
-  background: #008080;
+  background: var(--desktop-bg, #008080);
 }
 
 .desktop {
@@ -11,8 +11,9 @@ body {
   inset: 0 0 30px 0;
 }
 
-/* Desktop icons */
+/* Desktop icons: flex flow until one is dragged, then .free (absolute) */
 .icons {
+  position: relative;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -21,6 +22,10 @@ body {
   height: 100%;
   padding: 12px;
   box-sizing: border-box;
+}
+
+.icons.free .icon {
+  position: absolute;
 }
 
 .icon,
@@ -45,30 +50,55 @@ body {
   height: 32px;
 }
 
-.icon:focus span {
+.icon.sel span {
   background: #000080;
-  outline: 1px dotted #fff;
+}
+
+.icon.sel svg {
+  filter: brightness(0.6) sepia(1) hue-rotate(190deg) saturate(4);
 }
 
 .icon:focus {
   outline: none;
 }
 
+.icon:focus-visible span {
+  outline: 1px dotted #fff;
+}
+
+.band,
+.zoom {
+  position: fixed;
+  z-index: 2500;
+  pointer-events: none;
+  box-sizing: border-box;
+  border: 1px dotted #fff;
+  mix-blend-mode: difference;
+}
+
+.zoom {
+  border-width: 2px;
+}
+
 /* Windows */
-/* Native resize grip (bottom-right corner); content flexes to fill */
 .window {
   position: absolute;
   width: min(640px, calc(100vw - 32px));
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  resize: both;
   overflow: hidden;
   min-width: 220px;
   min-height: 120px;
+  --rs: 4px;
 }
 
 .window[hidden] {
   display: none;
+}
+
+.window:focus {
+  outline: none;
 }
 
 /* !important: beats per-window start positions and inline drag offsets,
@@ -78,8 +108,58 @@ body {
   top: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  box-sizing: border-box;
-  resize: none;
+}
+
+/* Resize handles along every edge and corner (win98.js adds them) */
+.rs {
+  position: absolute;
+  z-index: 1;
+  touch-action: none;
+}
+
+.rs[data-dir="n"],
+.rs[data-dir="s"] {
+  left: calc(var(--rs) * 2);
+  right: calc(var(--rs) * 2);
+  height: var(--rs);
+  cursor: ns-resize;
+}
+
+.rs[data-dir="e"],
+.rs[data-dir="w"] {
+  top: calc(var(--rs) * 2);
+  bottom: calc(var(--rs) * 2);
+  width: var(--rs);
+  cursor: ew-resize;
+}
+
+.rs[data-dir*="n"] { top: 0; }
+.rs[data-dir*="s"] { bottom: 0; }
+.rs[data-dir*="e"] { right: 0; }
+.rs[data-dir*="w"] { left: 0; }
+
+.rs[data-dir="ne"],
+.rs[data-dir="sw"],
+.rs[data-dir="nw"],
+.rs[data-dir="se"] {
+  width: calc(var(--rs) * 2.5);
+  height: calc(var(--rs) * 2.5);
+  cursor: nesw-resize;
+}
+
+.rs[data-dir="nw"],
+.rs[data-dir="se"] {
+  cursor: nwse-resize;
+}
+
+.window.max .rs {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .window {
+    --rs: 12px;
+  }
 }
 
 .title-bar {
@@ -100,6 +180,45 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 0;
+}
+
+/* Run dialog, above the Start button like the real one */
+#run {
+  left: 8px;
+  top: max(8px, calc(100% - 200px));
+  width: min(380px, calc(100vw - 16px));
+}
+
+.run {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.run-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.run p {
+  margin: 0;
+}
+
+.run input {
+  flex: 1;
+  min-width: 0;
+}
+
+.run-err {
+  color: #800000;
+}
+
+.run-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
 }
 
 /* Menus (menu bar dropdowns and the Start menu) are <details> */
@@ -163,9 +282,11 @@ body {
 }
 
 .dropdown a:hover,
-.dropdown button:hover {
+.dropdown button:hover,
+.dropdown button:focus-visible {
   background: #000080;
   color: #fff;
+  outline: none;
 }
 
 .dropdown hr {
@@ -173,6 +294,12 @@ body {
   border: 0;
   border-top: 1px solid grey;
   border-bottom: 1px solid #fff;
+}
+
+/* Desktop right-click menu */
+.ctx {
+  position: fixed;
+  z-index: 3000;
 }
 
 /* Taskbar */
@@ -217,6 +344,63 @@ body {
   bottom: 100%;
   left: 0;
   min-width: 180px;
+  padding-left: 27px;
+}
+
+/* Rotated 180deg so it reads bottom-up, hence the gradient runs navy-first */
+.start .banner {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: 22px;
+  padding: 6px 0;
+  box-sizing: border-box;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  background: linear-gradient(#000080, grey);
+  color: #c0c0c0;
+  font: 18px/22px Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
+}
+
+.start .banner b {
+  color: #fff;
+}
+
+.start .dropdown button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 24px 6px 6px;
+}
+
+.start .dropdown svg {
+  flex: none;
+}
+
+.quick {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  padding: 0 4px;
+  box-shadow: inset 1px 0 grey, inset 2px 0 #fff, inset -1px 0 grey, inset -2px 0 #fff;
+}
+
+.quick button {
+  min-width: 0;
+  min-height: 0;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: none;
+  box-shadow: none;
+}
+
+.quick button:hover {
+  box-shadow: inset -1px -1px grey, inset 1px 1px #fff;
 }
 
 .tasks {
@@ -229,10 +413,21 @@ body {
 .task {
   width: 160px;
   min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 4px;
+  text-align: left;
+}
+
+.task svg {
+  flex: none;
+}
+
+.task span {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  text-align: left;
 }
 
 .task.on {
@@ -242,6 +437,35 @@ body {
 .tray {
   display: flex;
   align-items: center;
+  gap: 4px;
   padding: 0 10px;
   box-shadow: inset -1px -1px #fff, inset 1px 1px grey;
+}
+
+/* Phones: every window is full screen, no drag/resize, 16px text so iOS
+   doesn't zoom into inputs */
+@media (max-width: 600px) {
+  .window {
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .rs {
+    display: none;
+  }
+
+  body .window-body,
+  body .window :is(input, textarea, select) {
+    font-size: 16px;
+  }
+
+  .quick {
+    display: none;
+  }
+
+  .tray {
+    padding: 0 6px;
+  }
 }
