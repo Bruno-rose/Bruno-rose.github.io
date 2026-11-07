@@ -44,7 +44,6 @@
         ]
       }
     </script>
-    <link rel="preconnect" href="https://jspaint.app" />
     <link rel="stylesheet" href="vendor/98.css" />
     <link rel="stylesheet" href="win98.css?v=13" />
     <style>
@@ -537,8 +536,8 @@ ELSEWHERE
           </div>
         </div>
         <div class="window-body">
-          <!-- JS Paint (MIT, github.com/1j01/jspaint), embedded as its README describes -->
-          <iframe class="ie" name="win98:paint" title="Paint" data-src="https://jspaint.app"></iframe>
+          <!-- JS Paint (MIT, github.com/1j01/jspaint), a git submodule in /paint -->
+          <iframe class="ie" name="win98:paint" title="Paint" data-src="paint/index.html"></iframe>
         </div>
       </section>
 
@@ -645,6 +644,13 @@ ELSEWHERE
             else window.open(a.href, "_blank", "noopener");
           }),
       );
+
+      // JS Paint follows the browser's language; the site is in English. It
+      // reads this key from our storage now that it's served from /paint, and
+      // a language picked in Paint's Extras menu still wins
+      try {
+        localStorage["jspaint language"] ||= "en";
+      } catch {}
 
       document.getElementById("empty-bin").onclick = () =>
         (document.getElementById("bin-status").textContent =
