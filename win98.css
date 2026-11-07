@@ -12,7 +12,10 @@ body {
   /* A photo wallpaper (content-box) sits inside this padding with teal
      around it; plain colours and patterns ignore it and fill the screen */
   box-sizing: border-box;
-  padding: 28px 28px 58px;
+  /* 5% of the desktop on each side (above the 30px taskbar): the photo
+     takes 90% of the width and height */
+  --frame: calc((100dvh - 30px) * 0.05);
+  padding: var(--frame) 5vw calc(var(--frame) + 30px);
   background: var(--desktop-bg, url(atacama.jpg) center / cover no-repeat content-box, #008080);
 }
 
