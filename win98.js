@@ -251,17 +251,19 @@
     const { el, task } = wins[id];
     const restoring = el.hidden && task.isConnected;
     if (!task.isConnected) tasks.append(task);
-    const frame = el.querySelector("iframe[data-src]:not([src])");
-    if (frame) frame.src = frame.dataset.src;
+    preload(id);
+    // Hourglass until the iframe's page has loaded
+    if (wins[id].frame && !wins[id].loaded) document.documentElement.classList.add("busy");
     el.hidden = false;
     if (restoring) zoom(task.getBoundingClientRect(), el.getBoundingClientRect());
     raise(el);
     if (quiet) return;
     if (!el.contains(document.activeElement)) wins[id].opener = document.activeElement;
     // Not the textarea: focusing it pops the keyboard on phones
-    // Text windows focus their content, not the first link at the bottom
+    // Text windows focus their content, not the first link at the bottom; on
+    // phones the window instead, since focusing editable text pops the keyboard
     const first =
-      el.querySelector(".window-body .notepad[tabindex]") ||
+      (touch ? el.querySelector(".notepad") && el : el.querySelector(".window-body .notepad[tabindex]")) ||
       el.querySelector(
         ".window-body :is(input:not([type=hidden]), select, button, a[href])",
       );
@@ -344,6 +346,11 @@
     // Its name="win98:<id>" lives in the HTML: a name set from script here
     // doesn't reach the page the frame loads
     const frame = el.querySelector("iframe");
+    frame?.addEventListener("load", () => {
+      if (!frame.src) return;
+      wins[id].loaded = true;
+      document.documentElement.classList.remove("busy");
+    });
     // Internet Explorer windows take the title of the page they show
     const retitle = (t) => (title.textContent = task.lastChild.textContent = t + " - Internet Explorer");
     wins[id] = { el, bar, task, share, frame, retitle, maxBtn: bar.querySelector('[aria-label="Maximize"]') };
@@ -422,6 +429,17 @@
   const openHash = () => wins[location.hash.slice(1)] && open(location.hash.slice(1));
   openHash();
   addEventListener("hashchange", openHash);
+
+  // Iframe windows load on first open, or earlier: as soon as the pointer
+  // heads for anything that opens them
+  function preload(id) {
+    const f = wins[id]?.frame;
+    if (f && !f.src) f.src = f.dataset.src;
+  }
+  document.addEventListener("pointerover", (e) => {
+    const t = e.target.closest?.("[data-open]");
+    if (t) preload(t.dataset.open);
+  });
 
   // Messages from our own pages inside a window's iframe (see the top)
   addEventListener("message", (e) => {

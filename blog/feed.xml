@@ -5,7 +5,14 @@
     <link>https://brunorodriguez.dev/blog/</link>
     <atom:link href="https://brunorodriguez.dev/blog/feed.xml" rel="self" type="application/rss+xml" />
     <description>Writing by Bruno Rodríguez.</description>
-    <lastBuildDate>Mon, 19 Oct 2026 11:11:53 -0700</lastBuildDate>
+    <lastBuildDate>Fri, 06 Nov 2026 21:00:00 -0800</lastBuildDate>
+    <item>
+      <title>Cómo quedé 3ro en VibeCon SF con Kazza</title>
+      <link>https://brunorodriguez.dev/blog/hackathon-3rd-place.html</link>
+      <guid isPermaLink="true">https://brunorodriguez.dev/blog/hackathon-3rd-place.html</guid>
+      <pubDate>Fri, 06 Nov 2026 21:00:00 -0800</pubDate>
+      <description>Dos días escribiendo un prompt de cinco páginas, tres prompts construyendo: cómo Kazza quedó 3er lugar en VibeCon SF sin escribir código.</description>
+    </item>
     <item>
       <title>Cómo buscar trabajo en Estados Unidos desde Latinoamérica</title>
       <link>https://brunorodriguez.dev/blog/trabajo-eeuu-latam.html</link>

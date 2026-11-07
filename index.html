@@ -44,8 +44,9 @@
         ]
       }
     </script>
+    <link rel="preconnect" href="https://jspaint.app" />
     <link rel="stylesheet" href="vendor/98.css" />
-    <link rel="stylesheet" href="win98.css?v=5" />
+    <link rel="stylesheet" href="win98.css?v=7" />
     <style>
       /* Windows cascade down and to the right, like Win98 opening them */
       #notepad {
@@ -339,7 +340,7 @@
           </details>
         </nav>
         <div class="window-body">
-          <div class="notepad" tabindex="0" aria-label="bruno.txt"><h1>Bruno Rodríguez</h1>
+          <div class="notepad" tabindex="0" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-multiline="true" aria-label="bruno.txt"><h1>Bruno Rodríguez</h1>
 Founding Engineer at Breezy · San Francisco
 
 Extremely curious. The world is fascinating.
@@ -387,7 +388,7 @@ Want to talk? <a href="mailto:contact@brunorodriguez.dev">contact@brunorodriguez
           </details>
         </nav>
         <div class="window-body">
-          <div class="notepad" tabindex="0" aria-label="cv.txt">BRUNO RODRÍGUEZ
+          <div class="notepad" tabindex="0" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-multiline="true" aria-label="cv.txt">BRUNO RODRÍGUEZ
 Founding Engineer · San Francisco
 
 EXPERIENCE
@@ -570,7 +571,7 @@ ELSEWHERE
       </section>
     </main>
 
-    <script src="win98.js?v=5"></script>
+    <script src="win98.js?v=7"></script>
     <script>
       // Request resume: an email rides along as a query string, so requests
       // show up in Cloudflare's traffic analytics. The download bar is for show.
@@ -606,6 +607,17 @@ ELSEWHERE
           "&body=" +
           encodeURIComponent(mail.body.value);
       };
+
+      // Notepad is editable, where a click on a link only places the caret:
+      // follow it anyway. ponytail: edits aren't saved, a reload restores the text
+      document.querySelectorAll(".notepad a").forEach(
+        (a) =>
+          (a.onclick = (e) => {
+            e.preventDefault();
+            if (a.protocol === "mailto:") location.href = a.href;
+            else window.open(a.href, "_blank", "noopener");
+          }),
+      );
 
       document.getElementById("empty-bin").onclick = () =>
         (document.getElementById("bin-status").textContent =
