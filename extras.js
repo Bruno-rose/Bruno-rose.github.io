@@ -3,6 +3,9 @@
 // taskbar and window.win98 exist. Each block below stands on its own.
 (() => {
   const desktop = document.querySelector(".desktop");
+  const ROOT = new URL(".", document.currentScript.src).href;
+  const CREDIT = `Atacama: Valle de la Luna, photo by Diego Delso,
+    <a href="https://commons.wikimedia.org/wiki/File:Anfiteatro,_Valle_de_la_Luna,_San_Pedro_de_Atacama,_Chile,_2016-02-01,_DD_149.JPG">CC BY-SA 4.0</a>`;
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // Storage can throw (private mode, blocked cookies): fail silently
@@ -207,6 +210,7 @@ Starting Windows 98...</pre>`,
 
   /* Display Properties: wallpaper, saved and applied via --desktop-bg */
   const WALLS = {
+    Atacama: `url(${ROOT}atacama.jpg) center / cover no-repeat content-box, #008080`,
     Teal: "#008080",
     Black: "#000",
     Navy: "#000080",
@@ -235,6 +239,7 @@ Starting Windows 98...</pre>`,
           )
           .join("")}
       </fieldset>
+      <p class="x-credit">${CREDIT}</p>
       <div class="x-buttons">
         <button type="button" class="ok" data-close>OK</button>
         <button type="button" data-close>Cancel</button>
@@ -263,6 +268,7 @@ Starting Windows 98...</pre>`,
       <div>
         <p>Bruno Rodríguez's personal site</p>
         <p>Built with vanilla JS and 98.css</p>
+        <p>${CREDIT}</p>
         <p><a href="https://github.com/bruno-rose/Bruno-rose.github.io">github.com/bruno-rose/Bruno-rose.github.io</a></p>
       </div>
     </div>
@@ -276,7 +282,7 @@ Starting Windows 98...</pre>`,
     if (name === "about") win98.open("about");
     if (name === "display") {
       const saved = local("wallpaper");
-      form.wallpaper.value = WALLS[saved] ? saved : "Teal";
+      form.wallpaper.value = WALLS[saved] ? saved : "Atacama";
       preview();
       win98.open("display");
     }

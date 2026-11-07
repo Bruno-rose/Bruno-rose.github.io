@@ -712,9 +712,9 @@
   // Optional add-ons (sounds, wallpaper, shut down...) load last, on top of this
   document.head.insertAdjacentHTML(
     "beforeend",
-    `<link rel="stylesheet" href="${ROOT}extras.css?v=8" />`,
+    `<link rel="stylesheet" href="${ROOT}extras.css?v=11" />`,
   );
   const extras = document.createElement("script");
-  extras.src = ROOT + "extras.js?v=8";
+  extras.src = ROOT + "extras.js?v=11";
   document.body.append(extras);
 })();

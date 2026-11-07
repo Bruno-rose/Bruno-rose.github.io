@@ -1,9 +1,32 @@
 /* Shared Win98 desktop. Pairs with win98.js, on top of 98.css */
+/* Its own background keeps body's from spreading over the whole window, so
+   body's padding below can frame the photo */
+html {
+  background: #008080;
+}
+
 body {
   margin: 0;
   height: 100dvh;
   overflow: hidden;
-  background: var(--desktop-bg, #008080);
+  /* A photo wallpaper (content-box) sits inside this padding with teal
+     around it; plain colours and patterns ignore it and fill the screen */
+  box-sizing: border-box;
+  padding: 28px 28px 58px;
+  background: var(--desktop-bg, url(atacama.jpg) center / cover no-repeat content-box, #008080);
+}
+
+/* 98.css draws the UI at 11px: one step up, like Win98's Large Fonts */
+.title-bar,
+.window,
+button,
+input,
+label,
+option,
+select,
+table,
+textarea {
+  font-size: 12px;
 }
 
 .desktop {
@@ -37,12 +60,13 @@ body {
   background: none;
   box-shadow: none;
   color: #fff;
-  text-shadow: none;
+  /* readable over a photo wallpaper too */
+  text-shadow: 1px 1px #000;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .icon svg {
@@ -450,6 +474,10 @@ body {
 /* Phones: every window is full screen, no drag/resize, 16px text so iOS
    doesn't zoom into inputs */
 @media (max-width: 600px) {
+  body {
+    padding: 8px 8px 38px;
+  }
+
   .window {
     left: 0 !important;
     top: 0 !important;

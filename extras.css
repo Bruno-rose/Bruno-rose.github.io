@@ -395,3 +395,9 @@
   color: #fff;
   outline: 1px dotted #fff;
 }
+
+.x-credit {
+  max-width: 260px;
+  margin: 8px 0 0;
+  font-size: 11px;
+}
