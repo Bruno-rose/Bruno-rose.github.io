@@ -46,7 +46,7 @@
     </script>
     <link rel="preconnect" href="https://jspaint.app" />
     <link rel="stylesheet" href="vendor/98.css" />
-    <link rel="stylesheet" href="win98.css?v=7" />
+    <link rel="stylesheet" href="win98.css?v=8" />
     <style>
       /* Windows cascade down and to the right, like Win98 opening them */
       #notepad {
@@ -324,6 +324,7 @@
             <summary>File</summary>
             <ul class="dropdown">
               <li><button data-open="cv">cv.txt</button></li>
+              <li><button data-save>Save</button></li>
               <li>
                 <button data-open="resume">Request resume</button>
               </li>
@@ -372,6 +373,7 @@ Want to talk? <a href="mailto:contact@brunorodriguez.dev">contact@brunorodriguez
             <summary>File</summary>
             <ul class="dropdown">
               <li><button data-open="notepad">bruno.txt</button></li>
+              <li><button data-save>Save</button></li>
               <li>
                 <button data-open="resume">Request resume</button>
               </li>
@@ -571,7 +573,7 @@ ELSEWHERE
       </section>
     </main>
 
-    <script src="win98.js?v=7"></script>
+    <script src="win98.js?v=8"></script>
     <script>
       // Request resume: an email rides along as a query string, so requests
       // show up in Cloudflare's traffic analytics. The download bar is for show.
@@ -608,8 +610,28 @@ ELSEWHERE
           encodeURIComponent(mail.body.value);
       };
 
+      // File → Save (or Ctrl/Cmd+S): download the text as it is now
+      const save = (n) => {
+        const a = document.createElement("a");
+        a.download = n.getAttribute("aria-label");
+        a.href = URL.createObjectURL(new Blob([n.textContent], { type: "text/plain" }));
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href));
+      };
+      document.querySelectorAll("[data-save]").forEach(
+        (b) => (b.onclick = () => save(b.closest(".window").querySelector(".notepad"))),
+      );
+      document.querySelectorAll(".notepad").forEach((n) =>
+        n.addEventListener("keydown", (e) => {
+          if ((e.metaKey || e.ctrlKey) && e.key === "s") {
+            e.preventDefault();
+            save(n);
+          }
+        }),
+      );
+
       // Notepad is editable, where a click on a link only places the caret:
-      // follow it anyway. ponytail: edits aren't saved, a reload restores the text
+      // follow it anyway. A reload restores the original text
       document.querySelectorAll(".notepad a").forEach(
         (a) =>
           (a.onclick = (e) => {

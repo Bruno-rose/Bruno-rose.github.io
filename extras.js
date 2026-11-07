@@ -187,14 +187,15 @@ Starting Windows 98...</pre>`,
     poke();
   }
 
-  /* Dialog windows, registered with the window manager */
-  function dialog(id, title, body) {
+  /* Dialog windows (or, resizable, app windows), registered with the window manager */
+  function dialog(id, title, body, resizable) {
+    const controls = resizable ? ["Minimize", "Maximize", "Close"] : ["Close"];
     desktop.insertAdjacentHTML(
       "beforeend",
-      `<section class="window" id="${id}" data-dialog hidden>
+      `<section class="window" id="${id}" ${resizable ? "" : "data-dialog"} hidden>
         <div class="title-bar">
           <div class="title-bar-text">${title}</div>
-          <div class="title-bar-controls"><button aria-label="Close"></button></div>
+          <div class="title-bar-controls">${controls.map((l) => `<button aria-label="${l}"></button>`).join("")}</div>
         </div>
         <div class="window-body">${body}</div>
       </section>`,
@@ -271,6 +272,7 @@ Starting Windows 98...</pre>`,
   document.addEventListener("win98:action", (e) => {
     const name = e.detail.name;
     if (name === "shutdown") shutdown();
+    if (name === "crash") crash();
     if (name === "about") win98.open("about");
     if (name === "display") {
       const saved = local("wallpaper");
@@ -279,6 +281,171 @@ Starting Windows 98...</pre>`,
       win98.open("display");
     }
   });
+
+  /* Blue screen: Run "crash" or CRASH in the prompt; any key comes back */
+  function crash() {
+    overlay(
+      "x-bsod",
+      `<div>
+        <p class="x-bsod-title"><span>Windows</span></p>
+        <p>A fatal exception 0E has occurred at 0028:C0FFEE98 in VXD BRUNO(01) +
+        00001998. The current application will be terminated.</p>
+        <p>*  Press any key to terminate the current application.<br />
+        *  Press CTRL+ALT+DEL again to restart your computer. You will<br />
+        &nbsp;&nbsp;&nbsp;lose any unsaved information in all applications.</p>
+        <p class="x-bsod-title">Press any key to continue _</p>
+      </div>`,
+    );
+  }
+
+  /* MS-DOS Prompt */
+  const dos = dialog(
+    "cmd",
+    "MS-DOS Prompt",
+    `<div class="x-dos"><pre></pre><label class="x-dos-line"><span>C:\\&gt;</span><input type="text" aria-label="Command" autocomplete="off" autocapitalize="off" spellcheck="false" /></label></div>`,
+    true,
+  );
+  const screen = dos.querySelector(".x-dos");
+  const out = screen.querySelector("pre");
+  const cmdIn = screen.querySelector("input");
+  const say = (t) => {
+    out.textContent += t + "\n";
+    screen.scrollTop = screen.scrollHeight;
+  };
+  say("BRUNO-PC MS-DOS Prompt\nType HELP for a list of commands.\n");
+  const FILES = { "bruno.txt": "notepad", "cv.txt": "cv" };
+  // Each takes the argument (lowercased in key) and returns text, or null for none
+  const CMDS = {
+    help: () => `HELP        This list
+WHOAMI      Who is this
+DIR         List files
+TYPE file   Show a file (bruno.txt, cv.txt)
+CD dir      Open a folder (blog, bookmarks)
+START app   Open a program (paint, mycomputer, contact...)
+PROJECTS    What I'm building
+VER         Windows version
+DATE        Today's date
+CLS         Clear the screen
+EXIT        Close this window`,
+    whoami: () => "bruno-pc\\bruno: Bruno Rodríguez, Founding Engineer at Breezy, San Francisco",
+    dir: () => ` Volume in drive C is BRUNO-PC
+ Directory of C:\\
+
+BRUNO    TXT
+CV       TXT
+RESUME   PDF
+BLOG           <DIR>
+BOOKMARKS      <DIR>
+         3 file(s)
+         2 dir(s)`,
+    type: (a, key) =>
+      document.querySelector(`#${FILES[key]} .notepad`)?.textContent ??
+      `File not found - ${a.toUpperCase() || "(none)"}`,
+    cd: (a, key) => (["blog", "bookmarks"].includes(key) ? (win98.launch(key), null) : "Invalid directory"),
+    start: (a, key) => (/^[\w-]+$/.test(key) ? (win98.launch(key), null) : "Usage: START app"),
+    projects: () => `Kazza     AI architect for California lots. 3rd place, VibeCon SF.
+          Now growing into Urbium: https://urbium.ai/en`,
+    ver: () => "Windows 98 [Version 4.10.1998]",
+    date: () => "Current date is " + new Date().toDateString(),
+    echo: (a) => a,
+    cls: () => ((out.textContent = ""), null),
+    exit: () => (win98.close("cmd"), null),
+    crash: () => (crash(), null),
+  };
+  const hist = [];
+  let at = 0;
+  cmdIn.onkeydown = (e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+      e.preventDefault();
+      at = Math.max(0, Math.min(hist.length, at + (e.key === "ArrowUp" ? -1 : 1)));
+      cmdIn.value = hist[at] ?? "";
+      return;
+    }
+    if (e.key !== "Enter") return;
+    const line = cmdIn.value;
+    cmdIn.value = "";
+    say("C:\\>" + line);
+    if (line.trim()) at = hist.push(line);
+    const [name = "", ...rest] = line.trim().split(/\s+/);
+    if (!name) return;
+    const arg = rest.join(" ");
+    const f = CMDS[name.toLowerCase()];
+    const r = f ? f(arg, arg.toLowerCase()) : "Bad command or file name";
+    if (r != null) say(r + "\n");
+  };
+  // Click anywhere on the screen to type, unless selecting text to copy
+  screen.addEventListener("click", () => getSelection().isCollapsed && cmdIn.focus());
+
+  /* My Computer: drives and folders over the site's windows */
+  const DRIVES = {
+    "My Computer": [
+      { name: "3½ Floppy (A:)", icon: "disk", say: "A:\\ is not accessible. The device is not ready." },
+      { name: "Local Disk (C:)", icon: "drive", dir: "C:\\" },
+      { name: "Bookmarks (D:)", icon: "cd", open: "bookmarks" },
+    ],
+    "C:\\": [
+      { name: "My Documents", icon: "folder", dir: "C:\\My Documents" },
+      { name: "Program Files", icon: "folder", dir: "C:\\Program Files" },
+      { name: "Recycle Bin", icon: "bin", open: "recycle" },
+    ],
+    "C:\\My Documents": [
+      { name: "bruno.txt", icon: "note", open: "notepad" },
+      { name: "cv.txt", icon: "note", open: "cv" },
+      { name: "resume.pdf", icon: "disk", open: "resume" },
+      { name: "Blog", icon: "web", open: "blog" },
+    ],
+    "C:\\Program Files": [
+      { name: "Paint", icon: "paint", open: "paint" },
+      { name: "MS-DOS Prompt", icon: "dos", open: "cmd" },
+      { name: "Internet Explorer", icon: "web", open: "blog" },
+      { name: "Outlook Express", icon: "mail", open: "contact" },
+    ],
+  };
+  const pc = dialog(
+    "mycomputer",
+    "My Computer",
+    `<div class="x-addr">
+      <button type="button" class="x-up">Up</button>
+      <label for="mc-addr">Address</label>
+      <input id="mc-addr" readonly />
+    </div>
+    <div class="x-list" role="listbox" aria-label="Files"></div>
+    <div class="status-bar"><p class="status-bar-field"></p></div>`,
+    true,
+  );
+  const list = pc.querySelector(".x-list");
+  const addr = pc.querySelector("input");
+  const status = pc.querySelector(".status-bar-field");
+  const upBtn = pc.querySelector(".x-up");
+  let path = "My Computer";
+  function show(p) {
+    path = p;
+    addr.value = p;
+    pc.querySelector(".title-bar-text").textContent = p;
+    upBtn.disabled = p === "My Computer";
+    list.innerHTML = DRIVES[p]
+      .map(
+        (it, i) =>
+          `<button type="button" class="x-item" role="option" data-i="${i}"><svg width="32" height="32" aria-hidden="true"><use href="#ico-${it.icon}" /></svg><span></span></button>`,
+      )
+      .join("");
+    DRIVES[p].forEach((it, i) => (list.children[i].lastChild.textContent = it.name));
+    status.textContent = DRIVES[p].length + " object(s)";
+  }
+  function go(btn) {
+    const it = btn && DRIVES[path][btn.dataset.i];
+    if (!it) return;
+    if (it.dir) show(it.dir);
+    else if (it.open) win98.launch(it.open);
+    else status.textContent = it.say;
+  }
+  upBtn.onclick = () => show(path.length > 3 ? "C:\\" : "My Computer");
+  // Double-click opens, like the desktop; one tap on touch screens
+  const coarse = matchMedia("(pointer: coarse)").matches;
+  list.ondblclick = (e) => go(e.target.closest(".x-item"));
+  list.onclick = (e) => coarse && go(e.target.closest(".x-item"));
+  list.onkeydown = (e) => e.key === "Enter" && (e.preventDefault(), go(e.target.closest(".x-item")));
+  show(path);
 
   /* Assistant: once per visitor, ~20s in, desktop pointers only */
   function assistant() {

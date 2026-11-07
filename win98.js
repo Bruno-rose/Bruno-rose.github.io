@@ -26,12 +26,14 @@
   }
 
   const APPS = [
+    { label: "My Computer", icon: "pc", open: "mycomputer" },
     { label: "bruno.txt", icon: "note", open: "notepad" },
     { label: "cv.txt", icon: "note", open: "cv" },
     { label: "Blog", icon: "web", open: "blog" },
     { label: "Bookmarks", icon: "fav", open: "bookmarks" },
     { label: "Request resume", icon: "disk", open: "resume" },
     { label: "Paint", icon: "paint", open: "paint" },
+    { label: "MS-DOS Prompt", icon: "dos", open: "cmd" },
     { label: "Contact", icon: "mail", open: "contact" },
     { label: "Recycle Bin", icon: "bin", open: "recycle" },
   ];
@@ -41,6 +43,7 @@
     github: "https://github.com/bruno-rose",
     mail: "mailto:contact@brunorodriguez.dev",
     email: "mailto:contact@brunorodriguez.dev",
+    command: "cmd",
   };
   const DIRS = ["n", "s", "e", "w", "ne", "nw", "se", "sw"];
 
@@ -100,6 +103,29 @@
       <path d="M8 21c3-6 6-1 9-6s5-3 7-5" fill="none" stroke="#f00" stroke-width="2" />
       <path d="M22 4l6 6-12 12-4 1 1-4z" fill="#ffb900" stroke="#000" />
     </symbol>
+    <symbol id="ico-pc" viewBox="0 0 32 32">
+      <rect x="4" y="3" width="24" height="18" fill="silver" stroke="#000" />
+      <rect x="7" y="6" width="18" height="12" fill="#008080" />
+      <path d="M10 21h12v3H10zM5 25h22v4H5z" fill="silver" stroke="#000" />
+    </symbol>
+    <symbol id="ico-dos" viewBox="0 0 32 32">
+      <rect x="3" y="5" width="26" height="22" fill="#000" stroke="grey" />
+      <path d="M3.5 5.5h25v4h-25z" fill="#000080" />
+      <path d="M7 14l4 3-4 3M13 21h6" fill="none" stroke="silver" stroke-width="2" />
+    </symbol>
+    <symbol id="ico-drive" viewBox="0 0 32 32">
+      <path d="M3 12h26v10H3z" fill="silver" stroke="#000" />
+      <path d="M6 18h4" stroke="#0c0" stroke-width="2" />
+      <path d="M14 17h12" stroke="grey" />
+    </symbol>
+    <symbol id="ico-cd" viewBox="0 0 32 32">
+      <path d="M3 18h26v8H3z" fill="silver" stroke="#000" />
+      <circle cx="16" cy="12" r="9" fill="#e8e8f8" stroke="#000" />
+      <circle cx="16" cy="12" r="2.5" fill="#fff" stroke="#000" />
+    </symbol>
+    <symbol id="ico-folder" viewBox="0 0 32 32">
+      <path d="M2 8h11l2 3h15v17H2z" fill="#ffd94a" stroke="#000" />
+    </symbol>
     <symbol id="ico-disk" viewBox="0 0 32 32">
       <path d="M4 4h21l3 3v21H4z" fill="#000080" stroke="#000" />
       <path d="M9 4h13v9H9z" fill="silver" />
@@ -150,7 +176,7 @@
         <div class="field-row">
           <label for="run-cmd">Open:</label>
           <input id="run-cmd" name="cmd" list="run-list" autocomplete="off" autocapitalize="off" spellcheck="false" />
-          <datalist id="run-list">${["cv", "contact", "resume", "blog", "bookmarks", "paint", "linkedin", "github", "mail"]
+          <datalist id="run-list">${["cv", "contact", "resume", "blog", "bookmarks", "paint", "cmd", "mycomputer", "linkedin", "github", "mail"]
             .map((c) => `<option value="${c}"></option>`)
             .join("")}</datalist>
         </div>
@@ -652,6 +678,10 @@
     const cmd = runForm.cmd.value.trim();
     const q = cmd.toLowerCase();
     if (!q) return;
+    if (q === "crash") {
+      close("run");
+      return document.dispatchEvent(new CustomEvent("win98:action", { detail: { name: "crash" } }));
+    }
     const app = APPS.find((a) => q === a.open || q === a.label.toLowerCase());
     const target = LINKS[q] || (q === "bruno" ? "notepad" : app && (app.open || app.href));
     if (!target) {
@@ -682,9 +712,9 @@
   // Optional add-ons (sounds, wallpaper, shut down...) load last, on top of this
   document.head.insertAdjacentHTML(
     "beforeend",
-    `<link rel="stylesheet" href="${ROOT}extras.css" />`,
+    `<link rel="stylesheet" href="${ROOT}extras.css?v=8" />`,
   );
   const extras = document.createElement("script");
-  extras.src = ROOT + "extras.js";
+  extras.src = ROOT + "extras.js?v=8";
   document.body.append(extras);
 })();
