@@ -45,7 +45,7 @@
       }
     </script>
     <link rel="stylesheet" href="vendor/98.css" />
-    <link rel="stylesheet" href="win98.css" />
+    <link rel="stylesheet" href="win98.css?v=5" />
     <style>
       /* Windows cascade down and to the right, like Win98 opening them */
       #notepad {
@@ -67,6 +67,33 @@
       #recycle {
         left: max(16px, calc(50% - 200px));
         top: 160px;
+      }
+
+      #blog {
+        left: max(16px, calc(50% - 360px));
+        top: 24px;
+        width: min(800px, calc(100vw - 32px));
+        height: min(640px, calc(100% - 48px));
+      }
+
+      #bookmarks {
+        left: max(16px, calc(50% - 260px));
+        top: 100px;
+      }
+
+      #paint {
+        left: max(16px, calc(50% - 450px));
+        top: 60px;
+        width: min(900px, calc(100vw - 32px));
+        height: min(620px, calc(100% - 64px));
+      }
+
+      .ie {
+        flex: 1;
+        min-height: 0;
+        width: 100%;
+        border: 0;
+        background: #fff;
       }
 
       /* Notepad: real HTML (links, a real h1) dressed as a textarea */
@@ -303,7 +330,7 @@
               <li><button data-close>Exit</button></li>
             </ul>
           </details>
-          <a href="blog/index.html">Blog</a>
+          <a href="#blog" data-open="blog">Blog</a>
           <details class="menu">
             <summary>Help</summary>
             <ul class="dropdown">
@@ -351,7 +378,7 @@ Want to talk? <a href="mailto:contact@brunorodriguez.dev">contact@brunorodriguez
               <li><button data-close>Exit</button></li>
             </ul>
           </details>
-          <a href="blog/index.html">Blog</a>
+          <a href="#blog" data-open="blog">Blog</a>
           <details class="menu">
             <summary>Help</summary>
             <ul class="dropdown">
@@ -448,6 +475,65 @@ ELSEWHERE
         </div>
       </section>
 
+      <section class="window" id="blog" hidden>
+        <div class="title-bar">
+          <div class="title-bar-text">Blog - Internet Explorer</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <!-- src set on first open (win98.js), so the home page doesn't load the blog -->
+          <iframe class="ie" name="win98:blog" title="Blog" data-src="blog/index.html"></iframe>
+        </div>
+      </section>
+
+      <section class="window" id="bookmarks" hidden>
+        <div class="title-bar">
+          <div class="title-bar-text">Bookmarks</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <div class="sunken-panel files">
+            <table>
+              <thead>
+                <tr><th>Name</th><th>Author</th><th>Why</th></tr>
+              </thead>
+              <tbody>
+                <!-- One row per reading:
+                <tr><td><a href="https://...">Title</a></td><td>Author</td><td>One line on why it's worth it</td></tr>
+                -->
+                <tr><td>(placeholder) Your first reading</td><td>Author</td><td>Why it's worth reading</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="status-bar">
+            <p class="status-bar-field">Readings I found interesting</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="window" id="paint" hidden>
+        <div class="title-bar">
+          <div class="title-bar-text">untitled - Paint</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <!-- JS Paint (MIT, github.com/1j01/jspaint), embedded as its README describes -->
+          <iframe class="ie" name="win98:paint" title="Paint" data-src="https://jspaint.app"></iframe>
+        </div>
+      </section>
+
       <section class="window" id="resume" data-dialog hidden>
         <div class="title-bar">
           <div class="title-bar-text">Request resume</div>
@@ -484,7 +570,7 @@ ELSEWHERE
       </section>
     </main>
 
-    <script src="win98.js"></script>
+    <script src="win98.js?v=5"></script>
     <script>
       // Request resume: an email rides along as a query string, so requests
       // show up in Cloudflare's traffic analytics. The download bar is for show.

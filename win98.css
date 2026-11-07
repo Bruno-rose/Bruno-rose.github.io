@@ -93,6 +93,11 @@ body {
   --rs: 4px;
 }
 
+/* An iframe under the pointer would swallow the moves of a drag */
+.dragging iframe {
+  pointer-events: none;
+}
+
 .window[hidden] {
   display: none;
 }

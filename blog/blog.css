@@ -6,6 +6,24 @@
   height: calc(100% - 32px);
 }
 
+/* Loaded inside the desktop's Internet Explorer window: fill the frame and
+   let the parent window supply the title bar */
+.embedded .desktop {
+  inset: 0;
+}
+
+.embedded .window.doc {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  box-shadow: none;
+}
+
+.embedded .window.doc > .title-bar {
+  display: none;
+}
+
 .toolbar {
   display: flex;
   gap: 4px;
@@ -140,4 +158,10 @@ hr {
   .address input {
     font-size: 16px;
   }
+}
+
+.page video {
+  display: block;
+  width: 100%;
+  margin: 16px 0;
 }

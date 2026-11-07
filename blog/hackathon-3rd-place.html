@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cómo quedé 3ro en VibeCon SF con Kazza - Bruno Rodríguez</title>
+    <!-- ponytail: draft, kept out of sitemap.xml and feed.xml until it's written -->
+    <meta name="robots" content="noindex" />
+    <meta name="description" content="Dos días escribiendo un prompt de cinco páginas, tres prompts construyendo: cómo Kazza quedó 3er lugar en VibeCon SF sin escribir código." />
+    <link rel="canonical" href="https://brunorodriguez.dev/blog/hackathon-3rd-place.html" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../vendor/98.css" />
+    <link rel="stylesheet" href="../win98.css?v=5" />
+    <link rel="stylesheet" href="blog.css?v=5" />
+  </head>
+  <body>
+    <main class="desktop">
+      <section class="window doc" id="post" data-close-href="index.html">
+        <div class="title-bar">
+          <div class="title-bar-text">Cómo quedé 3ro en VibeCon SF con Kazza - Internet Explorer</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <nav class="menubar">
+          <details class="menu">
+            <summary>File</summary>
+            <ul class="dropdown">
+              <li><button data-open="notepad">bruno.txt</button></li>
+              <li><button data-open="cv">cv.txt</button></li>
+              <li>
+                <button data-open="resume">Request resume</button>
+              </li>
+              <li><hr /></li>
+              <li><button data-close>Close</button></li>
+            </ul>
+          </details>
+          <a href="index.html">Blog</a>
+        </nav>
+        <div class="toolbar">
+          <button onclick="history.back()">Back</button>
+          <button onclick="history.forward()">Forward</button>
+        </div>
+        <div class="address">
+          <label for="address">Address</label>
+          <input id="address" readonly />
+        </div>
+        <div class="window-body">
+          <div class="page">
+            <h1>Cómo quedé 3ro en VibeCon SF con Kazza</h1>
+            <div class="meta">Hackathon · IA · Construcción</div>
+
+            <p class="subtitle">
+              Fui solo a VibeCon SF, el hackathon de Emergent, y quedé en tercer
+              lugar con Kazza, un arquitecto con IA que dibuja planos para cualquier
+              lote de California y revisa cada habitación contra 39 reglas del código
+              de construcción. No escribí ni una línea de código. Lo que sí hice fue
+              pasar dos días escribiendo un prompt de cinco páginas.
+            </p>
+
+            <article>
+              <h2>El hackathon</h2>
+              <p>
+                VibeCon SF lo organizó Emergent, una plataforma para construir
+                software con agentes. Postularon más de 2.000 personas y quedamos
+                175. El tema era <em>Build for Main Street</em>: construir productos
+                para problemas reales de pequeños negocios, en salud, logística,
+                finanzas, propiedades o educación.
+              </p>
+              <p>
+                Me enteré como me entero de casi todos los hackathons: por correos
+                que llegan del ecosistema de YC. Recién al leer los detalles me di
+                cuenta de que había que construir todo dentro de Emergent, que yo
+                nunca había usado.
+              </p>
+              <p>
+                Fueron más de 24 horas, desde las 10 de la mañana de un día hasta el
+                mediodía del siguiente, con noche de por medio. El ambiente era muy
+                bueno: conocí a un colombiano, dos peruanos y chicas de El Salvador.
+                Encontrarse con más latinos en el mundo tech siempre es lo mejor de
+                estos eventos.
+              </p>
+
+              <hr />
+
+              <h2>La idea: qué se puede construir, y dónde</h2>
+              <p>
+                En mi trabajo me dedico a la regulación de construcción en Estados
+                Unidos: analizo qué se puede construir en cada zona. Y me he dado
+                cuenta de que responder esa pregunta sirve en muchísimos sectores:
+                construcción, arquitectura, permisos, regulación.
+              </p>
+              <p>
+                Elegí construcción a propósito: es un tema que no le interesa a mucha
+                gente y que estaba poco tomado. El problema que quería atacar me lo
+                han contado arquitectos varias veces. Ellos dibujan los planos, los
+                mandan a la municipalidad (el <em>city hall</em>) y esperan. No
+                diseñan sabiendo de antemano qué dice la regulación: diseñan, y
+                después la municipalidad les dice "oye, revisa esto". Cada una de
+                esas pequeñas revisiones toma tiempo, y sumadas pueden ser meses.
+              </p>
+              <p>
+                Kazza hace dos cosas: crea planos y los revisa automáticamente contra
+                el código de construcción de California. Si el plano ya cumple las
+                reglas antes de llegar a la municipalidad, te ahorras gran parte de
+                esas idas y vueltas. Y en construcción, el tiempo es plata.
+              </p>
+              <p>
+                El nombre suena como "casa" en español. Lo escribí con K y dos Z
+                porque son letras de puras líneas rectas, como un plano.
+              </p>
+
+              <hr />
+
+              <h2>Por qué fui solo</h2>
+              <p>
+                No armé equipo por dos razones. La primera es que ya tenía la idea
+                muy definida, algo en lo que había pensado demasiado. La segunda es
+                que en Emergent cada proyecto avanza en un solo hilo de conversación
+                con el agente, así que no había mucho espacio para colaborar.
+              </p>
+
+              <hr />
+
+              <h2>Dos días preparando, tres prompts construyendo</h2>
+              <p>
+                Dos días antes del evento me senté a escribir los prompts. Pasé
+                varias horas conversando con IA, incluyendo Claude Code para revisar
+                y ordenar mis ideas, hasta tener claro cada feature. Fue un trabajo
+                de <em>product engineering</em> más que de programación.
+              </p>
+              <p>
+                El resultado fue un prompt de cinco o seis páginas con la visión de
+                la plataforma, la lista de features e historias de usuario. Como ya
+                conozco bien el código de construcción de California, elegir las 39
+                reglas fue la parte fácil.
+              </p>
+              <p>Durante el hackathon, la construcción fueron tres prompts:</p>
+              <ol>
+                <li><strong>La plataforma inicial</strong>, a partir del documento completo.</li>
+                <li><strong>Extender las features</strong> sobre esa base.</li>
+                <li><strong>Refinar</strong> lo que había quedado áspero.</li>
+              </ol>
+              <p>
+                La mayoría de las cosas funcionó a la primera. Creo que lo que hizo
+                la diferencia fue lo detallado del prompt: el agente no tuvo que
+                adivinar qué quería.
+              </p>
+
+              <hr />
+
+              <h2>El 80% del tiempo: aceptar sugerencias</h2>
+              <p>
+                Mientras construía, la plataforma iba proponiendo cambios, casi todos
+                de UI y UX. Los leía y, si caían dentro del scope que había definido,
+                los dejaba pasar. Ese fue probablemente el 80% de mi tiempo. No toqué
+                el código en ningún momento.
+              </p>
+              <p>
+                Gasté todos los créditos que nos dieron y pedí más: en total, unos
+                3.000 créditos de Emergent. El resto del tiempo lo usé para avanzar
+                otros proyectos que tenía en mente. Con un ambiente tan energético,
+                daban ganas de trabajar.
+              </p>
+              <p>
+                El vibe coding tiene mala fama, pero creo que se le pueden poner
+                guardrails para que sea una buena herramienta. Al final todo es
+                ingeniería, y la buena ingeniería consiste en armar un sistema que
+                evite los errores. En este caso, ese sistema era el prompt.
+              </p>
+
+              <hr />
+
+              <h2>Lo difícil: el video</h2>
+              <p>
+                Lo que más me costó no fue el producto, fue el video de la demo.
+                Tienes que ir moviéndote por el sitio, escribir, y a la vez hablar en
+                inglés y pensar en lo que estás mostrando. Mucha gente graba primero
+                el recorrido y después pone la voz encima. A mí me salvó una feature
+                de Emergent que genera un video de tu aplicación.
+              </p>
+              <video src="kazza-demo.mp4" controls preload="metadata" playsinline></video>
+
+              <hr />
+
+              <h2>El pitch</h2>
+              <p>Eran cinco minutos. Los estructuré así:</p>
+              <ol>
+                <li>El problema: meses de revisiones con la municipalidad.</li>
+                <li>El tamaño del mercado (TAM).</li>
+                <li>Un vistazo al producto.</li>
+                <li>Los desafíos técnicos y cómo lo implementé.</li>
+                <li>La demo.</li>
+              </ol>
+              <p>
+                En las preguntas me fue bien. Me preguntaron cómo revisan hoy los
+                planos las municipalidades, y qué potencial tenía esto para entrenar
+                modelos de lenguaje en este tipo de tareas.
+              </p>
+              <p>
+                Siendo honesto, la presentación pudo ser mejor; debí practicarla más.
+                No pensaba que iba a quedar en el top 10, ya estaba cansado y casi me
+                voy. Pasar al top 10 me hizo muy feliz, y quedar en el podio todavía
+                más. Hacía tiempo que no estaba tan contento.
+              </p>
+
+              <hr />
+
+              <h2>Lo que aprendí</h2>
+              <p>
+                <strong>Funcionó porque había una visión, y la visión tenía
+                sentido.</strong> De hecho, YC tiene un Request for Startups que
+                apunta a un problema muy parecido. Para un hackathon así hay que
+                tener clara la visión de producto, el scope y cuánto puede crecer la
+                idea. Es casi como vender una empresa: estás vendiendo su potencial.
+              </p>
+              <p>
+                <strong>Prepararía más la presentación.</strong> Si lo hiciera
+                mañana, es lo único que cambiaría.
+              </p>
+              <p>
+                <strong>Las tareas largas para agentes recién empiezan.</strong> Que
+                tres prompts bien preparados alcanzaran para un producto que quedó en
+                el podio me hace pensar que estamos en un 20% de lo que esto puede
+                llegar a ser.
+              </p>
+              <p>
+                <strong>¿Sirve para cualquiera?</strong> En algunos casos sí y en
+                otros no. Depende mucho del producto y de qué tan bien entiendas el
+                problema antes de escribir el primer prompt.
+              </p>
+
+              <hr />
+
+              <h2>Qué sigue</h2>
+              <p>
+                Voy a seguir con Kazza, ahora como
+                <a href="https://urbium.ai/en">urbium.ai</a>. Y el premio lo voy a usar
+                en herramientas de IA, para jugar, aprender y construir más cosas.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="../win98.js?v=5"></script>
+  </body>
+</html>

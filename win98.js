@@ -2,11 +2,36 @@
 // manager. Pages only declare their .window sections inside <main class="desktop">.
 (() => {
   const ROOT = new URL(".", document.currentScript.src).href;
+
+  // Inside a desktop window's iframe (named "win98:<id>" by the desktop): no
+  // desktop of our own, window actions go to the parent by postMessage. The
+  // name and messages also work on file://, where frames can't touch each other
+  if (self !== top && window.name.startsWith("win98:")) {
+    const tell = (msg) => parent.postMessage({ win98: msg }, "*");
+    document.documentElement.classList.add("embedded");
+    tell({ title: document.title });
+    // Most sites refuse to load in a frame, so outside links get a real tab
+    for (const a of document.links) if (a.origin !== location.origin) a.target = "_blank";
+    document.querySelectorAll(".address input").forEach((i) => (i.value = location.href));
+    document.addEventListener("click", (e) => {
+      for (const m of document.querySelectorAll("details.menu[open]"))
+        if (!m.contains(e.target) || e.target.closest(".dropdown")) m.open = false;
+      const t = e.target.closest("[data-open], [data-close], a[href]");
+      if (t?.dataset.open) tell({ launch: t.dataset.open });
+      else if (t?.matches("[data-close]") || t?.href === ROOT + "index.html") tell({ close: true });
+      else return;
+      e.preventDefault();
+    });
+    return;
+  }
+
   const APPS = [
     { label: "bruno.txt", icon: "note", open: "notepad" },
     { label: "cv.txt", icon: "note", open: "cv" },
-    { label: "Blog", icon: "web", href: ROOT + "blog/index.html" },
+    { label: "Blog", icon: "web", open: "blog" },
+    { label: "Bookmarks", icon: "fav", open: "bookmarks" },
     { label: "Request resume", icon: "disk", open: "resume" },
+    { label: "Paint", icon: "paint", open: "paint" },
     { label: "Contact", icon: "mail", open: "contact" },
     { label: "Recycle Bin", icon: "bin", open: "recycle" },
   ];
@@ -66,6 +91,15 @@
       <circle cx="16" cy="16" r="12" fill="#3a8be0" stroke="#000080" />
       <path d="M4 16h24M6 10h20M6 22h20M16 4c-6 6-6 18 0 24M16 4c6 6 6 18 0 24" fill="none" stroke="#cfe6ff" />
     </symbol>
+    <symbol id="ico-fav" viewBox="0 0 32 32">
+      <path d="M2 8h11l2 3h15v17H2z" fill="#ffd94a" stroke="#000" />
+      <path d="M16 13l2.4 4.8 5.3.8-3.8 3.7.9 5.2-4.8-2.5-4.8 2.5.9-5.2-3.8-3.7 5.3-.8z" fill="#ffb900" stroke="#806000" />
+    </symbol>
+    <symbol id="ico-paint" viewBox="0 0 32 32">
+      <path d="M4 6h24v20H4z" fill="#fff" stroke="#000" />
+      <path d="M8 21c3-6 6-1 9-6s5-3 7-5" fill="none" stroke="#f00" stroke-width="2" />
+      <path d="M22 4l6 6-12 12-4 1 1-4z" fill="#ffb900" stroke="#000" />
+    </symbol>
     <symbol id="ico-disk" viewBox="0 0 32 32">
       <path d="M4 4h21l3 3v21H4z" fill="#000080" stroke="#000" />
       <path d="M9 4h13v9H9z" fill="silver" />
@@ -116,7 +150,7 @@
         <div class="field-row">
           <label for="run-cmd">Open:</label>
           <input id="run-cmd" name="cmd" list="run-list" autocomplete="off" autocapitalize="off" spellcheck="false" />
-          <datalist id="run-list">${["cv", "contact", "resume", "blog", "linkedin", "github", "mail"]
+          <datalist id="run-list">${["cv", "contact", "resume", "blog", "bookmarks", "paint", "linkedin", "github", "mail"]
             .map((c) => `<option value="${c}"></option>`)
             .join("")}</datalist>
         </div>
@@ -183,6 +217,13 @@
     }
   }
 
+  // Like Windows: closing or minimizing activates the next window down
+  const topmost = () =>
+    Object.values(wins)
+      .map((w) => w.el)
+      .filter((el) => !el.hidden)
+      .sort((a, b) => b.style.zIndex - a.style.zIndex)[0] || null;
+
   function raise(el) {
     el.style.zIndex = ++z;
     setFocus(el);
@@ -210,6 +251,8 @@
     const { el, task } = wins[id];
     const restoring = el.hidden && task.isConnected;
     if (!task.isConnected) tasks.append(task);
+    const frame = el.querySelector("iframe[data-src]:not([src])");
+    if (frame) frame.src = frame.dataset.src;
     el.hidden = false;
     if (restoring) zoom(task.getBoundingClientRect(), el.getBoundingClientRect());
     raise(el);
@@ -232,7 +275,7 @@
     const { el, task } = wins[id];
     zoom(el.getBoundingClientRect(), task.getBoundingClientRect());
     el.hidden = true;
-    setFocus(null);
+    setFocus(topmost());
     refocus(id);
     emit("win98:minimize", id);
   }
@@ -243,7 +286,7 @@
     if (el.dataset.closeHref) return (location.href = el.dataset.closeHref);
     el.hidden = true;
     task.remove();
-    setFocus(null);
+    setFocus(topmost());
     refocus(id);
     if (location.hash === "#" + id)
       history.replaceState(null, "", location.pathname + location.search);
@@ -298,7 +341,12 @@
     task.onclick = () => (focused === el ? minimize(id) : open(id));
     // Only page windows get a #hash: late ones (extras.js) don't exist yet on load
     const share = !window.win98 && !el.dataset.closeHref && id !== "run";
-    wins[id] = { el, bar, task, share, maxBtn: bar.querySelector('[aria-label="Maximize"]') };
+    // Its name="win98:<id>" lives in the HTML: a name set from script here
+    // doesn't reach the page the frame loads
+    const frame = el.querySelector("iframe");
+    // Internet Explorer windows take the title of the page they show
+    const retitle = (t) => (title.textContent = task.lastChild.textContent = t + " - Internet Explorer");
+    wins[id] = { el, bar, task, share, frame, retitle, maxBtn: bar.querySelector('[aria-label="Maximize"]') };
 
     if (!isDialog(el))
       el.insertAdjacentHTML(
@@ -322,9 +370,11 @@
     const x0 = e.clientX;
     const y0 = e.clientY;
     target.setPointerCapture(e.pointerId);
+    document.body.classList.add("dragging");
     target.onpointermove = (e) => move(e.clientX - x0, e.clientY - y0);
     target.onpointerup = target.onpointercancel = () => {
       target.onpointermove = target.onpointerup = target.onpointercancel = null;
+      document.body.classList.remove("dragging");
       up?.();
     };
   }
@@ -372,6 +422,26 @@
   const openHash = () => wins[location.hash.slice(1)] && open(location.hash.slice(1));
   openHash();
   addEventListener("hashchange", openHash);
+
+  // Messages from our own pages inside a window's iframe (see the top)
+  addEventListener("message", (e) => {
+    const m = e.data?.win98;
+    const id = Object.keys(wins).find((k) => wins[k].frame?.contentWindow === e.source);
+    if (!m || !id) return;
+    if (typeof m.title === "string") wins[id].retitle(m.title);
+    // window ids only: a framed page must not navigate this one anywhere
+    if (typeof m.launch === "string" && /^[\w-]+$/.test(m.launch)) launch(m.launch);
+    if (m.close) close(id);
+  });
+
+  // Clicks inside an iframe never reach this page, but
+  // focus moving into the frame does: raise its window then
+  addEventListener("blur", () =>
+    setTimeout(() => {
+      const el = document.activeElement?.closest(".window");
+      if (el && wins[el.id] && el !== focused) raise(el);
+    }),
+  );
 
   document.addEventListener("pointerdown", (e) => {
     const el = e.target.closest(".window");
