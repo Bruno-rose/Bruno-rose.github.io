@@ -167,3 +167,9 @@ hr {
   height: auto;
   margin: 16px 0;
 }
+
+/* Photos sit smaller than the text column, centered */
+.page img {
+  max-width: 400px;
+  margin-inline: auto;
+}
