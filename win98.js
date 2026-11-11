@@ -10,6 +10,7 @@
     const tell = (msg) => parent.postMessage({ win98: msg }, "*");
     document.documentElement.classList.add("embedded");
     tell({ title: document.title });
+    document.addEventListener("langchange", () => tell({ title: document.title }));
     // Most sites refuse to load in a frame, so outside links get a real tab
     for (const a of document.links) if (a.origin !== location.origin) a.target = "_blank";
     document.querySelectorAll(".address input").forEach((i) => (i.value = location.href));
@@ -25,19 +26,21 @@
     return;
   }
 
+  // label: [English, Spanish]
   const APPS = [
-    { label: "My Computer", icon: "pc", open: "mycomputer" },
-    { label: "bruno.txt", icon: "note", open: "notepad" },
-    { label: "cv.txt", icon: "note", open: "cv" },
-    { label: "Blog", icon: "web", open: "blog" },
-    { label: "Bookmarks", icon: "fav", open: "bookmarks" },
-    { label: "Request resume", icon: "disk", open: "resume" },
-    { label: "Paint", icon: "paint", open: "paint" },
-    { label: "MS-DOS Prompt", icon: "dos", open: "cmd" },
-    { label: "Contact", icon: "mail", open: "contact" },
-    { label: "Recycle Bin", icon: "bin", open: "recycle" },
+    { label: ["My Computer", "Mi PC"], icon: "pc", open: "mycomputer" },
+    { label: ["bruno.txt", "bruno.txt"], icon: "note", open: "notepad" },
+    { label: ["cv.txt", "cv.txt"], icon: "note", open: "cv" },
+    { label: ["Blog", "Blog"], icon: "web", open: "blog" },
+    { label: ["Bookmarks", "Favoritos"], icon: "fav", open: "bookmarks" },
+    { label: ["Request resume", "Pedir CV"], icon: "disk", open: "resume" },
+    { label: ["Paint", "Paint"], icon: "paint", open: "paint" },
+    { label: ["MS-DOS Prompt", "Símbolo de MS-DOS"], icon: "dos", open: "cmd" },
+    { label: ["Contact", "Contacto"], icon: "mail", open: "contact" },
+    { label: ["Recycle Bin", "Papelera de reciclaje"], icon: "bin", open: "recycle" },
   ];
-  const QUICK = ["Blog", "Contact"];
+  const QUICK = ["blog", "contact"];
+  const { h, t } = i18n;
   const LINKS = {
     linkedin: "https://www.linkedin.com/in/bruno-rodriguez-sepulveda",
     github: "https://github.com/bruno-rose",
@@ -155,7 +158,7 @@
     "afterbegin",
     `<nav class="icons" aria-label="Desktop">${APPS.map(
       (a) => `<button class="icon" ${appAttrs(a)}>
-      ${ico(a.icon, 32)}<span>${a.label}</span>
+      ${ico(a.icon, 32)}<span>${h(...a.label)}</span>
     </button>`,
     ).join("")}</nav>`,
   );
@@ -165,16 +168,19 @@
     "beforeend",
     `<section class="window" id="run" data-dialog data-icon="run" hidden>
     <div class="title-bar">
-      <div class="title-bar-text">Run</div>
+      <div class="title-bar-text">${h("Run", "Ejecutar")}</div>
       <div class="title-bar-controls"><button aria-label="Close"></button></div>
     </div>
     <div class="window-body">
       <form class="run">
         <div class="run-row">${ico("run", 32)}
-          <p>Type the name of a program, folder, document, or Internet resource, and Windows will open it for you.</p>
+          <p>${h(
+            "Type the name of a program, folder, document, or Internet resource, and Windows will open it for you.",
+            "Escriba el nombre de un programa, carpeta, documento o recurso de Internet, y Windows lo abrirá.",
+          )}</p>
         </div>
         <div class="field-row">
-          <label for="run-cmd">Open:</label>
+          <label for="run-cmd">${h("Open:", "Abrir:")}</label>
           <input id="run-cmd" name="cmd" list="run-list" autocomplete="off" autocapitalize="off" spellcheck="false" />
           <datalist id="run-list">${["cv", "contact", "resume", "blog", "bookmarks", "paint", "cmd", "mycomputer", "linkedin", "github", "mail"]
             .map((c) => `<option value="${c}"></option>`)
@@ -182,8 +188,8 @@
         </div>
         <p class="run-err" role="alert" hidden></p>
         <div class="run-btns">
-          <button type="submit">OK</button>
-          <button type="button" data-close>Cancel</button>
+          <button type="submit">${h("OK", "Aceptar")}</button>
+          <button type="button" data-close>${h("Cancel", "Cancelar")}</button>
         </div>
       </form>
     </div>
@@ -194,32 +200,35 @@
     "beforeend",
     `<footer class="taskbar">
     <details class="menu start">
-      <summary>${ico("win")}Start</summary>
+      <summary>${ico("win")}${h("Start", "Inicio")}</summary>
       <ul class="dropdown">
         <li class="banner" aria-hidden="true"><b>Windows</b>98</li>
         ${APPS.map(
-          (a) => `<li><button ${appAttrs(a)}>${ico(a.icon)}${a.label}</button></li>`,
+          (a) => `<li><button ${appAttrs(a)}>${ico(a.icon)}${h(...a.label)}</button></li>`,
         ).join("")}
         <li><hr /></li>
-        <li><button data-action="run">${ico("run")}Run...</button></li>
+        <li><button data-action="run">${ico("run")}${h("Run...", "Ejecutar...")}</button></li>
         <li><hr /></li>
-        <li><button data-action="shutdown">${ico("shut")}Shut Down...</button></li>
+        <li><button data-action="shutdown">${ico("shut")}${h("Shut Down...", "Apagar el sistema...")}</button></li>
       </ul>
     </details>
-    <div class="quick">${APPS.filter((a) => QUICK.includes(a.label))
+    <div class="quick">${APPS.filter((a) => QUICK.includes(a.open))
       .map(
         (a) =>
-          `<button ${appAttrs(a)} title="${a.label}" aria-label="${a.label}">${ico(a.icon)}</button>`,
+          `<button ${appAttrs(a)} title data-label="${a.label.join("|")}">${ico(a.icon)}</button>`,
       )
       .join("")}</div>
     <div class="tasks"></div>
-    <div class="tray"><time id="clock"></time></div>
+    <div class="tray">
+      <button class="lang" title data-label="Language: English. Cambiar a español|Idioma: español. Switch to English">${h("EN", "ES")}</button>
+      <time id="clock"></time>
+    </div>
   </footer>
   <ul class="dropdown ctx" hidden>
-    <li><button data-action="arrange">Arrange Icons</button></li>
-    <li><button data-action="refresh">Refresh</button></li>
+    <li><button data-action="arrange">${h("Arrange Icons", "Organizar iconos")}</button></li>
+    <li><button data-action="refresh">${h("Refresh", "Actualizar")}</button></li>
     <li><hr /></li>
-    <li><button data-action="display">Properties</button></li>
+    <li><button data-action="display">${h("Properties", "Propiedades")}</button></li>
   </ul>`,
   );
 
@@ -289,7 +298,7 @@
     // Text windows focus their content, not the first link at the bottom; on
     // phones the window instead, since focusing editable text pops the keyboard
     const first =
-      (touch ? el.querySelector(".notepad") && el : el.querySelector(".window-body .notepad[tabindex]")) ||
+      (touch ? el.querySelector(".notepad") && el : el.querySelector(`.notepad[lang="${i18n.lang}"]`)) ||
       el.querySelector(
         ".window-body :is(input:not([type=hidden]), select, button, a[href])",
       );
@@ -365,7 +374,7 @@
     const task = document.createElement("button");
     task.className = "task";
     task.innerHTML = ico(icon) + "<span></span>";
-    task.lastChild.textContent = title.textContent;
+    task.lastChild.innerHTML = title.innerHTML; // both languages, see lang.js
     task.onclick = () => (focused === el ? minimize(id) : open(id));
     // Only page windows get a #hash: late ones (extras.js) don't exist yet on load
     const share = !window.win98 && !el.dataset.closeHref && id !== "run";
@@ -577,7 +586,7 @@
   if (saved) {
     freeze();
     for (const i of icons.children) {
-      const p = saved[i.textContent.trim()];
+      const p = saved[i.dataset.open];
       if (p) [i.style.left, i.style.top] = p.map((v) => v + "px");
     }
   }
@@ -609,7 +618,7 @@
         store(
           "win98:icons",
           Object.fromEntries(
-            [...icons.children].map((i) => [i.textContent.trim(), [i.offsetLeft, i.offsetTop]]),
+            [...icons.children].map((i) => [i.dataset.open, [i.offsetLeft, i.offsetTop]]),
           ),
         );
       },
@@ -682,10 +691,13 @@
       close("run");
       return document.dispatchEvent(new CustomEvent("win98:action", { detail: { name: "crash" } }));
     }
-    const app = APPS.find((a) => q === a.open || q === a.label.toLowerCase());
+    const app = APPS.find((a) => q === a.open || a.label.some((l) => q === l.toLowerCase()));
     const target = LINKS[q] || (q === "bruno" ? "notepad" : app && (app.open || app.href));
     if (!target) {
-      runErr.textContent = `Cannot find '${cmd}'. Make sure you typed the name correctly, and then try again.`;
+      runErr.textContent = t(
+        `Cannot find '${cmd}'. Make sure you typed the name correctly, and then try again.`,
+        `No se puede encontrar '${cmd}'. Asegúrese de que el nombre es correcto y vuelva a intentarlo.`,
+      );
       runErr.hidden = false;
       return runForm.cmd.select();
     }
@@ -700,21 +712,25 @@
   const clock = document.getElementById("clock");
   const tick = () => {
     const d = new Date();
-    clock.textContent = d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
-    clock.title = d.toLocaleDateString([], { dateStyle: "full" });
+    clock.textContent = d.toLocaleTimeString(i18n.lang, { hour: "numeric", minute: "2-digit" });
+    clock.title = d.toLocaleDateString(i18n.lang, { dateStyle: "full" });
     clock.dateTime = d.toISOString();
   };
   tick();
   setInterval(tick, 10000);
+  document.addEventListener("langchange", tick);
+
+  document.querySelector(".tray .lang").onclick = () =>
+    i18n.set(i18n.lang === "es" ? "en" : "es");
 
   window.win98 = { open, close, launch, register };
 
   // Optional add-ons (sounds, wallpaper, shut down...) load last, on top of this
   document.head.insertAdjacentHTML(
     "beforeend",
-    `<link rel="stylesheet" href="${ROOT}extras.css?v=11" />`,
+    `<link rel="stylesheet" href="${ROOT}extras.css?v=12" />`,
   );
   const extras = document.createElement("script");
-  extras.src = ROOT + "extras.js?v=11";
+  extras.src = ROOT + "extras.js?v=12";
   document.body.append(extras);
 })();

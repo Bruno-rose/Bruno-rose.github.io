@@ -9,6 +9,7 @@
       content="Bruno Rodríguez, Founding Engineer at Breezy in San Francisco. Previously Fintual. From Vallenar, Chile."
     />
     <link rel="canonical" href="https://brunorodriguez.dev/" />
+    <script src="lang.js?v=1"></script>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://brunorodriguez.dev/" />
@@ -45,7 +46,7 @@
       }
     </script>
     <link rel="stylesheet" href="vendor/98.css" />
-    <link rel="stylesheet" href="win98.css?v=13" />
+    <link rel="stylesheet" href="win98.css?v=14" />
     <style>
       /* Windows cascade down and to the right, like Win98 opening them */
       #notepad {
@@ -311,7 +312,7 @@
     <main class="desktop">
       <section class="window" id="notepad">
         <div class="title-bar">
-          <div class="title-bar-text">bruno.txt - Notepad</div>
+          <div class="title-bar-text">bruno.txt - <span lang="en">Notepad</span><span lang="es">Bloc de notas</span></div>
           <div class="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize"></button>
@@ -320,27 +321,27 @@
         </div>
         <nav class="menubar">
           <details class="menu">
-            <summary>File</summary>
+            <summary><span lang="en">File</span><span lang="es">Archivo</span></summary>
             <ul class="dropdown">
               <li><button data-open="cv">cv.txt</button></li>
-              <li><button data-save>Save</button></li>
+              <li><button data-save><span lang="en">Save</span><span lang="es">Guardar</span></button></li>
               <li>
-                <button data-open="resume">Request resume</button>
+                <button data-open="resume"><span lang="en">Request resume</span><span lang="es">Pedir CV</span></button>
               </li>
               <li><hr /></li>
-              <li><button data-close>Exit</button></li>
+              <li><button data-close><span lang="en">Exit</span><span lang="es">Salir</span></button></li>
             </ul>
           </details>
           <a href="#blog" data-open="blog">Blog</a>
           <details class="menu">
-            <summary>Help</summary>
+            <summary><span lang="en">Help</span><span lang="es">Ayuda</span></summary>
             <ul class="dropdown">
-              <li><button data-action="about">About Notepad</button></li>
+              <li><button data-action="about"><span lang="en">About Notepad</span><span lang="es">Acerca del Bloc de notas</span></button></li>
             </ul>
           </details>
         </nav>
         <div class="window-body">
-          <div class="notepad" tabindex="0" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-multiline="true" aria-label="bruno.txt"><h1>Bruno Rodríguez</h1>
+          <div class="notepad" lang="en" tabindex="0" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-multiline="true" aria-label="bruno.txt"><h1>Bruno Rodríguez</h1>
 Founding Engineer at Breezy · San Francisco
 
 Extremely curious. The world is fascinating.
@@ -355,12 +356,27 @@ From Vallenar, Atacama, Chile. Lived in:
 - San Francisco, USA
 
 Want to talk? <a href="mailto:contact@brunorodriguez.dev">contact@brunorodriguez.dev</a></div>
+          <div class="notepad" lang="es" tabindex="0" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-multiline="true" aria-label="bruno.txt"><h1>Bruno Rodríguez</h1>
+Founding Engineer en Breezy · San Francisco
+
+Extremadamente curioso. El mundo es fascinante.
+Crónicamente online. Me encanta ver tecnología nueva.
+Me encantan los desafíos.
+
+Trabajé en startups early-stage (Breezy) y late-stage (Fintual).
+
+De Vallenar, Atacama, Chile. He vivido en:
+- Santiago, Chile
+- París, Francia
+- San Francisco, EE.UU.
+
+¿Conversamos? <a href="mailto:contact@brunorodriguez.dev">contact@brunorodriguez.dev</a></div>
         </div>
       </section>
 
       <section class="window" id="cv" hidden>
         <div class="title-bar">
-          <div class="title-bar-text">cv.txt - Notepad</div>
+          <div class="title-bar-text">cv.txt - <span lang="en">Notepad</span><span lang="es">Bloc de notas</span></div>
           <div class="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize"></button>
@@ -369,27 +385,27 @@ Want to talk? <a href="mailto:contact@brunorodriguez.dev">contact@brunorodriguez
         </div>
         <nav class="menubar">
           <details class="menu">
-            <summary>File</summary>
+            <summary><span lang="en">File</span><span lang="es">Archivo</span></summary>
             <ul class="dropdown">
               <li><button data-open="notepad">bruno.txt</button></li>
-              <li><button data-save>Save</button></li>
+              <li><button data-save><span lang="en">Save</span><span lang="es">Guardar</span></button></li>
               <li>
-                <button data-open="resume">Request resume</button>
+                <button data-open="resume"><span lang="en">Request resume</span><span lang="es">Pedir CV</span></button>
               </li>
               <li><hr /></li>
-              <li><button data-close>Exit</button></li>
+              <li><button data-close><span lang="en">Exit</span><span lang="es">Salir</span></button></li>
             </ul>
           </details>
           <a href="#blog" data-open="blog">Blog</a>
           <details class="menu">
-            <summary>Help</summary>
+            <summary><span lang="en">Help</span><span lang="es">Ayuda</span></summary>
             <ul class="dropdown">
-              <li><button data-action="about">About Notepad</button></li>
+              <li><button data-action="about"><span lang="en">About Notepad</span><span lang="es">Acerca del Bloc de notas</span></button></li>
             </ul>
           </details>
         </nav>
         <div class="window-body">
-          <div class="notepad" tabindex="0" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-multiline="true" aria-label="cv.txt">BRUNO RODRÍGUEZ
+          <div class="notepad" tabindex="0" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-multiline="true" aria-label="cv.txt" lang="en">BRUNO RODRÍGUEZ
 Founding Engineer · San Francisco
 
 EXPERIENCE
@@ -410,12 +426,34 @@ ELSEWHERE
 <a href="https://github.com/bruno-rose">github.com/bruno-rose</a>
 <a href="https://www.linkedin.com/in/bruno-rodriguez-sepulveda">linkedin.com/in/bruno-rodriguez-sepulveda</a>
 <a href="mailto:contact@brunorodriguez.dev">contact@brunorodriguez.dev</a></div>
+          <div class="notepad" lang="es" tabindex="0" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-multiline="true" aria-label="cv.txt">BRUNO RODRÍGUEZ
+Founding Engineer · San Francisco
+
+EXPERIENCIA
+2025-hoy      Founding Engineer · Breezy
+2024          Software Engineer · Fintual (YC, Sequoia)
+2023          Investigación en Infra y Datos · Institute for
+              Foundational Research on Data
+2022          Software Engineer · Isatec I+D
+
+EDUCACIÓN
+CentraleSupélec
+  Diplôme d'ingénieur (MSc), Études générales
+
+Universidad de Chile
+  Ingeniería Civil en Computación y Licenciatura en
+  Ciencias de la Ingeniería
+
+EN LA WEB
+<a href="https://github.com/bruno-rose">github.com/bruno-rose</a>
+<a href="https://www.linkedin.com/in/bruno-rodriguez-sepulveda">linkedin.com/in/bruno-rodriguez-sepulveda</a>
+<a href="mailto:contact@brunorodriguez.dev">contact@brunorodriguez.dev</a></div>
         </div>
       </section>
 
       <section class="window" id="contact" data-dialog hidden>
         <div class="title-bar">
-          <div class="title-bar-text">New Message</div>
+          <div class="title-bar-text"><span lang="en">New Message</span><span lang="es">Mensaje nuevo</span></div>
           <div class="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize"></button>
@@ -425,18 +463,18 @@ ELSEWHERE
         <div class="window-body">
           <form>
             <div class="toolbar">
-              <button type="submit">Send</button>
-              <button type="button" data-close>Cancel</button>
+              <button type="submit"><span lang="en">Send</span><span lang="es">Enviar</span></button>
+              <button type="button" data-close><span lang="en">Cancel</span><span lang="es">Cancelar</span></button>
             </div>
             <div class="field-row">
-              <label for="contact-to">To:</label>
+              <label for="contact-to"><span lang="en">To:</span><span lang="es">Para:</span></label>
               <input id="contact-to" type="text" value="contact@brunorodriguez.dev" readonly />
             </div>
             <div class="field-row">
-              <label for="contact-subject">Subject:</label>
+              <label for="contact-subject"><span lang="en">Subject:</span><span lang="es">Asunto:</span></label>
               <input id="contact-subject" name="subject" type="text" />
             </div>
-            <textarea name="body" aria-label="Message"></textarea>
+            <textarea name="body" data-label="Message|Mensaje"></textarea>
           </form>
           <div class="links">
             <a href="mailto:contact@brunorodriguez.dev">Email</a>
@@ -448,7 +486,7 @@ ELSEWHERE
 
       <section class="window" id="recycle" hidden>
         <div class="title-bar">
-          <div class="title-bar-text">Recycle Bin</div>
+          <div class="title-bar-text"><span lang="en">Recycle Bin</span><span lang="es">Papelera de reciclaje</span></div>
           <div class="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize"></button>
@@ -457,24 +495,24 @@ ELSEWHERE
         </div>
         <div class="window-body">
           <div class="addressbar">
-            <button id="empty-bin" aria-disabled="true" style="color: grey">Empty Recycle Bin</button>
+            <button id="empty-bin" aria-disabled="true" style="color: grey"><span lang="en">Empty Recycle Bin</span><span lang="es">Vaciar Papelera de reciclaje</span></button>
           </div>
           <div class="sunken-panel files">
             <table>
               <thead>
-                <tr><th>Name</th><th>Original Location</th><th>Date Deleted</th></tr>
+                <tr><th><span lang="en">Name</span><span lang="es">Nombre</span></th><th><span lang="en">Original Location</span><span lang="es">Ubicación original</span></th><th><span lang="en">Date Deleted</span><span lang="es">Fecha de eliminación</span></th></tr>
               </thead>
               <tbody>
-                <tr><td>DOOM.exe</td><td>C:\games</td><td>10/19/2026</td></tr>
-                <tr><td>Games</td><td>C:\Desktop</td><td>10/19/2026</td></tr>
-                <tr><td>background.js (particles, black holes)</td><td>C:\</td><td>10/19/2026</td></tr>
-                <tr><td>opt-f1-job-search.html</td><td>C:\blog</td><td>10/19/2026</td></tr>
-                <tr><td>styles.css</td><td>C:\</td><td>02/12/2026</td></tr>
+                <tr><td>DOOM.exe</td><td>C:\games</td><td><span lang="en">10/19/2026</span><span lang="es">19/10/2026</span></td></tr>
+                <tr><td>Games</td><td>C:\Desktop</td><td><span lang="en">10/19/2026</span><span lang="es">19/10/2026</span></td></tr>
+                <tr><td>background.js (particles, black holes)</td><td>C:\</td><td><span lang="en">10/19/2026</span><span lang="es">19/10/2026</span></td></tr>
+                <tr><td>opt-f1-job-search.html</td><td>C:\blog</td><td><span lang="en">10/19/2026</span><span lang="es">19/10/2026</span></td></tr>
+                <tr><td>styles.css</td><td>C:\</td><td><span lang="en">02/12/2026</span><span lang="es">12/02/2026</span></td></tr>
               </tbody>
             </table>
           </div>
           <div class="status-bar">
-            <p class="status-bar-field" id="bin-status">5 object(s)</p>
+            <p class="status-bar-field" id="bin-status"><span lang="en">5 object(s)</span><span lang="es">5 objeto(s)</span></p>
           </div>
         </div>
       </section>
@@ -496,7 +534,7 @@ ELSEWHERE
 
       <section class="window" id="bookmarks" hidden>
         <div class="title-bar">
-          <div class="title-bar-text">Bookmarks</div>
+          <div class="title-bar-text"><span lang="en">Bookmarks</span><span lang="es">Favoritos</span></div>
           <div class="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize"></button>
@@ -507,21 +545,21 @@ ELSEWHERE
           <div class="sunken-panel files">
             <table>
               <thead>
-                <tr><th>Name</th><th>Author</th><th>Category</th></tr>
+                <tr><th><span lang="en">Name</span><span lang="es">Nombre</span></th><th><span lang="en">Author</span><span lang="es">Autor</span></th><th><span lang="en">Category</span><span lang="es">Categoría</span></th></tr>
               </thead>
               <tbody>
-                <tr><td><a href="https://matklad.github.io/" target="_blank" rel="noopener">matklad's Arts&amp;Crafts</a></td><td>Alex Kladov</td><td>Software engineering</td></tr>
-                <tr><td><a href="https://brandur.org/articles" target="_blank" rel="noopener">Articles</a></td><td>Brandur Leach</td><td>Software engineering</td></tr>
-                <tr><td><a href="https://nvartolomei.com/" target="_blank" rel="noopener">Notes</a></td><td>Nicolae Vartolomei</td><td>Software engineering</td></tr>
-                <tr><td><a href="https://www.petercai.com/" target="_blank" rel="noopener">Blog</a></td><td>Peter Cai</td><td>Software engineering</td></tr>
-                <tr><td><a href="https://cs329z.stanford.edu/" target="_blank" rel="noopener">CS329Z: Engineering AI Agents</a></td><td>Stanford</td><td>AI</td></tr>
-                <tr><td><a href="https://blog.glyph.im/2026/09/serious-ai-product.html" target="_blank" rel="noopener">What Would A Serious AI Product Look Like?</a></td><td>Glyph Lefkowitz</td><td>AI</td></tr>
-                <tr><td><a href="https://designeer.xyz/" target="_blank" rel="noopener">Designeer</a></td><td>Curated collection</td><td>Design</td></tr>
+                <tr><td><a href="https://matklad.github.io/" target="_blank" rel="noopener">matklad's Arts&amp;Crafts</a></td><td>Alex Kladov</td><td><span lang="en">Software engineering</span><span lang="es">Ingeniería de software</span></td></tr>
+                <tr><td><a href="https://brandur.org/articles" target="_blank" rel="noopener">Articles</a></td><td>Brandur Leach</td><td><span lang="en">Software engineering</span><span lang="es">Ingeniería de software</span></td></tr>
+                <tr><td><a href="https://nvartolomei.com/" target="_blank" rel="noopener">Notes</a></td><td>Nicolae Vartolomei</td><td><span lang="en">Software engineering</span><span lang="es">Ingeniería de software</span></td></tr>
+                <tr><td><a href="https://www.petercai.com/" target="_blank" rel="noopener">Blog</a></td><td>Peter Cai</td><td><span lang="en">Software engineering</span><span lang="es">Ingeniería de software</span></td></tr>
+                <tr><td><a href="https://cs329z.stanford.edu/" target="_blank" rel="noopener">CS329Z: Engineering AI Agents</a></td><td>Stanford</td><td><span lang="en">AI</span><span lang="es">IA</span></td></tr>
+                <tr><td><a href="https://blog.glyph.im/2026/09/serious-ai-product.html" target="_blank" rel="noopener">What Would A Serious AI Product Look Like?</a></td><td>Glyph Lefkowitz</td><td><span lang="en">AI</span><span lang="es">IA</span></td></tr>
+                <tr><td><a href="https://designeer.xyz/" target="_blank" rel="noopener">Designeer</a></td><td><span lang="en">Curated collection</span><span lang="es">Colección curada</span></td><td><span lang="en">Design</span><span lang="es">Diseño</span></td></tr>
               </tbody>
             </table>
           </div>
           <div class="status-bar">
-            <p class="status-bar-field">7 object(s) · Readings I found interesting</p>
+            <p class="status-bar-field"><span lang="en">7 object(s) · Readings I found interesting</span><span lang="es">7 objeto(s) · Lecturas que me parecieron interesantes</span></p>
           </div>
         </div>
       </section>
@@ -543,7 +581,7 @@ ELSEWHERE
 
       <section class="window" id="resume" data-dialog hidden>
         <div class="title-bar">
-          <div class="title-bar-text">Request resume</div>
+          <div class="title-bar-text"><span lang="en">Request resume</span><span lang="es">Pedir CV</span></div>
           <div class="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize"></button>
@@ -554,7 +592,7 @@ ELSEWHERE
           <form>
             <div class="ask">
               <div class="field-row-stacked">
-                <label for="resume-email">Your email (optional)</label>
+                <label for="resume-email"><span lang="en">Your email (optional)</span><span lang="es">Tu email (opcional)</span></label>
                 <input
                   id="resume-email"
                   name="email"
@@ -564,12 +602,12 @@ ELSEWHERE
               </div>
             </div>
             <div class="buttons ask">
-              <button type="submit">Download</button>
-              <button type="button" data-close>Cancel</button>
+              <button type="submit"><span lang="en">Download</span><span lang="es">Descargar</span></button>
+              <button type="button" data-close><span lang="en">Cancel</span><span lang="es">Cancelar</span></button>
             </div>
-            <a class="ask" href="resume.pdf">or open resume.pdf directly</a>
+            <a class="ask" href="resume.pdf"><span lang="en">or open resume.pdf directly</span><span lang="es">o abre resume.pdf directamente</span></a>
             <div class="progress" role="status">
-              <span>Downloading resume.pdf…</span>
+              <span><span lang="en">Downloading resume.pdf…</span><span lang="es">Descargando resume.pdf…</span></span>
               <div class="bar"><span></span></div>
             </div>
           </form>
@@ -577,7 +615,7 @@ ELSEWHERE
       </section>
     </main>
 
-    <script src="win98.js?v=11"></script>
+    <script src="win98.js?v=12"></script>
     <script>
       // Request resume: an email rides along as a query string, so requests
       // show up in Cloudflare's traffic analytics. The download bar is for show.
@@ -623,7 +661,7 @@ ELSEWHERE
         setTimeout(() => URL.revokeObjectURL(a.href));
       };
       document.querySelectorAll("[data-save]").forEach(
-        (b) => (b.onclick = () => save(b.closest(".window").querySelector(".notepad"))),
+        (b) => (b.onclick = () => save(b.closest(".window").querySelector(`.notepad[lang="${i18n.lang}"]`))),
       );
       document.querySelectorAll(".notepad").forEach((n) =>
         n.addEventListener("keydown", (e) => {
@@ -645,16 +683,18 @@ ELSEWHERE
           }),
       );
 
-      // JS Paint follows the browser's language; the site is in English. It
-      // reads this key from our storage now that it's served from /paint, and
-      // a language picked in Paint's Extras menu still wins
+      // JS Paint starts in the site's language. It reads this key from our
+      // storage now that it's served from /paint; the taskbar toggle updates
+      // it, and a language picked in Paint's Extras menu wins until then
       try {
-        localStorage["jspaint language"] ||= "en";
+        localStorage["jspaint language"] ||= i18n.lang;
       } catch {}
 
       document.getElementById("empty-bin").onclick = () =>
-        (document.getElementById("bin-status").textContent =
-          "Can't empty: keeping these for sentimental reasons.");
+        (document.getElementById("bin-status").textContent = i18n.t(
+          "Can't empty: keeping these for sentimental reasons.",
+          "No se puede vaciar: los guardo por razones sentimentales.",
+        ));
     </script>
   </body>
 </html>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>404 - Bruno Rodríguez</title>
+    <script src="/lang.js?v=1"></script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <style>
       html,
@@ -71,16 +72,18 @@
       <div>
         <h1>Windows</h1>
         <p>
-          A fatal exception 404 has occurred at brunorodriguez.dev<span id="path"></span>.
-          The page you requested could not be found.
+          <span lang="en">A fatal exception 404 has occurred at brunorodriguez.dev<span class="path"></span>.
+          The page you requested could not be found.</span>
+          <span lang="es">Se ha producido una excepción fatal 404 en brunorodriguez.dev<span class="path"></span>.
+          No se encontró la página solicitada.</span>
         </p>
         <p class="press">
-          * Press any key to return to the desktop <span class="cursor">_</span>
+          * <span lang="en">Press any key to return to the desktop</span><span lang="es">Presione cualquier tecla para volver al escritorio</span> <span class="cursor">_</span>
         </p>
       </div>
     </main>
     <script>
-      document.getElementById("path").textContent = location.pathname;
+      document.querySelectorAll(".path").forEach((p) => (p.textContent = location.pathname));
       const home = () => location.assign("/");
       addEventListener("keydown", (e) => e.metaKey || e.ctrlKey || e.altKey || e.key.length > 1 && e.key !== "Enter" || home());
       addEventListener("pointerdown", home);

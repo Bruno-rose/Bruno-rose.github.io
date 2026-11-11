@@ -4,7 +4,8 @@
 (() => {
   const desktop = document.querySelector(".desktop");
   const ROOT = new URL(".", document.currentScript.src).href;
-  const CREDIT = `Atacama: Valle de la Luna, photo by Diego Delso,
+  const { h, t } = i18n;
+  const CREDIT = `Atacama: Valle de la Luna, ${h("photo by", "foto de")} Diego Delso,
     <a href="https://commons.wikimedia.org/wiki/File:Anfiteatro,_Valle_de_la_Luna,_San_Pedro_de_Atacama,_Chile,_2016-02-01,_DD_149.JPG">CC BY-SA 4.0</a>`;
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -66,7 +67,7 @@ Main Processor : Pentium II 400MHz
 Memory Testing : 65536K OK
 
 Detecting IDE Primary Master ... brunorodriguez.dev
-Starting Windows 98...</pre>`,
+${t("Starting Windows 98...", "Iniciando Windows 98...")}</pre>`,
     );
     setTimeout(() => {
       if (!o.isConnected) return;
@@ -114,7 +115,7 @@ Starting Windows 98...</pre>`,
   if (tray) {
     tray.insertAdjacentHTML(
       "afterbegin",
-      `<button class="x-vol" aria-label="Mute" aria-pressed="${muted}">
+      `<button class="x-vol" data-label="Mute|Silenciar" aria-pressed="${muted}">
         <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
           <path d="M2 6h3l4-3v10l-4-3H2z" />
           <path class="w" d="M11 5q2 3 0 6M13 3q3.5 5 0 10" fill="none" stroke="#000" />
@@ -138,7 +139,10 @@ Starting Windows 98...</pre>`,
     setTimeout(() => {
       if (!o.isConnected) return;
       o.className = "x-overlay x-safe";
-      o.innerHTML = "<p>It's now safe to turn off<br />your computer.</p>";
+      o.innerHTML = t(
+        "<p>It's now safe to turn off<br />your computer.</p>",
+        "<p>Ahora puede apagar<br />el equipo.</p>",
+      );
     }, 900);
   }
 
@@ -218,6 +222,7 @@ Starting Windows 98...</pre>`,
       "radial-gradient(30% 9% at 25% 30%, #fff, #fff0), radial-gradient(22% 7% at 72% 18%, #fffd, #fff0), radial-gradient(35% 10% at 62% 64%, #fff, #fff0), linear-gradient(#2c62c9, #9cc2ee)",
     Tiles: "repeating-conic-gradient(#808080 0 25%, #c0c0c0 0 50%) 0 0 / 32px 32px",
   };
+  const WALL_ES = { Teal: "Verde azulado", Black: "Negro", Navy: "Azul marino", Clouds: "Nubes", Tiles: "Baldosas" };
   const setWall = (n) =>
     WALLS[n] &&
     document.documentElement.style.setProperty("--desktop-bg", WALLS[n]);
@@ -225,25 +230,25 @@ Starting Windows 98...</pre>`,
 
   const display = dialog(
     "display",
-    "Display Properties",
+    h("Display Properties", "Propiedades de Pantalla"),
     `<form>
       <div class="x-monitor"><div class="x-screen"></div></div>
       <fieldset>
-        <legend>Wallpaper</legend>
+        <legend>${h("Wallpaper", "Fondo")}</legend>
         ${Object.keys(WALLS)
           .map(
             (n) => `<div class="field-row">
               <input type="radio" name="wallpaper" id="wp-${n}" value="${n}" />
-              <label for="wp-${n}">${n}</label>
+              <label for="wp-${n}">${h(n, WALL_ES[n] || n)}</label>
             </div>`,
           )
           .join("")}
       </fieldset>
       <p class="x-credit">${CREDIT}</p>
       <div class="x-buttons">
-        <button type="button" class="ok" data-close>OK</button>
-        <button type="button" data-close>Cancel</button>
-        <button type="button" class="apply">Apply</button>
+        <button type="button" class="ok" data-close>${h("OK", "Aceptar")}</button>
+        <button type="button" data-close>${h("Cancel", "Cancelar")}</button>
+        <button type="button" class="apply">${h("Apply", "Aplicar")}</button>
       </div>
     </form>`,
   );
@@ -262,17 +267,17 @@ Starting Windows 98...</pre>`,
   /* About Notepad */
   dialog(
     "about",
-    "About Notepad",
+    h("About Notepad", "Acerca del Bloc de notas"),
     `<div class="x-about">
       ${FLAG}
       <div>
-        <p>Bruno Rodríguez's personal site</p>
-        <p>Built with vanilla JS and 98.css</p>
+        <p>${h("Bruno Rodríguez's personal site", "Sitio personal de Bruno Rodríguez")}</p>
+        <p>${h("Built with vanilla JS and 98.css", "Hecho con JS puro y 98.css")}</p>
         <p>${CREDIT}</p>
         <p><a href="https://github.com/bruno-rose/Bruno-rose.github.io">github.com/bruno-rose/Bruno-rose.github.io</a></p>
       </div>
     </div>
-    <div class="x-buttons"><button data-close>OK</button></div>`,
+    <div class="x-buttons"><button data-close>${h("OK", "Aceptar")}</button></div>`,
   );
 
   document.addEventListener("win98:action", (e) => {
@@ -294,12 +299,20 @@ Starting Windows 98...</pre>`,
       "x-bsod",
       `<div>
         <p class="x-bsod-title"><span>Windows</span></p>
-        <p>A fatal exception 0E has occurred at 0028:C0FFEE98 in VXD BRUNO(01) +
+        ${t(
+          `<p>A fatal exception 0E has occurred at 0028:C0FFEE98 in VXD BRUNO(01) +
         00001998. The current application will be terminated.</p>
         <p>*  Press any key to terminate the current application.<br />
         *  Press CTRL+ALT+DEL again to restart your computer. You will<br />
         &nbsp;&nbsp;&nbsp;lose any unsaved information in all applications.</p>
-        <p class="x-bsod-title">Press any key to continue _</p>
+        <p class="x-bsod-title">Press any key to continue _</p>`,
+          `<p>Se ha producido una excepción fatal 0E en 0028:C0FFEE98 en VXD BRUNO(01) +
+        00001998. Se terminará la aplicación actual.</p>
+        <p>*  Presione cualquier tecla para terminar la aplicación actual.<br />
+        *  Presione CTRL+ALT+SUPR de nuevo para reiniciar el equipo.<br />
+        &nbsp;&nbsp;&nbsp;Perderá la información no guardada de todas las aplicaciones.</p>
+        <p class="x-bsod-title">Presione cualquier tecla para continuar _</p>`,
+        )}
       </div>`,
     );
   }
@@ -307,8 +320,8 @@ Starting Windows 98...</pre>`,
   /* MS-DOS Prompt */
   const dos = dialog(
     "cmd",
-    "MS-DOS Prompt",
-    `<div class="x-dos"><pre></pre><label class="x-dos-line"><span>C:\\&gt;</span><input type="text" aria-label="Command" autocomplete="off" autocapitalize="off" spellcheck="false" /></label></div>`,
+    h("MS-DOS Prompt", "Símbolo de MS-DOS"),
+    `<div class="x-dos"><pre></pre><label class="x-dos-line"><span>C:\\&gt;</span><input type="text" data-label="Command|Comando" autocomplete="off" autocapitalize="off" spellcheck="false" /></label></div>`,
     true,
   );
   const screen = dos.querySelector(".x-dos");
@@ -318,11 +331,13 @@ Starting Windows 98...</pre>`,
     out.textContent += t + "\n";
     screen.scrollTop = screen.scrollHeight;
   };
-  say("BRUNO-PC MS-DOS Prompt\nType HELP for a list of commands.\n");
+  say(t("BRUNO-PC MS-DOS Prompt\nType HELP for a list of commands.\n", "BRUNO-PC Símbolo de MS-DOS\nEscriba HELP para ver la lista de comandos.\n"));
   const FILES = { "bruno.txt": "notepad", "cv.txt": "cv" };
   // Each takes the argument (lowercased in key) and returns text, or null for none
   const CMDS = {
-    help: () => `HELP        This list
+    help: () =>
+      t(
+        `HELP        This list
 WHOAMI      Who is this
 DIR         List files
 TYPE file   Show a file (bruno.txt, cv.txt)
@@ -333,7 +348,20 @@ VER         Windows version
 DATE        Today's date
 CLS         Clear the screen
 EXIT        Close this window`,
-    whoami: () => "bruno-pc\\bruno: Bruno Rodríguez, Founding Engineer at Breezy, San Francisco",
+        `HELP        Esta lista
+WHOAMI      Quién es
+DIR         Lista los archivos
+TYPE arch   Muestra un archivo (bruno.txt, cv.txt)
+CD dir      Abre una carpeta (blog, bookmarks)
+START app   Abre un programa (paint, mycomputer, contact...)
+PROJECTS    Lo que estoy construyendo
+VER         Versión de Windows
+DATE        Fecha de hoy
+CLS         Limpia la pantalla
+EXIT        Cierra esta ventana`,
+      ),
+    whoami: () =>
+      "bruno-pc\\bruno: Bruno Rodríguez, Founding Engineer " + t("at Breezy", "en Breezy") + ", San Francisco",
     dir: () => ` Volume in drive C is BRUNO-PC
  Directory of C:\\
 
@@ -342,17 +370,23 @@ CV       TXT
 RESUME   PDF
 BLOG           <DIR>
 BOOKMARKS      <DIR>
-         3 file(s)
-         2 dir(s)`,
+         3 ${t("file(s)", "archivo(s)")}
+         2 ${t("dir(s)", "directorio(s)")}`,
     type: (a, key) =>
-      document.querySelector(`#${FILES[key]} .notepad`)?.textContent ??
-      `File not found - ${a.toUpperCase() || "(none)"}`,
-    cd: (a, key) => (["blog", "bookmarks"].includes(key) ? (win98.launch(key), null) : "Invalid directory"),
-    start: (a, key) => (/^[\w-]+$/.test(key) ? (win98.launch(key), null) : "Usage: START app"),
-    projects: () => `Kazza     AI architect for California lots. 3rd place, VibeCon SF.
+      document.querySelector(`#${FILES[key]} .notepad[lang="${i18n.lang}"]`)?.textContent ??
+      `${t("File not found", "No se encontró el archivo")} - ${a.toUpperCase() || t("(none)", "(ninguno)")}`,
+    cd: (a, key) =>
+      ["blog", "bookmarks"].includes(key) ? (win98.launch(key), null) : t("Invalid directory", "Directorio no válido"),
+    start: (a, key) => (/^[\w-]+$/.test(key) ? (win98.launch(key), null) : t("Usage: START app", "Uso: START app")),
+    projects: () =>
+      t(
+        `Kazza     AI architect for California lots. 3rd place, VibeCon SF.
           Now growing into Urbium: https://urbium.ai/en`,
+        `Kazza     Arquitecto con IA para terrenos en California. 3er lugar, VibeCon SF.
+          Ahora creciendo como Urbium: https://urbium.ai/en`,
+      ),
     ver: () => "Windows 98 [Version 4.10.1998]",
-    date: () => "Current date is " + new Date().toDateString(),
+    date: () => t("Current date is ", "La fecha actual es ") + new Date().toLocaleDateString(i18n.lang, { dateStyle: "full" }),
     echo: (a) => a,
     cls: () => ((out.textContent = ""), null),
     exit: () => (win98.close("cmd"), null),
@@ -376,7 +410,7 @@ BOOKMARKS      <DIR>
     if (!name) return;
     const arg = rest.join(" ");
     const f = CMDS[name.toLowerCase()];
-    const r = f ? f(arg, arg.toLowerCase()) : "Bad command or file name";
+    const r = f ? f(arg, arg.toLowerCase()) : t("Bad command or file name", "Comando o nombre de archivo incorrecto");
     if (r != null) say(r + "\n");
   };
   // Click anywhere on the screen to type, unless selecting text to copy
@@ -385,14 +419,18 @@ BOOKMARKS      <DIR>
   /* My Computer: drives and folders over the site's windows */
   const DRIVES = {
     "My Computer": [
-      { name: "3½ Floppy (A:)", icon: "disk", say: "A:\\ is not accessible. The device is not ready." },
-      { name: "Local Disk (C:)", icon: "drive", dir: "C:\\" },
-      { name: "Bookmarks (D:)", icon: "cd", open: "bookmarks" },
+      {
+        name: ["3½ Floppy (A:)", "Disco de 3½ (A:)"],
+        icon: "disk",
+        say: ["A:\\ is not accessible. The device is not ready.", "No se puede tener acceso a A:\\. El dispositivo no está listo."],
+      },
+      { name: ["Local Disk (C:)", "Disco local (C:)"], icon: "drive", dir: "C:\\" },
+      { name: ["Bookmarks (D:)", "Favoritos (D:)"], icon: "cd", open: "bookmarks" },
     ],
     "C:\\": [
-      { name: "My Documents", icon: "folder", dir: "C:\\My Documents" },
-      { name: "Program Files", icon: "folder", dir: "C:\\Program Files" },
-      { name: "Recycle Bin", icon: "bin", open: "recycle" },
+      { name: ["My Documents", "Mis documentos"], icon: "folder", dir: "C:\\My Documents" },
+      { name: ["Program Files", "Archivos de programa"], icon: "folder", dir: "C:\\Program Files" },
+      { name: ["Recycle Bin", "Papelera de reciclaje"], icon: "bin", open: "recycle" },
     ],
     "C:\\My Documents": [
       { name: "bruno.txt", icon: "note", open: "notepad" },
@@ -402,20 +440,23 @@ BOOKMARKS      <DIR>
     ],
     "C:\\Program Files": [
       { name: "Paint", icon: "paint", open: "paint" },
-      { name: "MS-DOS Prompt", icon: "dos", open: "cmd" },
+      { name: ["MS-DOS Prompt", "Símbolo de MS-DOS"], icon: "dos", open: "cmd" },
       { name: "Internet Explorer", icon: "web", open: "blog" },
       { name: "Outlook Express", icon: "mail", open: "contact" },
     ],
   };
+  // Paths stay English inside; shown in the site's language
+  const PATH_ES = { "My Computer": "Mi PC", "C:\\My Documents": "C:\\Mis documentos", "C:\\Program Files": "C:\\Archivos de programa" };
+  const say2 = (v) => (Array.isArray(v) ? t(...v) : v);
   const pc = dialog(
     "mycomputer",
-    "My Computer",
+    h("My Computer", "Mi PC"),
     `<div class="x-addr">
-      <button type="button" class="x-up">Up</button>
-      <label for="mc-addr">Address</label>
+      <button type="button" class="x-up">${h("Up", "Subir")}</button>
+      <label for="mc-addr">${h("Address", "Dirección")}</label>
       <input id="mc-addr" readonly />
     </div>
-    <div class="x-list" role="listbox" aria-label="Files"></div>
+    <div class="x-list" role="listbox" data-label="Files|Archivos"></div>
     <div class="status-bar"><p class="status-bar-field"></p></div>`,
     true,
   );
@@ -426,8 +467,7 @@ BOOKMARKS      <DIR>
   let path = "My Computer";
   function show(p) {
     path = p;
-    addr.value = p;
-    pc.querySelector(".title-bar-text").textContent = p;
+    addr.value = pc.querySelector(".title-bar-text").textContent = t(p, PATH_ES[p] || p);
     upBtn.disabled = p === "My Computer";
     list.innerHTML = DRIVES[p]
       .map(
@@ -435,15 +475,15 @@ BOOKMARKS      <DIR>
           `<button type="button" class="x-item" role="option" data-i="${i}"><svg width="32" height="32" aria-hidden="true"><use href="#ico-${it.icon}" /></svg><span></span></button>`,
       )
       .join("");
-    DRIVES[p].forEach((it, i) => (list.children[i].lastChild.textContent = it.name));
-    status.textContent = DRIVES[p].length + " object(s)";
+    DRIVES[p].forEach((it, i) => (list.children[i].lastChild.textContent = say2(it.name)));
+    status.textContent = DRIVES[p].length + t(" object(s)", " objeto(s)");
   }
   function go(btn) {
     const it = btn && DRIVES[path][btn.dataset.i];
     if (!it) return;
     if (it.dir) show(it.dir);
     else if (it.open) win98.launch(it.open);
-    else status.textContent = it.say;
+    else status.textContent = say2(it.say);
   }
   upBtn.onclick = () => show(path.length > 3 ? "C:\\" : "My Computer");
   // Double-click opens, like the desktop; one tap on touch screens
@@ -452,6 +492,7 @@ BOOKMARKS      <DIR>
   list.onclick = (e) => coarse && go(e.target.closest(".x-item"));
   list.onkeydown = (e) => e.key === "Enter" && (e.preventDefault(), go(e.target.closest(".x-item")));
   show(path);
+  document.addEventListener("langchange", () => show(path));
 
   /* Assistant: once per visitor, ~20s in, desktop pointers only */
   function assistant() {
@@ -463,12 +504,12 @@ BOOKMARKS      <DIR>
     if (!local("clippy-seen")) return;
     document.body.insertAdjacentHTML(
       "beforeend",
-      `<div class="x-clippy" role="dialog" aria-label="Assistant">
+      `<div class="x-clippy" role="dialog" data-label="Assistant|Ayudante">
         <div class="x-bubble">
-          <p>It looks like you're hiring. Would you like help?</p>
-          <button data-open="cv">Open cv.txt</button>
-          <button data-open="resume">Request resume</button>
-          <button>Don't show me this again</button>
+          <p>${h("It looks like you're hiring. Would you like help?", "Parece que estás contratando. ¿Quieres ayuda?")}</p>
+          <button data-open="cv">${h("Open cv.txt", "Abrir cv.txt")}</button>
+          <button data-open="resume">${h("Request resume", "Pedir CV")}</button>
+          <button>${h("Don't show me this again", "No volver a mostrar")}</button>
         </div>
         <svg viewBox="0 0 40 84" width="48" height="100" aria-hidden="true">
           <path d="M14 60V22a6 6 0 0 1 12 0v46a9 9 0 0 1-18 0V14a12 12 0 0 1 24 0v44"
@@ -484,10 +525,14 @@ BOOKMARKS      <DIR>
       </div>`,
     );
     const el = document.body.lastElementChild;
+    i18n.refresh();
     // data-open is handled by win98.js's delegated listener; we just hide
     el.querySelectorAll("button").forEach((b) =>
       b.addEventListener("click", () => el.remove()),
     );
   }
   setTimeout(assistant, 20000);
+
+  // data-label attributes on what this file just added
+  i18n.refresh();
 })();

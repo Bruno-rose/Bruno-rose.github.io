@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Writing - Bruno Rodríguez</title>
+    <title data-es="Escritos - Bruno Rodríguez">Writing - Bruno Rodríguez</title>
     <meta
       name="description"
       content="Writing by Bruno Rodríguez, including a guide for Latin American professionals looking for jobs in the United States."
@@ -19,9 +19,10 @@
     <meta property="og:image" content="https://brunorodriguez.dev/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="alternate" type="application/rss+xml" title="Bruno Rodríguez - Blog" href="feed.xml" />
+    <script src="../lang.js?v=1"></script>
     <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="../vendor/98.css" />
-    <link rel="stylesheet" href="../win98.css?v=13" />
+    <link rel="stylesheet" href="../win98.css?v=14" />
     <link rel="stylesheet" href="blog.css?v=12" />
   </head>
   <body>
@@ -37,34 +38,35 @@
         </div>
         <nav class="menubar">
           <details class="menu">
-            <summary>File</summary>
+            <summary><span lang="en">File</span><span lang="es">Archivo</span></summary>
             <ul class="dropdown">
               <li><button data-open="notepad">bruno.txt</button></li>
               <li><button data-open="cv">cv.txt</button></li>
               <li>
-                <button data-open="resume">Request resume</button>
+                <button data-open="resume"><span lang="en">Request resume</span><span lang="es">Pedir CV</span></button>
               </li>
               <li><hr /></li>
-              <li><button data-close>Close</button></li>
+              <li><button data-close><span lang="en">Close</span><span lang="es">Cerrar</span></button></li>
             </ul>
           </details>
-          <a href="../index.html">Home</a>
+          <a href="../index.html"><span lang="en">Home</span><span lang="es">Inicio</span></a>
         </nav>
         <div class="toolbar">
-          <button onclick="history.back()">Back</button>
-          <button onclick="history.forward()">Forward</button>
+          <button onclick="history.back()"><span lang="en">Back</span><span lang="es">Atrás</span></button>
+          <button onclick="history.forward()"><span lang="en">Forward</span><span lang="es">Adelante</span></button>
         </div>
         <div class="address">
-          <label for="address">Address</label>
+          <label for="address"><span lang="en">Address</span><span lang="es">Dirección</span></label>
           <input id="address" readonly />
         </div>
         <div class="window-body">
           <div class="page">
-            <h1>Writing</h1>
+            <h1><span lang="en">Writing</span><span lang="es">Escritos</span></h1>
             <ul class="posts">
               <li>
                 <a href="hackathon-3rd-place.html">
                   <span class="post-title">Cómo quedé 3ro en VibeCon SF con Kazza</span>
+                  <span lang="en">(in Spanish)</span>
                 </a>
                 <div class="post-meta">2026 · Hackathon · IA</div>
                 <div class="post-excerpt">
@@ -78,6 +80,7 @@
                   <span class="post-title"
                     >Cómo buscar trabajo en Estados Unidos desde Latinoamérica</span
                   >
+                  <span lang="en">(in Spanish)</span>
                 </a>
                 <div class="post-meta">2026 · Guía · Carrera</div>
                 <div class="post-excerpt">
@@ -92,6 +95,6 @@
       </section>
     </main>
 
-    <script src="../win98.js?v=11"></script>
+    <script src="../win98.js?v=12"></script>
   </body>
 </html>
