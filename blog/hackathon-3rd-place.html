@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="es" data-fixed-lang>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cómo quedé 3ro en VibeCon SF con Kazza - Bruno Rodríguez</title>
+    <title data-es="Cómo quedé 3ro en VibeCon SF con Kazza - Bruno Rodríguez">How I placed 3rd at VibeCon SF with Kazza - Bruno Rodríguez</title>
     <meta name="description" content="Dos días escribiendo un prompt de cinco páginas, tres prompts construyendo: cómo Kazza quedó 3er lugar en VibeCon SF sin escribir código." />
     <link rel="canonical" href="https://brunorodriguez.dev/blog/hackathon-3rd-place.html" />
     <meta property="og:type" content="article" />
@@ -25,7 +25,7 @@
     <main class="desktop">
       <section class="window doc" id="post" data-close-href="index.html">
         <div class="title-bar">
-          <div class="title-bar-text">Cómo quedé 3ro en VibeCon SF con Kazza - Internet Explorer</div>
+          <div class="title-bar-text"><span lang="en">How I placed 3rd at VibeCon SF with Kazza</span><span lang="es">Cómo quedé 3ro en VibeCon SF con Kazza</span> - Internet Explorer</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize"></button>
@@ -57,6 +57,213 @@
         </div>
         <div class="window-body">
           <div class="page">
+           <div lang="en">
+            <h1>How I placed 3rd at VibeCon SF with Kazza</h1>
+            <div class="meta">Hackathon · AI · Construction</div>
+
+            <p class="subtitle">
+              I went solo to VibeCon SF, Emergent's hackathon, and placed third
+              with Kazza, an AI architect that draws floor plans for any lot in
+              California and checks every room against 39 building code rules. I
+              didn't write a single line of code. What I did do was spend two days
+              writing a five-page prompt.
+            </p>
+
+            <article>
+              <h2>The hackathon</h2>
+              <p>
+                VibeCon SF was put on by Emergent, a platform for building software
+                with agents. More than 2,000 people applied and 175 of us got in.
+                The theme was <em>Build for Main Street</em>: build products for
+                real small-business problems in health, logistics, finance, real
+                estate or education.
+              </p>
+              <p>
+                I heard about it the way I hear about almost every hackathon:
+                emails from the YC ecosystem. Only when I read the details did I
+                realize everything had to be built inside Emergent, which I had
+                never used.
+              </p>
+              <p>
+                It ran more than 24 hours, from 10 in the morning one day to noon
+                the next, with a night in between. The vibe was great: I met a
+                Colombian, two Peruvians and a group of women from El Salvador.
+                Running into more Latinos in tech is always the best part of these
+                events.
+              </p>
+
+              <hr />
+
+              <h2>The idea: what can be built, and where</h2>
+              <p>
+                At work I deal with building regulation in the United States: I
+                analyze what can be built in each zone. And I've noticed that
+                answering that question matters in a lot of industries:
+                construction, architecture, permitting, regulation.
+              </p>
+              <p>
+                I picked construction on purpose: it's a topic few people care
+                about and few teams were going after. Architects have told me about
+                the problem I wanted to tackle more than once. They draw the plans,
+                send them to city hall and wait. They don't design knowing upfront
+                what the regulation says: they design, and then city hall tells
+                them "hey, take another look at this." Each of those small reviews
+                takes time, and added up they can be months.
+              </p>
+              <p>
+                Kazza does two things: it creates floor plans and automatically
+                checks them against the California building code. If the plan
+                already follows the rules before it reaches city hall, you skip a
+                lot of that back and forth. And in construction, time is money.
+              </p>
+              <p>
+                The name sounds like "casa", Spanish for house. I spelled it with a
+                K and two Zs because they're letters made only of straight lines,
+                like a floor plan.
+              </p>
+
+              <hr />
+
+              <h2>Why I went solo</h2>
+              <p>
+                I didn't form a team for two reasons. First, I already had a very
+                defined idea, something I had thought about way too much. Second,
+                in Emergent each project moves forward in a single conversation
+                thread with the agent, so there wasn't much room to collaborate.
+              </p>
+
+              <hr />
+
+              <h2>Two days preparing, three prompts building</h2>
+              <p>
+                I started thinking about what to build a week before, but the real
+                work was the two days before the event, when I sat down to write
+                the prompts. I spent hours talking with AI, including Claude Code,
+                to review and organize my ideas until every feature was clear. It
+                was <em>product engineering</em> more than programming.
+              </p>
+              <p>
+                The result was a five or six page prompt with the platform's
+                vision, the feature list and user stories. Since I already know the
+                California building code well, choosing the 39 rules was the easy
+                part.
+              </p>
+              <p>During the hackathon, building took three prompts:</p>
+              <ol>
+                <li><strong>The initial platform</strong>, from the full document.</li>
+                <li><strong>Extending the features</strong> on top of that.</li>
+                <li><strong>Refining</strong> whatever was still rough.</li>
+              </ol>
+              <p>
+                Most things worked on the first try. I think what made the
+                difference was how detailed the prompt was: the agent didn't have
+                to guess what I wanted.
+              </p>
+
+              <hr />
+
+              <h2>80% of the time: accepting suggestions</h2>
+              <p>
+                While I built, the platform kept proposing changes, almost all of
+                them UI and UX. I read them and, if they fit the scope I'd defined,
+                I let them through. That was probably 80% of my time. I never
+                touched the code.
+              </p>
+              <p>
+                I burned through all the credits they gave us and asked for more:
+                about 3,000 Emergent credits in total. I used the rest of the time
+                to push other projects I had in mind. With that much energy in the
+                room, you wanted to work.
+              </p>
+              <p>
+                Vibe coding has a bad reputation, but I think you can put guardrails
+                on it so it becomes a good tool. In the end it's all engineering,
+                and good engineering is building a system that prevents mistakes.
+                Here, that system was the prompt.
+              </p>
+
+              <hr />
+
+              <h2>The hard part: the video</h2>
+              <p>
+                The hardest part wasn't the product, it was the demo video. You
+                have to move around the site, type, and at the same time talk in
+                English and think about what you're showing. A lot of people record
+                the walkthrough first and add the voice over it later. What saved
+                me was an Emergent feature that generates a video of your app.
+              </p>
+              <video src="kazza-demo.mp4" controls preload="metadata" playsinline></video>
+
+              <hr />
+
+              <h2>The pitch</h2>
+              <p>It was five minutes. I structured it like this:</p>
+              <ol>
+                <li>The problem: months of back and forth with city hall.</li>
+                <li>The market size (TAM).</li>
+                <li>A look at the product.</li>
+                <li>The technical challenges and how I built it.</li>
+                <li>The demo.</li>
+              </ol>
+              <p>
+                The Q&amp;A went well. They asked how cities review plans today,
+                and what potential this had for training language models on this
+                kind of task.
+              </p>
+              <p>
+                To be honest, the presentation could have been better; I should
+                have practiced more. I didn't think I'd make the top 10. I was
+                already tired and almost left. Making the top 10 made me really
+                happy, and getting on the podium even more. I hadn't been that
+                happy in a while.
+              </p>
+              <img
+                src="vibecon-podio.jpg"
+                width="1000"
+                height="1000"
+                loading="lazy"
+                alt="Bruno holding the giant 3,000 dollar check for third place at VibeCon, under the title Congratulations, Team Kazza"
+              />
+
+              <hr />
+
+              <h2>What I learned</h2>
+              <p>
+                <strong>It worked because there was a vision, and the vision made
+                sense.</strong> In fact, YC has a Request for Startups,
+                <a href="https://www.ycombinator.com/rfs#ai-for-city-hall">AI for City Hall</a>,
+                aimed right at this problem. For a hackathon like this you need a
+                clear product vision, scope, and a sense of how big the idea can
+                get. It's almost like selling a company: you're selling its
+                potential.
+              </p>
+              <p>
+                <strong>I'd prepare the presentation more.</strong> If I did it
+                again tomorrow, that's the only thing I'd change.
+              </p>
+              <p>
+                <strong>Long-running tasks for agents are just getting
+                started.</strong> That three well-prepared prompts were enough for
+                a product that made the podium makes me think we're at about 20% of
+                what this can become.
+              </p>
+              <p>
+                <strong>Does it work for everyone?</strong> Sometimes yes,
+                sometimes no. It depends a lot on the product and on how well you
+                understand the problem before writing the first prompt.
+              </p>
+
+              <hr />
+
+              <h2>What's next</h2>
+              <p>
+                I'm going to keep going with Kazza, now as
+                <a href="https://urbium.ai/en">urbium.ai</a>. And I'll spend the
+                prize on AI tools, to play, learn and build more things.
+              </p>
+            </article>
+           </div>
+           <div lang="es">
             <h1>Cómo quedé 3ro en VibeCon SF con Kazza</h1>
             <div class="meta">Hackathon · IA · Construcción</div>
 
@@ -258,6 +465,7 @@
                 en herramientas de IA, para jugar, aprender y construir más cosas.
               </p>
             </article>
+           </div>
           </div>
         </div>
       </section>

@@ -29,8 +29,7 @@
   // Re-apply: also for markup added after load (taskbar, extras.js dialogs)
   function refresh() {
     const l = root.dataset.ui;
-    // Blog posts are written in Spanish: their <html lang> stays put
-    if (!root.hasAttribute("data-fixed-lang")) root.lang = l;
+    root.lang = l;
     if (titleEl) document.title = (l === "es" && titleEl.dataset.es) || enTitle;
     // data-label="English|Español": aria-label, and title when it has one
     for (const el of document.querySelectorAll("[data-label]")) {
